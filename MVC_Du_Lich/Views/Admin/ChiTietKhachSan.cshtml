@@ -1,0 +1,61 @@
+﻿@model MVC_Du_Lich.Models.KHACHSAN
+@{
+    ViewBag.Title = "ChiTietKhachSan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiết Khách Sạn</h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.MaKS)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TÊN KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TenKS)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            GIÁ KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.GiaKS)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            ĐỊA CHỈ:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.DiaChi)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ LOẠI KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.LOAIK.MaLKS)
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("ĐIỀU CHỈNH", "SuaDiemDi", new { loai = Model.MaKS }) |
+    @Html.ActionLink("TRỞ VỀ", "KhachSan")
+</p>
+<style>
+    .row-title {
+        font-weight: bold;
+        text-align: right;
+    }
+</style>
+

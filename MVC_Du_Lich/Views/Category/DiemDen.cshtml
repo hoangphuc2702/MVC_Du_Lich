@@ -1,0 +1,28 @@
+﻿@using MVC_Du_Lich.Models
+@model IEnumerable<DIEMDEN>
+
+
+
+@*<div class="start-to-stop mb-3">
+    <h5 class="point-start-title s-title">Điểm đến</h5>
+    <select class="form-control dropdown Filter" id="sllDiemDen" name="sllDiemDen">
+        @foreach (var diemden in Model)
+        {
+            <option>
+                <a href="@Url.Action("TourTrongNuoc", "CustomerTour", new { id=diemden.MaDDen })" class="list-group-item list-group-item-action">@diemden.TenDDen</a>
+            </option>
+        }
+    </select>
+</div>*@
+
+
+<div class="title">Điểm đến</div>
+<ul class="list-group">
+    @foreach (var diemden in Model)
+    {
+        <a href="@Url.Action("Index", "CustomerTour", new { diemden=diemden.MaDDen })"
+           class="list-group-item list-group-item-action">
+            @diemden.TenDDen
+        </a>
+    }
+</ul>

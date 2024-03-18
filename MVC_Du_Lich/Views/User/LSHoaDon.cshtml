@@ -1,0 +1,63 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<CTDATTOUR>
+
+@{
+    ViewBag.Title = "LSHoaDon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row g-5 g-lg-3 d-none d-lg-flex">
+    @foreach (var hd in Model)
+    {
+        <div class="col-3" style="min-height: 900px">
+            <div class="card destination-item">
+                <div class="position-relative destination-item__image">
+                    <a href="@Url.Action("ChiTietHd", "User", new { id = hd.SoHD })">
+                        <img src="~/Images/@hd.TOUR.Hinh1" class="card-img-top img-fluid" alt="@hd.TOUR.TenTour" style="height: 100%" width="312" height="208" loading="lazy">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title destination-item__title">@hd.TOUR.TenTour</h5>
+                    <p class="card-text destination-item__description">
+                        @if ((bool)hd.DONDATTOUR.HTThanhToan)
+                        {
+                            <span>Đã thanh toán</span>
+                        }
+                        else
+                        {
+                            <span>Chưa thanh toán</span>
+                        }
+                    </p>
+                    <p class="card-title destination-item__title">
+                        @if ((bool)hd.DONDATTOUR.TrangThai)
+                        {
+                            <span>Hoàn thành</span>
+                        }
+                        else
+                        {
+                            <span>Chưa hoàn thành</span>
+                        }
+                    </p>
+                    <p class="card-text destination-item__description">@hd.DONDATTOUR.TongTien</p>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("LSHoaDon", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<!-- Kết thúc -->

@@ -1,0 +1,94 @@
+﻿@model MVC_Du_Lich.Models.DONDATTOUR
+@{
+    ViewBag.Title = "XoaDonDatTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>XoaDonDatTour</h2>
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA ĐƠN ĐẶT TOUR NÀY KHÔNG?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                MÃ KHÁCH HÀNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.KHACHHANG.MaKH)
+            </dd>
+
+            <dt>
+                HỌ VÀ TÊN KHÁCH HÀNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTenKH)
+            </dd>
+
+            <dt>
+                SỐ ĐIỆN THOẠI KHÁCH HÀNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT_KH)
+            </dd>
+            <dt>
+                EMAIL KHÁCH HÀNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmailKH)
+            </dd>
+
+            <dt>
+                ĐỊA CHỈ KHÁCH HÀNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChiKH)
+            </dd>
+
+            <dt>
+                TỔNG TIỀN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TongTien)
+            </dd>
+
+            <dt>
+                HOÀN THÀNH THANH TOÁN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HTThanhToan)
+            </dd>
+            <dt>
+                TRẠNG THÁI
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+            <dt>
+                MÃ TOUR
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TOUR.MaTour)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("TRỞ LẠI", "DonDatHang")
+            </div>
+        }
+    </div>
+</div>

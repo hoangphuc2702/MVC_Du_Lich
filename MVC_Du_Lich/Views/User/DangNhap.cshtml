@@ -1,0 +1,58 @@
+﻿@model MVC_Du_Lich.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/User.cshtml";
+}
+
+
+@Html.AntiForgeryToken()
+<form class="form" method="post" action="">
+    <h2>@ViewBag.ThongBao</h2>
+    <h2 style="color: red;">@ViewBag.Error</h2>
+    @using (Html.BeginForm("DangNhap", "User"))
+    {
+        <div class="input-box">
+            <label for="dangnhap">Số điện thoại: <span style="color:red">*</span></label>
+            @Html.TextBoxFor(model => model.DienThoaiKH, new { @class = "form-control", @id = "dangnhap", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.DienThoaiKH)
+        </div>
+        <div class="input-box">
+            <label for="matkhau">Mật khẩu: <span style="color:red">*</span></label>
+            @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @id = "matkhau", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.MatKhau)
+        </div>
+
+        <a href="#" class="forget-pass">Lấy lại mật khẩu</a>
+
+        <button class="btn btn-primary" type="submit">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></button>
+    }
+
+    @*<div class="input-box">
+            <label class="form-label">Số điện thoại hoặc Email <span style="color:red">*</span></label>
+            <input class="form-control" id="Email" name="Email" placeholder="Tài khoản" type="text" value="" />
+        </div>
+
+        <div class="input-box">
+            <label class="form-label">Mật khẩu <span style="color:red">*</span></label>
+            <input class="form-control" id="MatKhau" name="MatKhau" placeholder="Mật khẩu" type="password" value="" />
+        </div>
+
+        <a href="#" class="forget-pass">Lấy lại mật khẩu</a>
+
+        <button class="btn btn-primary" type="submit">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></button>
+
+        <div class="text-center" style="margin-top:15px">hoặc</div>
+
+        <div class="col">
+            <button class="btn btn-icon-fb btn-primary" type="submit"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i> Tiếp tục với Facebook</i></button>
+            <button class="btn btn-icon-gg btn-primary" type="submit"><i class="fa-brands fa-google-plus-g" style="color: #ffffff;"></i> Tiếp tục với Google</i></button>
+        </div>
+
+        <hr style="margin-top: 35px;margin-bottom: 25px;" />
+
+        <p class="btn-register">
+            Không có tài khoản?<a href="@Url.Action("DangKy","User")">Đăng ký <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+        </p>*@
+
+</form>

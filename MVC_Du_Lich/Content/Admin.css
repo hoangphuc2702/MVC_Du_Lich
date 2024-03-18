@@ -1,0 +1,276 @@
+﻿
+.bg-primary {
+    background-color: #4b7df7; /* Màu nền chính */
+}
+
+.pt-10 {
+    padding-top: 2rem; /* Khoảng cách trên */
+}
+
+.pb-21 {
+    padding-bottom: 4rem; /* Khoảng cách dưới */
+}
+
+.mt-n6 {
+    margin-top: -1.5rem; /* Dịch lên */
+}
+
+.mx-n4 {
+    margin-left: -1rem; /* Dịch sang trái */
+    margin-right: -1rem; /* Dịch sang phải */
+}
+
+.text-white {
+    color: #ffffff; /* Màu chữ trắng */
+}
+
+.btn-white {
+    background-color: #ffffff; /* Nút nền màu trắng */
+    color: #4b7df7; /* Màu chữ */
+}
+
+    .btn-white:hover {
+        background-color: #f3f4f8; /* Màu nền khi hover */
+    }
+
+.card-lift {
+    border-radius: 1rem; /* Bo tròn góc card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
+
+.icon-shape {
+    width: 40px; /* Kích thước biểu tượng */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-primary-soft {
+    background-color: rgba(75, 125, 247, 0.1); /* Màu nền mờ */
+}
+
+.text-primary {
+    color: #4b7df7; /* Màu chữ chính */
+}
+
+.lh-1 {
+    line-height: 1.25; /* Chiều cao dòng */
+}
+
+.fw-bold {
+    font-weight: bold; /* Chữ in đậm */
+}
+
+.text-dark {
+    color: #2e3d49; /* Màu chữ đậm */
+}
+
+.me-2 {
+    margin-right: 0.5rem; /* Khoảng cách bên phải */
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem; /* Khoảng cách dưới */
+}
+
+.mb-2 {
+    margin-bottom: 3rem; /* Khoảng cách dưới */
+    font-weight: bold;
+}
+
+.mb-3 {
+    margin-bottom: 0.75rem; /* Khoảng cách dưới */
+}
+
+.mb-5 {
+    margin-bottom: 1.25rem; /* Khoảng cách dưới */
+}
+
+.mb-lg-0 {
+    margin-bottom: 0 !important; /* Khoảng cách dưới cho màn hình lớn */
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between; /* Canh giữa */
+}
+
+.align-items-center {
+    align-items: center; /* Canh giữa theo chiều dọc */
+}
+
+.col-12 {
+    flex: 0 0 100%; /* Chiếm 100% width */
+    max-width: 100%;
+}
+
+.col-xl-3 {
+    flex: 0 0 25%; /* Chiếm 25% width trên màn hình lớn */
+    max-width: 25%;
+}
+
+.col-lg-6 {
+    flex: 0 0 50%; /* Chiếm 50% width trên màn hình lớn */
+    max-width: 50%;
+}
+
+.col-md-12 {
+    flex: 0 0 100%; /* Chiếm 100% width trên màn hình trung bình */
+    max-width: 100%;
+}
+
+.col-xl-3,
+.col-lg-6,
+.col-md-12 {
+    padding-right: 1rem; /* Khoảng cách bên phải */
+    padding-left: 1rem; /* Khoảng cách bên trái */
+}
+
+.row {
+    margin-right: -1rem; /* Đặt lại margin right của row */
+    margin-left: -1rem; /* Đặt lại margin left của row */
+}
+
+
+/*....*/
+
+.btn-white {
+    background-color: #ffffff;
+    color: #000;
+    transition: background-color 0.3s; /* Thêm hiệu ứng chuyển đổi màu nền */
+}
+
+    .btn-white:hover {
+        background-color: #f3f4f8;
+    }
+
+    .btn-white:active {
+        background-color: #e1e4eb; /* Màu nền khi click chuột */
+    }
+
+.icon-shape {
+    transition: background-color 0.3s; /* Thêm hiệu ứng chuyển đổi màu nền */
+}
+
+    .icon-shape:hover {
+        background-color: rgba(75, 125, 247, 0.2);
+    }
+
+    .icon-shape:active {
+        background-color: rgba(75, 125, 247, 0.4); /* Màu nền khi click chuột */
+    }
+
+.zoom-on-hover {
+    transition: transform 0.3s; /* Thêm hiệu ứng chuyển đổi transform */
+}
+
+    .zoom-on-hover:hover {
+        transform: scale(1.05); /* Phóng to lên 1.05 lần khi hover */
+    }
+
+.col-xl-3,
+.col-lg-6,
+.col-md-12,
+.col-12 {
+    flex: 0 0 calc(25% - 1rem); /* Chiếm 25% width trên màn hình lớn */
+    max-width: calc(25% - 1rem);
+    margin-right: 0.5rem; /* Khoảng cách bên phải */
+    margin-bottom: 0.5rem; /* Khoảng cách dưới */
+    border: none
+}
+
+.row {
+    margin-right: -0.5rem; /* Đặt lại margin right của row */
+    margin-left: -0.5rem; /* Đặt lại margin left của row */
+}
+
+.container-fluid mt-n15 {
+    width: 100%;
+    /*background-color: #007bff;*/
+    padding-top: 50px;
+    padding-bottom: 210px;
+    margin-top: -3rem;
+    margin-bottom: -22rem;
+}
+
+.card-lift {
+    border: none;
+}
+
+
+/**/
+body {
+    font-family: 'Arial', sans-serif;
+    color: #000000;
+}
+
+#wrapper {
+    display: flex;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+    background-color: #ffffff;
+    color: black;
+    padding-top: 20px;
+}
+
+#content-wrapper {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.brand-logo {
+    padding: 10px;
+    text-align: center;
+}
+
+.close-btn {
+    color: #61dafb;
+}
+
+    .close-btn:hover {
+        color: #38a1db;
+    }
+
+#sidebarnav {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-item a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+}
+
+    .sidebar-item a.active {
+        background-color: #61dafb;
+        color: #20232a;
+    }
+
+.sidebar-item a.active i {
+    color: #20232a;
+}
+
+.sidebar-item a i {
+    margin-right: 10px;
+}
+
+.sidebar-item a:hover {
+    background-color: #dcdcdc; /* Màu xám cho nền hover */
+    color: #008000; /* Màu xanh cho chữ hover */
+}
+
+.custom-icon {
+    display: inline-block; /* Đảm bảo nó hiển thị đúng là một hình ảnh */
+    width: 20px; /* Thiết lập kích thước phù hợp */
+    height: 20px;
+    margin-right: 5px; /* Tùy chỉnh khoảng cách giữa icon và văn bản (nếu có) */
+}

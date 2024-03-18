@@ -1,0 +1,147 @@
+﻿@model MVC_Du_Lich.Models.DONDATTOUR
+
+@{
+    ViewBag.Title = "ChiTietHd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi Tiet Đơn Đặt Tour</h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 row-title">
+            SỐ HOÁ ĐƠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.SoHD)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ KHÁCH HÀNG:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.KHACHHANG.MaKH)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            HỌ VÀ TÊN KHÁCH HÀNG:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.HoTenKH)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            SỐ ĐIỆN THOẠI KHÁCH HÀNG:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.SDT_KH)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            EMAIL KHÁCH HÀNG
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.EmailKH)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            ĐỊA CHỈ KHÁCH HÀNG
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.DiaChiKH)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TỔNG TIỀN
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TongTien)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            HOÀN THÀNH THANH TOÁN:
+        </div>
+        <div class="col-md-9">
+            @if ((bool)Model.HTThanhToan)
+            {
+                <span>Đã thanh toán</span>
+            }
+            else
+            {
+                <span>Chưa thanh toán</span>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TRẠNG THÁI
+        </div>
+        <div class="col-md-9">
+            @if ((bool)Model.HTThanhToan)
+            {
+                <span>Hoàn thành</span>
+            }
+            else
+            {
+                <span>Chưa hoàn thành</span>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TOUR.MaTour)
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                HÀNH KHÁCH
+            </th>
+            <th>
+                TÊN TV
+            </th>
+            <th>
+                GIỚI TÍNH
+            </th>
+            <th>
+                NGÀY SINH
+            </th>
+        </tr>
+
+        @foreach (var item in Model.CTDATTOURs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HANHKHACH.TenHK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenTV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<style>
+    .row-title {
+        font-weight: bold;
+        text-align: right;
+    }
+</style>

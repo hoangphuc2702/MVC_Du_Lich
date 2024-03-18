@@ -1,0 +1,149 @@
+﻿@model IEnumerable<MVC_Du_Lich.Models.TOUR>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/Content/item.css" rel="stylesheet">
+<div class="row bg-primary ">
+    <div class="col-lg-12 col-md-12 col-12">
+        <!-- Page header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div class="mb-2 mb-lg-0">
+                <h3 text-white"><strong>@Html.ActionLink("TRANG CHỦ ADMIN", "Index", "Admin", null, new { @class = "nav-link" })</strong></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid row rounded bg-white">
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover ">
+        <!-- card -->
+        <a href="@Url.Action("Tour", "Admin")" style="list-style: none; text-decoration: none">
+            <div class="card h-100 card-lift">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- heading -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="mb-0">Quản Lý Tour</h4>
+                        </div>
+                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                    </div>
+                    <!-- project number -->
+                    <div class="lh-1">
+                        <h1 class=" mb-1 fw-bold">18</h1>
+                        <p class="mb-0"><span class="text-dark me-2">2</span>Completed</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
+        <a href="@Url.Action("DiemDi", "Admin")" style="list-style: none; text-decoration: none">
+
+            <!-- card -->
+            <div class="card h-100 card-lift">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- heading -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="mb-0">Quản Lý Danh Mục Tour</h4>
+                        </div>
+                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                        </div>
+                    </div>
+                    <!-- project number -->
+                    <div class="lh-1">
+                        <h1 class="  mb-1 fw-bold">132</h1>
+                        <p class="mb-0"><span class="text-dark me-2">28</span>Completed</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
+        <a href="@Url.Action("KhachSan", "Admin")" style="list-style: none; text-decoration: none">
+
+            <!-- card -->
+            <div class="card h-100 card-lift">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- heading -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="mb-0">Quản Lý Dịch Vụ</h4>
+                        </div>
+                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                    </div>
+                    <!-- project number -->
+                    <div class="lh-1">
+                        <h1 class="  mb-1 fw-bold">12</h1>
+                        <p class="mb-0"><span class="text-dark me-2">1</span>Completed</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
+        <a href="@Url.Action("DonDatTour", "Admin")" style="list-style: none; text-decoration: none">
+
+            <!-- card -->
+            <div class="card h-100 card-lift">
+                <!-- card body -->
+                <div class="card-body">
+                    <!-- heading -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="mb-0">Quản Lý Đơn Đặt Tour</h4>
+                        </div>
+                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        </div>
+                    </div>
+                    <!-- project number -->
+                    <div class="lh-1">
+                        <h1 class="  mb-1 fw-bold">76%</h1>
+                        <p class="mb-0"><span class="text-success me-2">5%</span>Completed</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<section class="home-page__destination mb-4">
+    <h3 class="home-page__title mb-4">Tour yêu thích</h3>
+    <div class="container">
+        <div id="DiemDenYeuThich_NuocNgoai">
+            <div class="row g-5 g-lg-3 d-none d-lg-flex">
+                @foreach (var tour in Model)
+                {
+                    <div class="col-3" style="min-height: 900px">
+                        <div class="card destination-item">
+                            <div class="position-relative destination-item__image">
+                                <a href="@Url.Action("ChiTietTour", "Admin", new { loai = tour.MaTour })">
+                                    <img src="~/Images/@tour.Hinh1" class="card-img-top img-fluid" alt="@tour.TenTour" style="height: 100%" width="312" height="208" loading="lazy">
+                                </a>
+                                @*<a href="/du-lich-nuoc-ngoai/tour-chau-a.aspx">
+                                        <i class="icon icon--chau-a position-absolute"></i>
+                                        <div class="destination-item__image__overlay"></div>
+                                    </a>*@
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title destination-item__title">@tour.TenTour</h5>
+                                <p class="card-text destination-item__description">@tour.Gia</p>
+                            </div>
+                        </div>
+                    </div>
+                 }
+            </div>
+        </div>
+    </div>
+</section>

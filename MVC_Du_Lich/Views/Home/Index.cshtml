@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MVC_Du_Lich.Models.TOUR>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Private.css" />
+
+<section class="home-page__destination mb-4">
+    <h3 class="home-page__title mb-4">Tour yêu thích</h3>
+    <div class="container">
+        <div id="DiemDenYeuThich_NuocNgoai">
+            <div class="row g-5 g-lg-3 d-none d-lg-flex">
+                @foreach (var tour in Model)
+                {
+                    <div class="col-3" style="min-height: 900px">
+                        <div class="card destination-item">
+                            <div class="position-relative destination-item__image">
+                                <a href="@Url.Action("Details", "CustomerTour", new { loai = tour.MaTour })">
+                                    <img src="~/Images/@tour.Hinh1" class="card-img-top img-fluid" alt="@tour.TenTour" style="height: 100%" width="312" height="208" loading="lazy">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title destination-item__title">@tour.TenTour</h5>
+                                <p class="card-text destination-item__description">@tour.Gia</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="home-page__why-vietravel mb-4">
+    <h3 class="home-page__title mb-5">Vì sao chọn Vietravel</h3>
+    <div class="container-fluid">
+        <div id="test" class="row g-5 g-lg-3 d-none d-lg-flex">
+            <div class="col-4 mb-6">
+                <div class="why-item">
+                    <img src="~/Images/forecast.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">
+                        Mạng bán tour
+                    </h5>
+                    <p class="card-text">Ứng dụng công nghệ mới nhất</p>
+                </div>
+            </div>
+            <div class="col-4 mb-4">
+                <div class="why-item">
+                    <img src="~/Images/good-product.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">Sản phẩm &amp; Dịch vụ</h5>
+                    <p class="card-text mb-1">Đa dạng – Chất lượng – An toàn</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="why-item">
+                    <img src="~/Images/dollar.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">Giá cả</h5>
+                    <p class="card-text mb-1">Luôn có mức giá tốt nhất</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="why-item">
+                    <img src="~/Images/mobile.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">Đặt tour</h5>
+                    <p class="card-text mb-1">Dễ dàng &amp; nhanh chóng chỉ với 3 bước</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="why-item">
+                    <img src="~/Images/pay.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">Thanh toán</h5>
+                    <p class="card-text mb-1">An toàn &amp; linh hoạt</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="why-item">
+                    <img src="~/Images/technical-support.png" alt="Forecast Icon" class="icon icon--why-1 mb-3">
+                    <h5 class="card-text mb-3 why-item__title">Hỗ trợ</h5>
+                    <p class="card-text mb-1">Hotline &amp; trực tuyến (08h00 - 22h00)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLDULICHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="UserAdmin" />
+          </Key>
+          <Property Name="UserAdmin" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PassAdmin" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="VaiTro" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="CHAULUC">
+          <Key>
+            <PropertyRef Name="MaChauLuc" />
+          </Key>
+          <Property Name="MaChauLuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenChauLuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaLoaiTour" Type="int" />
+        </EntityType>
+        <EntityType Name="CTDATTOUR">
+          <Key>
+            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="TenTV" />
+          </Key>
+          <Property Name="SoHD" Type="int" Nullable="false" />
+          <Property Name="MaHK" Type="int" />
+          <Property Name="MaTour" Type="char" MaxLength="50" />
+          <Property Name="DonGia" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="PTGiam" Type="float" Nullable="false" />
+          <Property Name="TenTV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="NgaySinh" Type="smalldatetime" />
+          <Property Name="ThanhTien" Type="float" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="MaDD" />
+          </Key>
+          <Property Name="MaDD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenDD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaDDen" Type="int" />
+        </EntityType>
+        <EntityType Name="DIEMDEN">
+          <Key>
+            <PropertyRef Name="MaDDen" />
+          </Key>
+          <Property Name="MaDDen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenDDen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaChauLuc" Type="int" />
+          <Property Name="MaLoaiTour" Type="int" />
+        </EntityType>
+        <EntityType Name="DIEMDI">
+          <Key>
+            <PropertyRef Name="MaDDi" />
+          </Key>
+          <Property Name="MaDDi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenDDi" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaLoaiTour" Type="int" />
+        </EntityType>
+        <EntityType Name="DONDATTOUR">
+          <Key>
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="SoHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaKH" Type="int" />
+          <Property Name="HoTenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SDT_KH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmailKH" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChiKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TongTien" Type="money" />
+          <Property Name="HTThanhToan" Type="bit" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="PTThanhToan" Type="bit" />
+          <Property Name="MaTour" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HANHKHACH">
+          <Key>
+            <PropertyRef Name="MaHK" />
+          </Key>
+          <Property Name="MaHK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenHK" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PTGiam" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChiKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="DienThoaiKH" Type="varchar" MaxLength="10" />
+          <Property Name="EmailKH" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="XacNhanMatKhau" Type="varchar" MaxLength="15" />
+          <Property Name="NgaySinh" Type="smalldatetime" />
+          <Property Name="GioiTinh" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLDULICH.dbo.KHACHSAN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="KHACHSAN">
+          <Key>
+            <PropertyRef Name="MaKS" />
+            <PropertyRef Name="TenKS" />
+            <PropertyRef Name="GiaKS" />
+            <PropertyRef Name="DiaChi" />
+          </Key>
+          <Property Name="MaKS" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenKS" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="GiaKS" Type="money" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MaLKS" Type="int" />
+        </EntityType>
+        <EntityType Name="LICHTRINH">
+          <Key>
+            <PropertyRef Name="SoTT" />
+            <PropertyRef Name="MaTour" />
+            <PropertyRef Name="MaDD" />
+          </Key>
+          <Property Name="SoTT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaTour" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="MaDD" Type="int" Nullable="false" />
+          <Property Name="ThoiGianDi" Type="smalldatetime" />
+          <Property Name="MoTa" Type="ntext" Nullable="false" />
+          <Property Name="TenLichTrinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOAIKS">
+          <Key>
+            <PropertyRef Name="MaLKS" />
+          </Key>
+          <Property Name="MaLKS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLKS" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOAITOUR">
+          <Key>
+            <PropertyRef Name="MaLoaiTour" />
+          </Key>
+          <Property Name="MaLoaiTour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiTour" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PHUONGTIEN">
+          <Key>
+            <PropertyRef Name="MaPT" />
+          </Key>
+          <Property Name="MaPT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPT" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TOUR">
+          <Key>
+            <PropertyRef Name="MaTour" />
+          </Key>
+          <Property Name="MaTour" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="TenTour" Type="ntext" Nullable="false" />
+          <Property Name="Gia" Type="money" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="Hinh1" Type="varchar" MaxLength="50" />
+          <Property Name="Hinh2" Type="varchar" MaxLength="50" />
+          <Property Name="Hinh3" Type="varchar" MaxLength="50" />
+          <Property Name="Hinh4" Type="varchar" MaxLength="50" />
+          <Property Name="MoTa" Type="ntext" />
+          <Property Name="SoLuongConLai" Type="int" Nullable="false" />
+          <Property Name="NgayDiTour" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="MaDDi" Type="int" />
+          <Property Name="MaDDen" Type="int" />
+          <Property Name="MaLoaiTour" Type="int" />
+          <Property Name="MaPT" Type="int" />
+          <Property Name="MaLKS" Type="int" />
+        </EntityType>
+        <Association Name="FK__CHAULUC__MaLoaiT__7C4F7684">
+          <End Role="LOAITOUR" Type="Self.LOAITOUR" Multiplicity="0..1" />
+          <End Role="CHAULUC" Type="Self.CHAULUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="CHAULUC">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__MaHK__373B3228">
+          <End Role="HANHKHACH" Type="Self.HANHKHACH" Multiplicity="0..1" />
+          <End Role="CTDATTOUR" Type="Self.CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANHKHACH">
+              <PropertyRef Name="MaHK" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="MaHK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__MaTou__382F5661">
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="0..1" />
+          <End Role="CTDATTOUR" Type="Self.CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__SoHD__36470DEF">
+          <End Role="DONDATTOUR" Type="Self.DONDATTOUR" Multiplicity="1" />
+          <End Role="CTDATTOUR" Type="Self.CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONDATTOUR">
+              <PropertyRef Name="SoHD" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIADIEM__MaDDen__37703C52">
+          <End Role="DIEMDEN" Type="Self.DIEMDEN" Multiplicity="0..1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDEN">
+              <PropertyRef Name="MaDDen" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="MaDDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDEN__MaChauL__02084FDA">
+          <End Role="CHAULUC" Type="Self.CHAULUC" Multiplicity="0..1" />
+          <End Role="DIEMDEN" Type="Self.DIEMDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHAULUC">
+              <PropertyRef Name="MaChauLuc" />
+            </Principal>
+            <Dependent Role="DIEMDEN">
+              <PropertyRef Name="MaChauLuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDEN__MaLoaiT__02FC7413">
+          <End Role="LOAITOUR" Type="Self.LOAITOUR" Multiplicity="0..1" />
+          <End Role="DIEMDEN" Type="Self.DIEMDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="DIEMDEN">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDI__MaLoaiTo__7F2BE32F">
+          <End Role="LOAITOUR" Type="Self.LOAITOUR" Multiplicity="0..1" />
+          <End Role="DIEMDI" Type="Self.DIEMDI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="DIEMDI">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONDATTOU__MaTou__336AA144">
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="0..1" />
+          <End Role="DONDATTOUR" Type="Self.DONDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="DONDATTOUR">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONDATTOUR__MaKH__2EA5EC27">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="DONDATTOUR" Type="Self.DONDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="DONDATTOUR">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KHACHSAN__MaLKS__6BE40491">
+          <End Role="LOAIKS" Type="Self.LOAIKS" Multiplicity="0..1" />
+          <End Role="KHACHSAN" Type="Self.KHACHSAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIKS">
+              <PropertyRef Name="MaLKS" />
+            </Principal>
+            <Dependent Role="KHACHSAN">
+              <PropertyRef Name="MaLKS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LICHTRINH__MaDD__7849DB76">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="LICHTRINH" Type="Self.LICHTRINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="MaDD" />
+            </Principal>
+            <Dependent Role="LICHTRINH">
+              <PropertyRef Name="MaDD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LICHTRINH__MaTou__7755B73D">
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="1" />
+          <End Role="LICHTRINH" Type="Self.LICHTRINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="LICHTRINH">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaDDen__719CDDE7">
+          <End Role="DIEMDEN" Type="Self.DIEMDEN" Multiplicity="0..1" />
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDEN">
+              <PropertyRef Name="MaDDen" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaDDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaDDi__70A8B9AE">
+          <End Role="DIEMDI" Type="Self.DIEMDI" Multiplicity="0..1" />
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDI">
+              <PropertyRef Name="MaDDi" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaDDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaLKS__74794A92">
+          <End Role="LOAIKS" Type="Self.LOAIKS" Multiplicity="0..1" />
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIKS">
+              <PropertyRef Name="MaLKS" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaLKS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaLoaiTour__72910220">
+          <End Role="LOAITOUR" Type="Self.LOAITOUR" Multiplicity="0..1" />
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaPT__73852659">
+          <End Role="PHUONGTIEN" Type="Self.PHUONGTIEN" Multiplicity="0..1" />
+          <End Role="TOUR" Type="Self.TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUONGTIEN">
+              <PropertyRef Name="MaPT" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaPT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLDULICHModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHAULUC" EntityType="Self.CHAULUC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTDATTOUR" EntityType="Self.CTDATTOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIADIEM" EntityType="Self.DIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIEMDEN" EntityType="Self.DIEMDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIEMDI" EntityType="Self.DIEMDI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONDATTOUR" EntityType="Self.DONDATTOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HANHKHACH" EntityType="Self.HANHKHACH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHTRINH" EntityType="Self.LICHTRINH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIKS" EntityType="Self.LOAIKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAITOUR" EntityType="Self.LOAITOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHUONGTIEN" EntityType="Self.PHUONGTIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOUR" EntityType="Self.TOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHSAN" EntityType="Self.KHACHSAN" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [KHACHSAN].[MaKS] AS [MaKS], 
+    [KHACHSAN].[TenKS] AS [TenKS], 
+    [KHACHSAN].[GiaKS] AS [GiaKS], 
+    [KHACHSAN].[DiaChi] AS [DiaChi], 
+    [KHACHSAN].[MaLKS] AS [MaLKS]
+    FROM [dbo].[KHACHSAN] AS [KHACHSAN]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__CHAULUC__MaLoaiT__7C4F7684" Association="Self.FK__CHAULUC__MaLoaiT__7C4F7684">
+            <End Role="LOAITOUR" EntitySet="LOAITOUR" />
+            <End Role="CHAULUC" EntitySet="CHAULUC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__MaHK__373B3228" Association="Self.FK__CTDATTOUR__MaHK__373B3228">
+            <End Role="HANHKHACH" EntitySet="HANHKHACH" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__MaTou__382F5661" Association="Self.FK__CTDATTOUR__MaTou__382F5661">
+            <End Role="TOUR" EntitySet="TOUR" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__SoHD__36470DEF" Association="Self.FK__CTDATTOUR__SoHD__36470DEF">
+            <End Role="DONDATTOUR" EntitySet="DONDATTOUR" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIADIEM__MaDDen__37703C52" Association="Self.FK__DIADIEM__MaDDen__37703C52">
+            <End Role="DIEMDEN" EntitySet="DIEMDEN" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDEN__MaChauL__02084FDA" Association="Self.FK__DIEMDEN__MaChauL__02084FDA">
+            <End Role="CHAULUC" EntitySet="CHAULUC" />
+            <End Role="DIEMDEN" EntitySet="DIEMDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDEN__MaLoaiT__02FC7413" Association="Self.FK__DIEMDEN__MaLoaiT__02FC7413">
+            <End Role="LOAITOUR" EntitySet="LOAITOUR" />
+            <End Role="DIEMDEN" EntitySet="DIEMDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDI__MaLoaiTo__7F2BE32F" Association="Self.FK__DIEMDI__MaLoaiTo__7F2BE32F">
+            <End Role="LOAITOUR" EntitySet="LOAITOUR" />
+            <End Role="DIEMDI" EntitySet="DIEMDI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONDATTOU__MaTou__336AA144" Association="Self.FK__DONDATTOU__MaTou__336AA144">
+            <End Role="TOUR" EntitySet="TOUR" />
+            <End Role="DONDATTOUR" EntitySet="DONDATTOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONDATTOUR__MaKH__2EA5EC27" Association="Self.FK__DONDATTOUR__MaKH__2EA5EC27">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="DONDATTOUR" EntitySet="DONDATTOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KHACHSAN__MaLKS__6BE40491" Association="Self.FK__KHACHSAN__MaLKS__6BE40491">
+            <End Role="LOAIKS" EntitySet="LOAIKS" />
+            <End Role="KHACHSAN" EntitySet="KHACHSAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LICHTRINH__MaDD__7849DB76" Association="Self.FK__LICHTRINH__MaDD__7849DB76">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="LICHTRINH" EntitySet="LICHTRINH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LICHTRINH__MaTou__7755B73D" Association="Self.FK__LICHTRINH__MaTou__7755B73D">
+            <End Role="TOUR" EntitySet="TOUR" />
+            <End Role="LICHTRINH" EntitySet="LICHTRINH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaDDen__719CDDE7" Association="Self.FK__TOUR__MaDDen__719CDDE7">
+            <End Role="DIEMDEN" EntitySet="DIEMDEN" />
+            <End Role="TOUR" EntitySet="TOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaDDi__70A8B9AE" Association="Self.FK__TOUR__MaDDi__70A8B9AE">
+            <End Role="DIEMDI" EntitySet="DIEMDI" />
+            <End Role="TOUR" EntitySet="TOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaLKS__74794A92" Association="Self.FK__TOUR__MaLKS__74794A92">
+            <End Role="LOAIKS" EntitySet="LOAIKS" />
+            <End Role="TOUR" EntitySet="TOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaLoaiTour__72910220" Association="Self.FK__TOUR__MaLoaiTour__72910220">
+            <End Role="LOAITOUR" EntitySet="LOAITOUR" />
+            <End Role="TOUR" EntitySet="TOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaPT__73852659" Association="Self.FK__TOUR__MaPT__73852659">
+            <End Role="PHUONGTIEN" EntitySet="PHUONGTIEN" />
+            <End Role="TOUR" EntitySet="TOUR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLDULICHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLDULICHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="QLDULICHModel.ADMIN" />
+          <EntitySet Name="CHAULUCs" EntityType="QLDULICHModel.CHAULUC" />
+          <EntitySet Name="CTDATTOURs" EntityType="QLDULICHModel.CTDATTOUR" />
+          <EntitySet Name="DIADIEMs" EntityType="QLDULICHModel.DIADIEM" />
+          <EntitySet Name="DIEMDENs" EntityType="QLDULICHModel.DIEMDEN" />
+          <EntitySet Name="DIEMDIs" EntityType="QLDULICHModel.DIEMDI" />
+          <EntitySet Name="DONDATTOURs" EntityType="QLDULICHModel.DONDATTOUR" />
+          <EntitySet Name="HANHKHACHes" EntityType="QLDULICHModel.HANHKHACH" />
+          <EntitySet Name="KHACHHANGs" EntityType="QLDULICHModel.KHACHHANG" />
+          <EntitySet Name="LICHTRINHs" EntityType="QLDULICHModel.LICHTRINH" />
+          <EntitySet Name="LOAIKS" EntityType="QLDULICHModel.LOAIK" />
+          <EntitySet Name="LOAITOURs" EntityType="QLDULICHModel.LOAITOUR" />
+          <EntitySet Name="PHUONGTIENs" EntityType="QLDULICHModel.PHUONGTIEN" />
+          <EntitySet Name="TOURs" EntityType="QLDULICHModel.TOUR" />
+          <EntitySet Name="KHACHSANs" EntityType="QLDULICHModel.KHACHSAN" />
+          <AssociationSet Name="FK__CHAULUC__MaLoaiT__7C4F7684" Association="QLDULICHModel.FK__CHAULUC__MaLoaiT__7C4F7684">
+            <End Role="LOAITOUR" EntitySet="LOAITOURs" />
+            <End Role="CHAULUC" EntitySet="CHAULUCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDEN__MaChauL__02084FDA" Association="QLDULICHModel.FK__DIEMDEN__MaChauL__02084FDA">
+            <End Role="CHAULUC" EntitySet="CHAULUCs" />
+            <End Role="DIEMDEN" EntitySet="DIEMDENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__MaHK__373B3228" Association="QLDULICHModel.FK__CTDATTOUR__MaHK__373B3228">
+            <End Role="HANHKHACH" EntitySet="HANHKHACHes" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__MaTou__382F5661" Association="QLDULICHModel.FK__CTDATTOUR__MaTou__382F5661">
+            <End Role="TOUR" EntitySet="TOURs" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTDATTOUR__SoHD__36470DEF" Association="QLDULICHModel.FK__CTDATTOUR__SoHD__36470DEF">
+            <End Role="DONDATTOUR" EntitySet="DONDATTOURs" />
+            <End Role="CTDATTOUR" EntitySet="CTDATTOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIADIEM__MaDDen__37703C52" Association="QLDULICHModel.FK__DIADIEM__MaDDen__37703C52">
+            <End Role="DIEMDEN" EntitySet="DIEMDENs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LICHTRINH__MaDD__7849DB76" Association="QLDULICHModel.FK__LICHTRINH__MaDD__7849DB76">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="LICHTRINH" EntitySet="LICHTRINHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDEN__MaLoaiT__02FC7413" Association="QLDULICHModel.FK__DIEMDEN__MaLoaiT__02FC7413">
+            <End Role="LOAITOUR" EntitySet="LOAITOURs" />
+            <End Role="DIEMDEN" EntitySet="DIEMDENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaDDen__719CDDE7" Association="QLDULICHModel.FK__TOUR__MaDDen__719CDDE7">
+            <End Role="DIEMDEN" EntitySet="DIEMDENs" />
+            <End Role="TOUR" EntitySet="TOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIEMDI__MaLoaiTo__7F2BE32F" Association="QLDULICHModel.FK__DIEMDI__MaLoaiTo__7F2BE32F">
+            <End Role="LOAITOUR" EntitySet="LOAITOURs" />
+            <End Role="DIEMDI" EntitySet="DIEMDIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaDDi__70A8B9AE" Association="QLDULICHModel.FK__TOUR__MaDDi__70A8B9AE">
+            <End Role="DIEMDI" EntitySet="DIEMDIs" />
+            <End Role="TOUR" EntitySet="TOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONDATTOU__MaTou__336AA144" Association="QLDULICHModel.FK__DONDATTOU__MaTou__336AA144">
+            <End Role="TOUR" EntitySet="TOURs" />
+            <End Role="DONDATTOUR" EntitySet="DONDATTOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DONDATTOUR__MaKH__2EA5EC27" Association="QLDULICHModel.FK__DONDATTOUR__MaKH__2EA5EC27">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="DONDATTOUR" EntitySet="DONDATTOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LICHTRINH__MaTou__7755B73D" Association="QLDULICHModel.FK__LICHTRINH__MaTou__7755B73D">
+            <End Role="TOUR" EntitySet="TOURs" />
+            <End Role="LICHTRINH" EntitySet="LICHTRINHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KHACHSAN__MaLKS__6BE40491" Association="QLDULICHModel.FK__KHACHSAN__MaLKS__6BE40491">
+            <End Role="LOAIK" EntitySet="LOAIKS" />
+            <End Role="KHACHSAN" EntitySet="KHACHSANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaLKS__74794A92" Association="QLDULICHModel.FK__TOUR__MaLKS__74794A92">
+            <End Role="LOAIK" EntitySet="LOAIKS" />
+            <End Role="TOUR" EntitySet="TOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaLoaiTour__72910220" Association="QLDULICHModel.FK__TOUR__MaLoaiTour__72910220">
+            <End Role="LOAITOUR" EntitySet="LOAITOURs" />
+            <End Role="TOUR" EntitySet="TOURs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TOUR__MaPT__73852659" Association="QLDULICHModel.FK__TOUR__MaPT__73852659">
+            <End Role="PHUONGTIEN" EntitySet="PHUONGTIENs" />
+            <End Role="TOUR" EntitySet="TOURs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="UserAdmin" />
+          </Key>
+          <Property Name="UserAdmin" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassAdmin" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VaiTro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CHAULUC">
+          <Key>
+            <PropertyRef Name="MaChauLuc" />
+          </Key>
+          <Property Name="MaChauLuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenChauLuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiTour" Type="Int32" />
+          <NavigationProperty Name="LOAITOUR" Relationship="QLDULICHModel.FK__CHAULUC__MaLoaiT__7C4F7684" FromRole="CHAULUC" ToRole="LOAITOUR" />
+          <NavigationProperty Name="DIEMDENs" Relationship="QLDULICHModel.FK__DIEMDEN__MaChauL__02084FDA" FromRole="CHAULUC" ToRole="DIEMDEN" />
+        </EntityType>
+        <EntityType Name="CTDATTOUR">
+          <Key>
+            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="TenTV" />
+          </Key>
+          <Property Name="SoHD" Type="Int32" Nullable="false" />
+          <Property Name="MaHK" Type="Int32" />
+          <Property Name="MaTour" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="DonGia" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="PTGiam" Type="Double" Nullable="false" />
+          <Property Name="TenTV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="ThanhTien" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="HANHKHACH" Relationship="QLDULICHModel.FK__CTDATTOUR__MaHK__373B3228" FromRole="CTDATTOUR" ToRole="HANHKHACH" />
+          <NavigationProperty Name="TOUR" Relationship="QLDULICHModel.FK__CTDATTOUR__MaTou__382F5661" FromRole="CTDATTOUR" ToRole="TOUR" />
+          <NavigationProperty Name="DONDATTOUR" Relationship="QLDULICHModel.FK__CTDATTOUR__SoHD__36470DEF" FromRole="CTDATTOUR" ToRole="DONDATTOUR" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="MaDD" />
+          </Key>
+          <Property Name="MaDD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaDDen" Type="Int32" />
+          <NavigationProperty Name="DIEMDEN" Relationship="QLDULICHModel.FK__DIADIEM__MaDDen__37703C52" FromRole="DIADIEM" ToRole="DIEMDEN" />
+          <NavigationProperty Name="LICHTRINHs" Relationship="QLDULICHModel.FK__LICHTRINH__MaDD__7849DB76" FromRole="DIADIEM" ToRole="LICHTRINH" />
+        </EntityType>
+        <EntityType Name="DIEMDEN">
+          <Key>
+            <PropertyRef Name="MaDDen" />
+          </Key>
+          <Property Name="MaDDen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDDen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaChauLuc" Type="Int32" />
+          <Property Name="MaLoaiTour" Type="Int32" />
+          <NavigationProperty Name="CHAULUC" Relationship="QLDULICHModel.FK__DIEMDEN__MaChauL__02084FDA" FromRole="DIEMDEN" ToRole="CHAULUC" />
+          <NavigationProperty Name="DIADIEMs" Relationship="QLDULICHModel.FK__DIADIEM__MaDDen__37703C52" FromRole="DIEMDEN" ToRole="DIADIEM" />
+          <NavigationProperty Name="LOAITOUR" Relationship="QLDULICHModel.FK__DIEMDEN__MaLoaiT__02FC7413" FromRole="DIEMDEN" ToRole="LOAITOUR" />
+          <NavigationProperty Name="TOURs" Relationship="QLDULICHModel.FK__TOUR__MaDDen__719CDDE7" FromRole="DIEMDEN" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="DIEMDI">
+          <Key>
+            <PropertyRef Name="MaDDi" />
+          </Key>
+          <Property Name="MaDDi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDDi" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiTour" Type="Int32" />
+          <NavigationProperty Name="LOAITOUR" Relationship="QLDULICHModel.FK__DIEMDI__MaLoaiTo__7F2BE32F" FromRole="DIEMDI" ToRole="LOAITOUR" />
+          <NavigationProperty Name="TOURs" Relationship="QLDULICHModel.FK__TOUR__MaDDi__70A8B9AE" FromRole="DIEMDI" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="DONDATTOUR">
+          <Key>
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="SoHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="Int32" />
+          <Property Name="HoTenKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT_KH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChiKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TongTien" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HTThanhToan" Type="Boolean" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="PTThanhToan" Type="Boolean" />
+          <Property Name="MaTour" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CTDATTOURs" Relationship="QLDULICHModel.FK__CTDATTOUR__SoHD__36470DEF" FromRole="DONDATTOUR" ToRole="CTDATTOUR" />
+          <NavigationProperty Name="TOUR" Relationship="QLDULICHModel.FK__DONDATTOU__MaTou__336AA144" FromRole="DONDATTOUR" ToRole="TOUR" />
+          <NavigationProperty Name="KHACHHANG" Relationship="QLDULICHModel.FK__DONDATTOUR__MaKH__2EA5EC27" FromRole="DONDATTOUR" ToRole="KHACHHANG" />
+        </EntityType>
+        <EntityType Name="HANHKHACH">
+          <Key>
+            <PropertyRef Name="MaHK" />
+          </Key>
+          <Property Name="MaHK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenHK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PTGiam" Type="Double" Nullable="false" />
+          <NavigationProperty Name="CTDATTOURs" Relationship="QLDULICHModel.FK__CTDATTOUR__MaHK__373B3228" FromRole="HANHKHACH" ToRole="CTDATTOUR" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTenKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoaiKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="XacNhanMatKhau" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <NavigationProperty Name="DONDATTOURs" Relationship="QLDULICHModel.FK__DONDATTOUR__MaKH__2EA5EC27" FromRole="KHACHHANG" ToRole="DONDATTOUR" />
+        </EntityType>
+        <EntityType Name="LICHTRINH">
+          <Key>
+            <PropertyRef Name="SoTT" />
+            <PropertyRef Name="MaTour" />
+            <PropertyRef Name="MaDD" />
+          </Key>
+          <Property Name="SoTT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaTour" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="MaDD" Type="Int32" Nullable="false" />
+          <Property Name="ThoiGianDi" Type="DateTime" Precision="0" />
+          <Property Name="MoTa" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TenLichTrinh" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DIADIEM" Relationship="QLDULICHModel.FK__LICHTRINH__MaDD__7849DB76" FromRole="LICHTRINH" ToRole="DIADIEM" />
+          <NavigationProperty Name="TOUR" Relationship="QLDULICHModel.FK__LICHTRINH__MaTou__7755B73D" FromRole="LICHTRINH" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="LOAIK">
+          <Key>
+            <PropertyRef Name="MaLKS" />
+          </Key>
+          <Property Name="MaLKS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLKS" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KHACHSANs" Relationship="QLDULICHModel.FK__KHACHSAN__MaLKS__6BE40491" FromRole="LOAIK" ToRole="KHACHSAN" />
+          <NavigationProperty Name="TOURs" Relationship="QLDULICHModel.FK__TOUR__MaLKS__74794A92" FromRole="LOAIK" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="LOAITOUR">
+          <Key>
+            <PropertyRef Name="MaLoaiTour" />
+          </Key>
+          <Property Name="MaLoaiTour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiTour" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CHAULUCs" Relationship="QLDULICHModel.FK__CHAULUC__MaLoaiT__7C4F7684" FromRole="LOAITOUR" ToRole="CHAULUC" />
+          <NavigationProperty Name="DIEMDENs" Relationship="QLDULICHModel.FK__DIEMDEN__MaLoaiT__02FC7413" FromRole="LOAITOUR" ToRole="DIEMDEN" />
+          <NavigationProperty Name="DIEMDIs" Relationship="QLDULICHModel.FK__DIEMDI__MaLoaiTo__7F2BE32F" FromRole="LOAITOUR" ToRole="DIEMDI" />
+          <NavigationProperty Name="TOURs" Relationship="QLDULICHModel.FK__TOUR__MaLoaiTour__72910220" FromRole="LOAITOUR" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="PHUONGTIEN">
+          <Key>
+            <PropertyRef Name="MaPT" />
+          </Key>
+          <Property Name="MaPT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TOURs" Relationship="QLDULICHModel.FK__TOUR__MaPT__73852659" FromRole="PHUONGTIEN" ToRole="TOUR" />
+        </EntityType>
+        <EntityType Name="TOUR">
+          <Key>
+            <PropertyRef Name="MaTour" />
+          </Key>
+          <Property Name="MaTour" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="TenTour" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="Hinh1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hinh2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hinh3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hinh4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongConLai" Type="Int32" Nullable="false" />
+          <Property Name="NgayDiTour" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="MaDDi" Type="Int32" />
+          <Property Name="MaDDen" Type="Int32" />
+          <Property Name="MaLoaiTour" Type="Int32" />
+          <Property Name="MaPT" Type="Int32" />
+          <Property Name="MaLKS" Type="Int32" />
+          <NavigationProperty Name="CTDATTOURs" Relationship="QLDULICHModel.FK__CTDATTOUR__MaTou__382F5661" FromRole="TOUR" ToRole="CTDATTOUR" />
+          <NavigationProperty Name="DIEMDEN" Relationship="QLDULICHModel.FK__TOUR__MaDDen__719CDDE7" FromRole="TOUR" ToRole="DIEMDEN" />
+          <NavigationProperty Name="DIEMDI" Relationship="QLDULICHModel.FK__TOUR__MaDDi__70A8B9AE" FromRole="TOUR" ToRole="DIEMDI" />
+          <NavigationProperty Name="DONDATTOURs" Relationship="QLDULICHModel.FK__DONDATTOU__MaTou__336AA144" FromRole="TOUR" ToRole="DONDATTOUR" />
+          <NavigationProperty Name="LICHTRINHs" Relationship="QLDULICHModel.FK__LICHTRINH__MaTou__7755B73D" FromRole="TOUR" ToRole="LICHTRINH" />
+          <NavigationProperty Name="LOAIK" Relationship="QLDULICHModel.FK__TOUR__MaLKS__74794A92" FromRole="TOUR" ToRole="LOAIK" />
+          <NavigationProperty Name="LOAITOUR" Relationship="QLDULICHModel.FK__TOUR__MaLoaiTour__72910220" FromRole="TOUR" ToRole="LOAITOUR" />
+          <NavigationProperty Name="PHUONGTIEN" Relationship="QLDULICHModel.FK__TOUR__MaPT__73852659" FromRole="TOUR" ToRole="PHUONGTIEN" />
+        </EntityType>
+        <EntityType Name="KHACHSAN">
+          <Key>
+            <PropertyRef Name="MaKS" />
+            <PropertyRef Name="TenKS" />
+            <PropertyRef Name="GiaKS" />
+            <PropertyRef Name="DiaChi" />
+          </Key>
+          <Property Name="MaKS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TenKS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GiaKS" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaLKS" Type="Int32" />
+          <NavigationProperty Name="LOAIK" Relationship="QLDULICHModel.FK__KHACHSAN__MaLKS__6BE40491" FromRole="KHACHSAN" ToRole="LOAIK" />
+        </EntityType>
+        <Association Name="FK__CHAULUC__MaLoaiT__7C4F7684">
+          <End Type="QLDULICHModel.LOAITOUR" Role="LOAITOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.CHAULUC" Role="CHAULUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="CHAULUC">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDEN__MaChauL__02084FDA">
+          <End Type="QLDULICHModel.CHAULUC" Role="CHAULUC" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DIEMDEN" Role="DIEMDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHAULUC">
+              <PropertyRef Name="MaChauLuc" />
+            </Principal>
+            <Dependent Role="DIEMDEN">
+              <PropertyRef Name="MaChauLuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__MaHK__373B3228">
+          <End Type="QLDULICHModel.HANHKHACH" Role="HANHKHACH" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.CTDATTOUR" Role="CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANHKHACH">
+              <PropertyRef Name="MaHK" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="MaHK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__MaTou__382F5661">
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.CTDATTOUR" Role="CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTDATTOUR__SoHD__36470DEF">
+          <End Type="QLDULICHModel.DONDATTOUR" Role="DONDATTOUR" Multiplicity="1" />
+          <End Type="QLDULICHModel.CTDATTOUR" Role="CTDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONDATTOUR">
+              <PropertyRef Name="SoHD" />
+            </Principal>
+            <Dependent Role="CTDATTOUR">
+              <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIADIEM__MaDDen__37703C52">
+          <End Type="QLDULICHModel.DIEMDEN" Role="DIEMDEN" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DIADIEM" Role="DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDEN">
+              <PropertyRef Name="MaDDen" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="MaDDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LICHTRINH__MaDD__7849DB76">
+          <End Type="QLDULICHModel.DIADIEM" Role="DIADIEM" Multiplicity="1" />
+          <End Type="QLDULICHModel.LICHTRINH" Role="LICHTRINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="MaDD" />
+            </Principal>
+            <Dependent Role="LICHTRINH">
+              <PropertyRef Name="MaDD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDEN__MaLoaiT__02FC7413">
+          <End Type="QLDULICHModel.LOAITOUR" Role="LOAITOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DIEMDEN" Role="DIEMDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="DIEMDEN">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaDDen__719CDDE7">
+          <End Type="QLDULICHModel.DIEMDEN" Role="DIEMDEN" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDEN">
+              <PropertyRef Name="MaDDen" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaDDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIEMDI__MaLoaiTo__7F2BE32F">
+          <End Type="QLDULICHModel.LOAITOUR" Role="LOAITOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DIEMDI" Role="DIEMDI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="DIEMDI">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaDDi__70A8B9AE">
+          <End Type="QLDULICHModel.DIEMDI" Role="DIEMDI" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIEMDI">
+              <PropertyRef Name="MaDDi" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaDDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONDATTOU__MaTou__336AA144">
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DONDATTOUR" Role="DONDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="DONDATTOUR">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DONDATTOUR__MaKH__2EA5EC27">
+          <End Type="QLDULICHModel.KHACHHANG" Role="KHACHHANG" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.DONDATTOUR" Role="DONDATTOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="DONDATTOUR">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LICHTRINH__MaTou__7755B73D">
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="1" />
+          <End Type="QLDULICHModel.LICHTRINH" Role="LICHTRINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR">
+              <PropertyRef Name="MaTour" />
+            </Principal>
+            <Dependent Role="LICHTRINH">
+              <PropertyRef Name="MaTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KHACHSAN__MaLKS__6BE40491">
+          <End Type="QLDULICHModel.LOAIK" Role="LOAIK" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.KHACHSAN" Role="KHACHSAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIK">
+              <PropertyRef Name="MaLKS" />
+            </Principal>
+            <Dependent Role="KHACHSAN">
+              <PropertyRef Name="MaLKS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaLKS__74794A92">
+          <End Type="QLDULICHModel.LOAIK" Role="LOAIK" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIK">
+              <PropertyRef Name="MaLKS" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaLKS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaLoaiTour__72910220">
+          <End Type="QLDULICHModel.LOAITOUR" Role="LOAITOUR" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaLoaiTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TOUR__MaPT__73852659">
+          <End Type="QLDULICHModel.PHUONGTIEN" Role="PHUONGTIEN" Multiplicity="0..1" />
+          <End Type="QLDULICHModel.TOUR" Role="TOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUONGTIEN">
+              <PropertyRef Name="MaPT" />
+            </Principal>
+            <Dependent Role="TOUR">
+              <PropertyRef Name="MaPT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLDULICHModelStoreContainer" CdmEntityContainer="QLDULICHEntities">
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="QLDULICHModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="VaiTro" ColumnName="VaiTro" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="PassAdmin" ColumnName="PassAdmin" />
+                <ScalarProperty Name="UserAdmin" ColumnName="UserAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHAULUCs">
+            <EntityTypeMapping TypeName="QLDULICHModel.CHAULUC">
+              <MappingFragment StoreEntitySet="CHAULUC">
+                <ScalarProperty Name="MaLoaiTour" ColumnName="MaLoaiTour" />
+                <ScalarProperty Name="TenChauLuc" ColumnName="TenChauLuc" />
+                <ScalarProperty Name="MaChauLuc" ColumnName="MaChauLuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTDATTOURs">
+            <EntityTypeMapping TypeName="QLDULICHModel.CTDATTOUR">
+              <MappingFragment StoreEntitySet="CTDATTOUR">
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TenTV" ColumnName="TenTV" />
+                <ScalarProperty Name="PTGiam" ColumnName="PTGiam" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="MaTour" ColumnName="MaTour" />
+                <ScalarProperty Name="MaHK" ColumnName="MaHK" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIADIEMs">
+            <EntityTypeMapping TypeName="QLDULICHModel.DIADIEM">
+              <MappingFragment StoreEntitySet="DIADIEM">
+                <ScalarProperty Name="MaDDen" ColumnName="MaDDen" />
+                <ScalarProperty Name="TenDD" ColumnName="TenDD" />
+                <ScalarProperty Name="MaDD" ColumnName="MaDD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIEMDENs">
+            <EntityTypeMapping TypeName="QLDULICHModel.DIEMDEN">
+              <MappingFragment StoreEntitySet="DIEMDEN">
+                <ScalarProperty Name="MaLoaiTour" ColumnName="MaLoaiTour" />
+                <ScalarProperty Name="MaChauLuc" ColumnName="MaChauLuc" />
+                <ScalarProperty Name="TenDDen" ColumnName="TenDDen" />
+                <ScalarProperty Name="MaDDen" ColumnName="MaDDen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIEMDIs">
+            <EntityTypeMapping TypeName="QLDULICHModel.DIEMDI">
+              <MappingFragment StoreEntitySet="DIEMDI">
+                <ScalarProperty Name="MaLoaiTour" ColumnName="MaLoaiTour" />
+                <ScalarProperty Name="TenDDi" ColumnName="TenDDi" />
+                <ScalarProperty Name="MaDDi" ColumnName="MaDDi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONDATTOURs">
+            <EntityTypeMapping TypeName="QLDULICHModel.DONDATTOUR">
+              <MappingFragment StoreEntitySet="DONDATTOUR">
+                <ScalarProperty Name="MaTour" ColumnName="MaTour" />
+                <ScalarProperty Name="PTThanhToan" ColumnName="PTThanhToan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="DiaChiKH" ColumnName="DiaChiKH" />
+                <ScalarProperty Name="EmailKH" ColumnName="EmailKH" />
+                <ScalarProperty Name="SDT_KH" ColumnName="SDT_KH" />
+                <ScalarProperty Name="HoTenKH" ColumnName="HoTenKH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HANHKHACHes">
+            <EntityTypeMapping TypeName="QLDULICHModel.HANHKHACH">
+              <MappingFragment StoreEntitySet="HANHKHACH">
+                <ScalarProperty Name="PTGiam" ColumnName="PTGiam" />
+                <ScalarProperty Name="TenHK" ColumnName="TenHK" />
+                <ScalarProperty Name="MaHK" ColumnName="MaHK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANGs">
+            <EntityTypeMapping TypeName="QLDULICHModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="XacNhanMatKhau" ColumnName="XacNhanMatKhau" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="EmailKH" ColumnName="EmailKH" />
+                <ScalarProperty Name="DienThoaiKH" ColumnName="DienThoaiKH" />
+                <ScalarProperty Name="DiaChiKH" ColumnName="DiaChiKH" />
+                <ScalarProperty Name="HoTenKH" ColumnName="HoTenKH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHTRINHs">
+            <EntityTypeMapping TypeName="QLDULICHModel.LICHTRINH">
+              <MappingFragment StoreEntitySet="LICHTRINH">
+                <ScalarProperty Name="TenLichTrinh" ColumnName="TenLichTrinh" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="ThoiGianDi" ColumnName="ThoiGianDi" />
+                <ScalarProperty Name="MaDD" ColumnName="MaDD" />
+                <ScalarProperty Name="MaTour" ColumnName="MaTour" />
+                <ScalarProperty Name="SoTT" ColumnName="SoTT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIKS">
+            <EntityTypeMapping TypeName="QLDULICHModel.LOAIK">
+              <MappingFragment StoreEntitySet="LOAIKS">
+                <ScalarProperty Name="TenLKS" ColumnName="TenLKS" />
+                <ScalarProperty Name="MaLKS" ColumnName="MaLKS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAITOURs">
+            <EntityTypeMapping TypeName="QLDULICHModel.LOAITOUR">
+              <MappingFragment StoreEntitySet="LOAITOUR">
+                <ScalarProperty Name="TenLoaiTour" ColumnName="TenLoaiTour" />
+                <ScalarProperty Name="MaLoaiTour" ColumnName="MaLoaiTour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHUONGTIENs">
+            <EntityTypeMapping TypeName="QLDULICHModel.PHUONGTIEN">
+              <MappingFragment StoreEntitySet="PHUONGTIEN">
+                <ScalarProperty Name="TenPT" ColumnName="TenPT" />
+                <ScalarProperty Name="MaPT" ColumnName="MaPT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOURs">
+            <EntityTypeMapping TypeName="QLDULICHModel.TOUR">
+              <MappingFragment StoreEntitySet="TOUR">
+                <ScalarProperty Name="MaLKS" ColumnName="MaLKS" />
+                <ScalarProperty Name="MaPT" ColumnName="MaPT" />
+                <ScalarProperty Name="MaLoaiTour" ColumnName="MaLoaiTour" />
+                <ScalarProperty Name="MaDDen" ColumnName="MaDDen" />
+                <ScalarProperty Name="MaDDi" ColumnName="MaDDi" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="NgayDiTour" ColumnName="NgayDiTour" />
+                <ScalarProperty Name="SoLuongConLai" ColumnName="SoLuongConLai" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Hinh4" ColumnName="Hinh4" />
+                <ScalarProperty Name="Hinh3" ColumnName="Hinh3" />
+                <ScalarProperty Name="Hinh2" ColumnName="Hinh2" />
+                <ScalarProperty Name="Hinh1" ColumnName="Hinh1" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TenTour" ColumnName="TenTour" />
+                <ScalarProperty Name="MaTour" ColumnName="MaTour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHSANs">
+            <EntityTypeMapping TypeName="QLDULICHModel.KHACHSAN">
+              <MappingFragment StoreEntitySet="KHACHSAN">
+                <ScalarProperty Name="MaLKS" ColumnName="MaLKS" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GiaKS" ColumnName="GiaKS" />
+                <ScalarProperty Name="TenKS" ColumnName="TenKS" />
+                <ScalarProperty Name="MaKS" ColumnName="MaKS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

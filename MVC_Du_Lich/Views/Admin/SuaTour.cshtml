@@ -1,0 +1,163 @@
+﻿@model MVC_Du_Lich.Models.TOUR
+@{
+    ViewBag.Title = "SuaTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h2 style="text-align: center">CHỈNH SỬA TOUR</h2>
+
+    @using (Html.BeginForm("SuaTour", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>TOUR</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaTour)
+
+            <div class="form-group">
+                TÊN TOUR
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenTour, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenTour, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                Giá
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                SỐ LƯỢNG
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                HÌNH TOUR
+                <div class="col-md-10">
+                    CHỌN ẢNH MỚI
+                    <input type="file" name="HINHANH" style="padding-bottom: 20px;" />
+                    <img src="~/Images/@Model.Hinh1" /> (Ảnh hiện tại)
+                    @Html.ValidationMessageFor(model => model.Hinh1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                HÌNH TOUR
+                <div class="col-md-10">
+                    CHỌN ẢNH MỚI
+                    <input type="file" name="HINHANH" style="padding-bottom: 20px;" />
+                    <img src="~/Images/@Model.Hinh2" /> (Ảnh hiện tại)
+                    @Html.ValidationMessageFor(model => model.Hinh2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                HÌNH TOUR
+                <div class="col-md-10">
+                    CHỌN ẢNH MỚI
+                    <input type="file" name="HINHANH" style="padding-bottom: 20px;" />
+                    <img src="~/Images/@Model.Hinh3" /> (Ảnh hiện tại)
+                    @Html.ValidationMessageFor(model => model.Hinh3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                HÌNH TOUR
+                <div class="col-md-10">
+                    CHỌN ẢNH MỚI
+                    <input type="file" name="HINHANH" style="padding-bottom: 20px;" />
+                    <img src="~/Images/@Model.Hinh4" /> (Ảnh hiện tại)
+                    @Html.ValidationMessageFor(model => model.Hinh4, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                MÔ TẢ
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                SỐ LƯỢNG CÒN LẠI
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SoLuongConLai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoLuongConLai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                Ngày ĐI TOUR
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayDiTour, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.NgayDiTour, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                NGÀY KẾT THÚC
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ ĐIỂM ĐI
+                <div class="col-md-10">
+                    @Html.DropDownList("MaDDi", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaDDi, "", new { @class = "text - danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ ĐIỂM ĐẾN
+                <div class="col-md-10">
+                    @Html.DropDownList("MaDDen", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaDDen, "", new { @class = "text - danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ LOẠI TOUR
+                <div class="col-md-10">
+                    @Html.DropDownList("MaLoaiTour", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaLoaiTour, "", new { @class = "text - danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ PHƯƠNG TIỆN
+                <div class="col-md-10">
+                    @Html.DropDownList("MaPT", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaPT, "", new { @class = "text - danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ LOẠI KHÁCH SẠN
+                <div class="col-md-10">
+                    @Html.DropDownList("MaLKS", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaLKS, "", new { @class = "text - danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 mb-3 mt-3">
+                    <input type="submit" value="LƯU" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+     }
+        <div>
+            @Html.ActionLink("TRỞ LẠI", "Tour")
+        </div>
+</div>
+
+

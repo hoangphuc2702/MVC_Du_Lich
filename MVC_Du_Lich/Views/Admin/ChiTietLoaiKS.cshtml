@@ -1,0 +1,37 @@
+﻿@model MVC_Du_Lich.Models.LOAIK
+@{
+    ViewBag.Title = "ChiTietLoaiKS";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiết Loại Khách Sạn</h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ LOẠI KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.MaLKS)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TÊN LOẠI KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TenLKS)
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("ĐIỀU CHỈNH", "SuaLoaiKS", new { id = Model.MaLKS }) |
+    @Html.ActionLink("TRỞ VỀ", "LoaiKS")
+</p>
+<style>
+    .row-title {
+        font-weight: bold;
+        text-align: right;
+    }
+</style>
+

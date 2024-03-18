@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: contain;
+        height: contain;
+        display: flex;
+        justify-content: center;
+        padding: 20px 0 20px 0;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .right-form {
+        padding: 20px 10px 20px 10px;
+        margin: 50px 10px 0 10px;
+    }
+
+    .form-wrap {
+        width: 450px;
+        margin-left: 25px;
+        margin-right: 25px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .heading {
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        border: none;
+        height: fit-content;
+        margin-bottom: 60px;
+        color: black;
+    }
+
+    .card {
+        padding: 20px 30px 20px 30px;
+        display: flex;
+        justify-content: center;
+        border: none;
+        background-color: transparent;
+        border-radius: 20px;
+    }
+
+    .form-label {
+        padding: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .card .input-box {
+        max-width: 100%;
+        margin-top: 15px;
+    }
+
+    .input-box input {
+        max-width: 100%;
+        height: 50px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .forget-pass {
+        display: flex;
+        justify-content: right;
+        text-align: right;
+        text-decoration: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: black;
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 20px;
+        background-color: orangered;
+        border: none;
+    }
+
+        .btn:hover {
+            background-color: darkred;
+            border: none;
+        }
+
+    .col {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .btn-icon-fb {
+        width: 48%;
+        height: 60px;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        background-color: #4267B2;
+    }
+
+    .btn-icon-gg {
+        width: 48%;
+        height: 60px;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        background-color: #FD5056;
+    }
+
+    .btn-register {
+        display: flex;
+        justify-content: right;
+        text-align: right;
+    }
+
+        .btn-register a {
+            margin-left: 15px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            color: black;
+        }
+
+    a{
+        list-style:none
+    }
+</style>
+
+<div class="container-fluid wrapper" style="background-image:url(../../Images/holiday-tools-table.jpg); border-top-left-radius: 20px; border-top-right-radius: 20px">
+    <div class="row form-wrap">
+        <div class="col-12 right-form">
+            <div class="text-center heading row">
+                <h3 style="width:100%">
+                    Chào mừng Quý khách đến với
+                </h3>
+                <h3 style="width:100%; color: red">
+                    Travelike
+                </h3>
+            </div>
+
+            <div class="card bg-white">
+                <div class="d-flex tab">
+                    @if (ViewBag.loai == 1)
+                    {
+                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white" href="@Url.Action("DangNhap", "User", new {loai = 2})">Đăng nhập</a>
+                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271" href="@Url.Action("DangKy", "User", new {loai = 1})">Đăng ký</a>
+                    }
+                    else
+                    {
+                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271" href="@Url.Action("DangNhap", "User", new {loai = 2})">Đăng nhập</a>
+                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white" href="@Url.Action("DangKy", "User", new {loai = 1})">Đăng ký</a>
+                    }
+                </div>
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+

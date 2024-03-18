@@ -1,0 +1,66 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<CHAULUC>
+@{
+    ViewBag.Title = "ChauLuc";
+    Layout = "~/Views/Shared/NavigationAdmin.cshtml";
+}
+
+<h2>QUẢN LÝ THÔNG TIN CHÂU LỤC</h2>
+
+<p>
+    @Html.ActionLink("THÊM MỚI", "ThemChauLuc")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaChauLuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TenChauLuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaLoaiTour)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaChauLuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenChauLuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOAITOUR.TenLoaiTour)
+            </td>
+
+            <td style="width: 150px;">
+                @Html.ActionLink("SỬA", "SuaChauLuc", new { id = item.MaChauLuc }) |
+                @Html.ActionLink("CHI TIẾT", "ChiTietChauLuc", new { id = item.MaChauLuc })|
+                @Html.ActionLink("XÓA", "XoaChauLuc", new { id = item.MaChauLuc })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("ChauLuc", new { page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+
+    td, th {
+        text-align: center;
+    }
+</style>
+<!-- Kết thúc -->

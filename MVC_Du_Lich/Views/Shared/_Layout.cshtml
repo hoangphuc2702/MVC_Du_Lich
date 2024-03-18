@@ -1,0 +1,717 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <!-- Jquery -->
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+    <!-- CSS only -->
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <!-- JavaScript Bundle with Popper -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
+
+
+    <link rel="stylesheet" href="~/Content/Main.css" />
+
+
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="/Assets/HotelFlight/libs/query/jquery-3.6.0.min.js"></script>
+    <script src="/Assets/HotelFlight/libs/query/jquery-ui.js"></script>
+    <script src="/Assets/HotelFlight/libs/daterangepickerBootstrap/daterangepicker.js"></script>
+
+
+    <!-- Đặt đoạn mã này trước Bootstrap để đảm bảo jQuery được tải trước -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <style>
+
+        header {
+            display: block;
+        }
+
+        body {
+            font-weight: 400;
+            color: #2d4271;
+            line-height: 24px;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+            background-color: #fff;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+        }
+
+        .header .right {
+            display: flex;
+            -webkit-box-align: center;
+            align-content: center;
+        }
+
+        .navbar-nav {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        div {
+            display: block;
+        }
+
+        .header .left .form-search {
+            margin-right: 50px;
+            margin-left: 40px;
+        }
+
+            .header .left .form-search form {
+                border: 2px solid #ffc709;
+                border-radius: 5px;
+                height: 50px;
+                position: relative;
+                overflow: hidden;
+            }
+
+        input, button, select, optgroup, textarea {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .header .left .form-search form input[type=text] {
+            width: 90%;
+        }
+
+        .header .left .form-search form input[type=text] {
+            height: 100%;
+            width: 100%;
+            padding: 0 25px;
+            color: #2d4271;
+            font-weight: 400;
+            border: none;
+        }
+
+        input, button, select, optgroup, textarea {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .header .left .form-search form input[type=submit] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            height: 100%;
+            width: 60px;
+            border: none;
+            background: 0 0;
+        }
+
+        .header .left .form-search form i {
+            position: absolute;
+            top: 50%;
+            right: 13px;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            z-index: 1;
+            pointer-events: none;
+            font-size: 18px;
+            color: #2d4271;
+        }
+
+        .icon--search::before {
+            content: '\f186';
+        }
+
+        .icon::before {
+            font-family: icons !important;
+            font-style: normal;
+            font-weight: 400 !important;
+            vertical-align: middle;
+        }
+
+        a {
+            color: #0d6efd;
+            text-decoration: underline;
+        }
+
+        a {
+            background-color: transparent;
+        }
+
+        .group-features {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            justify-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        li {
+            text-align: center;
+            max-width: 123px;
+            width: 123px
+        }
+
+        ul {
+            text-align: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        footer .block.two-line {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .block ul li {
+            list-style: none;
+            text-align: left
+        }
+
+        ul {
+            display: block;
+            list-style-type: disc;
+            padding: 0;
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .ft-app a {
+            text-decoration: none;
+        }
+
+        .ft-app {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mb-app {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .call-action {
+            max-width: 100%;
+            width: 100%;
+            max-height: 50px;
+            height: 50px;
+            padding-top: 20px;
+            margin-top: 5px;
+        }
+
+            .call-action a {
+                max-height: 50px;
+                background-color: red;
+                text-decoration: none;
+                padding: 10px 15px 10px 15px;
+                color: white;
+                border-radius: 10px;
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+        .social {
+            display: inline;
+            justify-content: left;
+            text-align: left;
+            text-decoration: none;
+            padding-right: 20px;
+        }
+
+        .socials {
+            max-width: fit-content;
+        }
+
+            .socials a {
+                text-decoration: none;
+            }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .menu .menu-item {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        footer .block form {
+            background: #fff;
+            border: 1px solid #7d8fab;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 10px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            margin-top: -5px;
+            max-width: 323px;
+        }
+
+            footer .block form input[type=text] {
+                height: 100%;
+                width: 100%;
+                padding: 0 25px;
+                color: #2d4271;
+                font-weight: 400;
+                border: none;
+                outline: none;
+            }
+
+            footer .block form input[type=submit] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 1;
+                height: 100%;
+                width: 50px;
+                border: none;
+                background: 0 0;
+                border-left: 1px solid #7d8fab;
+            }
+
+            footer .block form i {
+                position: absolute;
+                top: 50%;
+                right: 13px;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                z-index: 1;
+                pointer-events: none;
+                font-size: 18px;
+                color: #2d4271;
+            }
+
+        .thanhtoan {
+            margin: 10px 0 10px 0;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            display: none;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0;
+            font-size: 1rem;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-radius: 0.25rem;
+        }
+
+        .header .left .navbar-nav .megamenu {
+            border: none;
+            padding-left: 2rem;
+            padding-top: 1rem;
+        }
+
+        .header .left .dropdown-menu {
+            color: #2d4271;
+        }
+
+        .navbar-nav .dropdown-menu {
+            position: static;
+        }
+
+        .header .right .group-features .item {
+            padding: 0 11px;
+            cursor: pointer;
+        }
+
+        .navbar-collapse.left {
+            margin-left: -15px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+    <header class="header">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/logo (1).png" alt="Travelike logo" width="150" height="50" loading="lazy" />
+                </a>
+                <div class="navbar-collapse offcanvas-collapse left" id="main_nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown me-4">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")" rel="nofollow" role="button" aria-expanded="true">Trang chủ</a>
+                        </li>
+                        <li class="nav-item dropdown me-4">
+                            <a class="nav-link" href="#" rel="nofollow" role="button" aria-expanded="true">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item dropdown has-megamenu me-4">
+                            <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Du lịch</a>
+                            <div class="col-2">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "CustomerTour", new {loaiTour = 1})">Tour trong nước</a>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "CustomerTour", new {loaiTour = 2})">Tour ngoài nước</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown has-megamenu me-4">
+                            <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin tức</a>
+                            <div class="col-2">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="@Url.Action("TinTuc1", "TinTuc")">Top 7 địa điểm du lịch Hạ Long tuyệt đẹp nhất định phải ghé thăm</a>
+                                    <a class="dropdown-item" href="@Url.Action("TinTuc2", "TinTuc")">Du lịch Đài Loan mùa xuân - Thiên đàng hoa anh đào trên đảo Formosa</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown me-4">
+                            <a class="nav-link" href="#">Liên hệ</a>
+                        </li>
+                    </ul>
+
+                    <div class="navbar-collapse offcanvas-collapse left" id="main_nav" style="display:flex; justify-content:center">
+                        <div class="form-search">
+                            <form method="post">
+                                <input type="hidden" />
+                                <input type="text" name="search" class="ipt" placeholder="Bắt đầu tìm kiếm..." />
+                                <input type="submit" name="submit" class="sm" value="" id="btnSearchTour" />
+                                <i class='bx bx-search'></i>
+                            </form>
+                            <div class="form-search-wrapper"></div>
+                        </div>
+
+                        @if (Session["NameUser"] != null)
+                        {
+                            <div class="group-features">
+                                <div class="account item">
+                                    <li class="nav-item dropdown has-megamenu me-4">
+                                        <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa-solid fa-user fa-xl" style="color: #000000;"></i>
+                                        </a>
+                                        <div class="col-2">
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan", "User")">Thông tin cá nhân</a>
+                                                <a class="dropdown-item" href="@Url.Action("LSHoaDon", "User")">Lịch sử đặt tour</a>
+                                                <a class="dropdown-item" href="@Url.Action("Logout", "User")">Đăng xuất</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+                            <div class="wishlist item">
+                                Hello @Session["NameUser"]
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="group-features">
+                                <div class="account item">
+                                    <li class="nav-item dropdown has-megamenu me-4">
+                                        <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa-solid fa-user fa-xl" style="color: #000000;"></i>
+                                        </a>
+                                        <div class="col-2">
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="@Url.Action("DangNhap", "User")">Đăng nhập</a>
+                                                <a class="dropdown-item" href="@Url.Action("DangKy", "User")">Đăng ký</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="container-fluid" style="padding:0; width: 100%">
+        @RenderBody()
+        <footer>
+            <section class="footer-top" style="background-color: #f9f9f9; padding-top: 45px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-6 block two-line" style="display:flex; flex-wrap: wrap; margin-bottom: 40px">
+                            <h4 style="max-width: 100%; width: 100%; max-height: fit-content; height: fit-content; margin-bottom: 15px ">
+                                <a href="#" name="Du lịch trong nước" title="Du lịch trong nước" style="text-decoration: none;color:black">Du lịch trong nước</a>
+                            </h4>
+                            <ul class="menu" style="width: 40%; padding: 0; margin: 0;">
+                                <li class="menu-item"><a href="#" name="Hà Nội" title="Hà Nội">Hà Nội</a></li>
+                                <li class="menu-item"><a href="#" name="Hạ Long" title="Hạ Long">Hạ Long</a></li>
+                                <li class="menu-item"><a href="#" name="Huế" title="Huế">Huế</a></li>
+                                <li class="menu-item"><a href="#" name="Quảng Bình" title="Quảng Bình">Quảng Bình</a></li>
+                                <li class="menu-item"><a href="#" name="Đà Nẵng" title="Đà Nẵng">Đà Nẵng</a></li>
+                                <li class="menu-item"><a href="#" name="Quảng Nam" title="Quảng Nam">Quảng Nam</a></li>
+                                <li class="menu-item"><a href="#" name="Nha Trang" title="Nha Trang">Nha Trang</a></li>
+                                <li class="menu-item"><a href="#" name="Đà Lạt" title="Đà Lạt">Đà Lạt</a></li>
+                            </ul>
+                            <ul class="menu" style="width: 40%; padding: 0; margin: 0;">
+                                <li class="menu-item"><a href="#" name="Phan Thiết" title="Phan Thiết">Phan Thiết</a></li>
+                                <li class="menu-item"><a href="#" name="Bà Rịa - Vũng Tàu" title="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</a></li>
+                                <li class="menu-item"><a href="#" name="Phú Quốc" title="Phú Quốc">Phú Quốc</a></li>
+                                <li class="menu-item"><a href="#" name="Cần Thơ" title="Cần Thơ">Cần Thơ</a></li>
+                                <li class="menu-item"><a href="#" name="Hà Tiên" title="Hà Tiên">Hà Tiên</a></li>
+                                <li class="menu-item"><a href="#" name="Bắc Kạn" title="Bắc Kạn">Bắc Kạn</a></li>
+                                <li class="menu-item"><a href="#" name="Hà Giang" title="Hà Giang">Hà Giang</a></li>
+                                <li class="menu-item"><a href="#" name="Côn Đảo" title="Côn Đảo">Côn Đảo</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-6 block two-line" style="display: flex; flex-wrap: wrap; margin-bottom: 40px">
+                            <h4 style="max-width: 100%; width: 100%; max-height: fit-content; height: fit-content; margin-bottom: 15px ">
+                                <a href="#" name="Du lịch nước ngoài" title="Du lịch nước ngoài" style="text-decoration: none; color: black">Du lịch nước ngoài</a>
+                            </h4>
+                            <ul class="menu" style="width: 40%; padding: 0; margin: 0;">
+                                <li class="menu-item"><a href="#" name="Trung Quốc" title="Trung Quốc">Trung Quốc</a></li>
+                                <li class="menu-item"><a href="#" name="Thái Lan" title="Thái Lan">Thái Lan</a></li>
+                                <li class="menu-item"><a href="#" name="Malaysia" title="Malaysia">Malaysia</a></li>
+                                <li class="menu-item"><a href="#" name="Singapore" title="Singapore">Singapore</a></li>
+                                <li class="menu-item"><a href="#" name="Hàn Quốc" title="Hàn Quốc">Hàn Quốc</a></li>
+                                <li class="menu-item"><a href="#" name="Úc" title="Úc">Úc</a></li>
+                                <li class="menu-item"><a href="#" name="Mỹ - Hoa Kì" title="Mỹ - Hoa Kì">Mỹ - Hoa Kì</a></li>
+                                <li class="menu-item"><a href="#" name="Nhật Bản" title="Nhật Bản">Nhật Bản</a></li>
+                            </ul>
+                            <ul class="menu" style="width: 40%; padding: 0; margin: 0;">
+                                <li class="menu-item"><a href="#" name="Ấn Độ" title="Ấn Độ">Ấn Độ</a></li>
+                                <li class="menu-item"><a href="#" name="Philippines" title="Philippines">Philippines</a></li>
+                                <li class="menu-item"><a href="#" name="Maldives" title="Maldives">Maldives</a></li>
+                                <li class="menu-item"><a href="#" name="Na Uy" title="Na Uy">Na Uy</a></li>
+                                <li class="menu-item"><a href="#" name="Tây Ban Nha" title="Tây Ban Nha">Tây Ban Nha</a></li>
+                                <li class="menu-item"><a href="#" name="Hà Lan" title="Hà Lan">Hà Lan</a></li>
+                                <li class="menu-item"><a href="#" name="Đức" title="Đức">Đức</a></li>
+                                <li class="menu-item"><a href="#" name="Anh" title="Anh">Anh</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-6 block" style="display: flex; flex-wrap: wrap; margin-bottom: 40px">
+                            <h4 style="max-width: 100%; width: 100%; max-height: fit-content; height: fit-content; margin-bottom: 15px">
+                                <a href="#" name="Dòng Tour" title="Dòng Tour" style="text-decoration: none; color: black">Dòng Tour</a>
+                            </h4>
+                            <ul class="menu" style="width: 40%; padding: 0; margin: 0;">
+                                <li class="menu-item"><a href="#" name="Cao cấp" title="Cao cấp">Cao cấp</a></li>
+                                <li class="menu-item"><a href="#" name="Tiêu chuẩn" title="Tiêu chuẩn">Tiêu chuẩn</a></li>
+                                <li class="menu-item"><a href="#" name="Tiết kiệm" title="Tiết kiệm">Tiết kiệm</a></li>
+                                <li class="menu-item"><a href="#" name="Giá tốt" title="Giá tốt">Giá tốt</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-6 block" style="margin-bottom: 40px">
+                            <h4 style="max-width: 100%; width: 100%; max-height: fit-content; height: fit-content; margin-bottom: 15px">
+                                <a href="#" name="Ứng dụng di động" title="Ứng dụng di động" style="text-decoration: none; color: black; ">Ứng dụng di động</a>
+                            </h4>
+                            <div class="ft-app">
+                                <a href="https://play.google.com/store/apps/details?id=vn.com.vietravel" rel="nofollow noreferrer" target="_blank" name="Tải app" title="Tải app">
+                                    <img src="~/Images/ggp.png" alt="Travelike on PlayStore" width="132" height="44" loading="lazy" />
+                                </a>
+                                <a href="https://itunes.apple.com/us/app/vietravel/id623123001?l=vi&ls=1&mt=8" rel="nofollow noreferrer" target="_blank" name="Tải app" title="Tải app">
+                                    <img src="~/Images/aps.png" alt="Travelike on AppleStore" width="132" height="44" loading="lazy" />
+                                </a>
+                            </div>
+
+                            <div class="mb-app col">
+                                <div class="andoroid">
+                                    <p>Android</p>
+                                    <a href="https://play.google.com/store/apps/details?id=vn.com.vietravel" rel="nofollow noreferrer" target="_blank" name="Tải app" title="Tải app">
+                                        <img src="~/Images/QRAndroid.png" alt="image" width="120" height="120" loading="lazy" />
+                                    </a>
+                                </div>
+                                <div class="apple">
+                                    <p>Apple</p>
+                                    <a href="https://itunes.apple.com/us/app/vietravel/id623123001?l=vi&ls=1&mt=8" rel="nofollow noreferrer" target="_blank" name="Tải app" title="Tải app">
+                                        <img src="~/Images/QRApple.png" alt="image" width="120" height="120" loading="lazy" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-6 block contract-block" style="margin-bottom: 40px">
+                            <h4 style="font-size: 18px">Liên hệ</h4>
+                            <div class="contract-info" style="font-size:13px">
+                                190 Pasture, Phường Võ Thị Sáu, Quận 3, TP
+                                <br style="margin-bottom: 15px" />
+                                HCM
+                                <br style="margin-bottom: 15px" />
+                                (+84 28) 3822 8898
+                                <br style="margin-bottom: 15px" />
+                                (+84 28) 3829 9142
+                                <br style="margin-bottom: 15px" />
+                                info@travelike.com
+                            </div>
+                            <h4 style="margin-bottom: 15px; font-size: 18px; margin-top: 15px">Mạng xã hội</h4>
+                            <ul class="socials">
+                                <li class="social">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer" name="facebook" title="facebook">
+                                        <i class="fa-brands fa-facebook-f fa-2xl" style="color: #000000;"></i>
+                                    </a>
+                                </li>
+                                <li class="social">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer" name="instagram" title="instagram">
+                                        <i class="fa-brands fa-instagram fa-2xl" style="color: #000000;"></i>
+                                    </a>
+                                </li>
+                                <li class="social">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer" name="viber" title="viber">
+                                        <i class="fa-brands fa-viber fa-2xl" style="color: #000000;"></i>
+                                    </a>
+                                </li>
+                                <li class="social">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer" name="youtube" title="youtube">
+                                        <i class="fa-brands fa-youtube fa-2xl" style="color: #000000;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="call-action">
+                                <a href="tel:1900 1839">
+                                    <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+                                    1900 1839
+                                </a>
+                            </div>
+                            <p style="margin-top: 15px; font-size: 13px">Từ 8:00 - 22:00 hằng ngày</p>
+                        </div>
+
+                        <div class="col-md-3 col-6 block">
+                            <h4 style="font-size: 18px">Thông tin</h4>
+                            <ul class="menu">
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Tạp chí du lịch</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Cẩm nang du lịch</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Tin tức</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Sitemap</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">FAQs</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Chính sách riêng tư</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" target="_blank" rel="nofollow noreferrer">Thỏa thuận sử dụng</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 col-12 block">
+                            <h4 style="font-size: 18px; margin-bottom: 15px;">Newsletter</h4>
+                            <div class="newsletter form">
+                                <form action="" method="post" style="margin-bottom: 25px">
+                                    <input type="text" name="EmailRegister" placeholder="Email của quý khách" id="EmailRegisterFooter" style="border: none" />
+                                    <input type="submit" name="submit" class="sm" value="" />
+                                    <i class="fa-regular fa-envelope" style="color: #000000;"></i>
+                                </form>
+                            </div>
+
+                            <h4 style="font-size: 18px; margin-bottom: 15px;">Tìm kiếm thông tin</h4>
+                            <div class="searcj form">
+                                <form action="" method="post" style="margin-bottom: 25px">
+                                    <input type="text" name="search" placeholder="Tour du lịch, điểm đến..." id="searchfooter" style="border: none" />
+                                    <input type="submit" name="submit" class="sm" value="" />
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
+                                </form>
+                            </div>
+
+                            <div class="securi-payment col">
+                                <div class="securu row" style="text-decoration: none; width: auto; display:flex; justify-content: left; text-align:left">
+                                    <h4 style="font-size:18px;margin-bottom: 15px">Chứng nhận</h4>
+                                    <a href="#" rel="nofollow noreferrer" target="_blank" style="margin-bottom: 15px">
+                                        <img alt="image" width="178" height="37" loading="lazy" src="~/Images/chungnhan2.png" />
+                                    </a>
+                                    <a href="#" rel="nofollow noreferrer" target="_blank">
+                                        <img alt="image" width="177" height="68" loading="lazy" src="~/Images/chungnhan1.png" />
+                                    </a>
+                                </div>
+
+                                <div class="payment" style="float: left; margin-left: 10px; display: inline">
+                                    <h4 style="font-size: 18px; margin-bottom: 10px; display: flex; justify-content: left; text-align: left">Chấp nhận thanh toán</h4>
+                                    <div class="pay">
+                                        <img src="~/Images/123pay.png" alt="123pay" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/vnpay_qr1_1.png" alt="VNPay" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/visa.png" alt="Visa" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/mastercard.png" alt="Master Card" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/jcb.png" alt="jcb" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/vvisa.png" alt="visa" width="72" height="27" loading="lazy" />
+                                        <img src="~/Images/shopeepay.png" alt="ShopeePay" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                        <img src="~/Images/msb.png" alt="MSB" width="72" height="27" loading="lazy" class="thanhtoan" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+

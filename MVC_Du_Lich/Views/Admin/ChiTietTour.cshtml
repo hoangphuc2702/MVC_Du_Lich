@@ -1,0 +1,158 @@
+﻿@model MVC_Du_Lich.Models.TOUR
+@{
+    ViewBag.Title = "ChiTietTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiet Tour</h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.MaTour)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TÊN TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TenTour)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            GIÁ:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.Gia)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            SỐ LƯỢNG:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.SoLuong)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            HÌNH ẢNH:
+        </div>
+        <div class="col-md-9">
+            <img src="~/Images/@Model.Hinh1" style="width: 120px;" />
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-3 row-title">
+            HÌNH ẢNH:
+        </div>
+        <div class="col-md-9">
+            <img src="~/Images/@Model.Hinh2" style="width: 120px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            HÌNH ẢNH:
+        </div>
+        <div class="col-md-9">
+            <img src="~/Images/@Model.Hinh3" style="width: 120px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            HÌNH ẢNH:
+        </div>
+        <div class="col-md-9">
+            <img src="~/Images/@Model.Hinh4" style="width: 120px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÔ TẢ
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.MoTa)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            SỐ LƯỢNG CÒN LẠI:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.SoLuongConLai)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            NGÀY ĐI TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.NgayDiTour)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            NGÀY KẾT THÚC:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ ĐIỂM ĐI
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.DIEMDI.MaDDi)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ ĐIỂM ĐẾN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.DIEMDEN.MaDDen)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ LOẠI TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.LOAITOUR.MaLoaiTour)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ PHƯƠNG TIỆN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.PHUONGTIEN.MaPT)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ LOẠI KHÁCH SẠN:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.LOAIK.MaLKS)
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("ĐIỀU CHỈNH", "SuaTour", new { loai = Model.MaTour }) |
+    @Html.ActionLink("TRỞ VỀ", "Tour")
+</p>
+<style>
+    .row-title {
+        font-weight: bold;
+        text-align: right;
+    }
+</style>
+

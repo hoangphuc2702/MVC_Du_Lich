@@ -1,0 +1,47 @@
+﻿@model MVC_Du_Lich.Models.DIEMDEN
+@{
+    ViewBag.Title = "XoaDiemDen";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA ĐIỂM ĐẾN NÀY KHÔNG?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN ĐIỂM ĐẾN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenDDen)
+            </dd>
+
+            <dt>
+                MÃ CHÂU LỤC
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CHAULUC.TenChauLuc)
+            </dd>
+            <dt>
+                MÃ LOẠI TOUR
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LOAITOUR.TenLoaiTour)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("TRỞ LẠI", "DiemDen")
+            </div>
+        }
+    </div>
+</div>
+

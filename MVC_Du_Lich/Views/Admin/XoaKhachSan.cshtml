@@ -1,0 +1,56 @@
+﻿@model MVC_Du_Lich.Models.KHACHSAN
+@{
+    ViewBag.Title = "XoaKhachSan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA KHÁCH SẠN NÀY KHÔNG?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN KHÁCH SẠN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenKS)
+            </dd>
+
+            <dt>
+                GIÁ KHÁCH SẠN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GiaKS)
+            </dd>
+
+            <dt>
+                ĐỊA CHỈ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+            <dt>
+                MÃ LOẠI KHÁCH SẠN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LOAIK.TenLKS)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("TRỞ LẠI", "KhachSan")
+            </div>
+        }
+    </div>
+</div>
+

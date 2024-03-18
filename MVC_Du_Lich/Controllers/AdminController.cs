@@ -1,0 +1,875 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MVC_Du_Lich.Models;
+using PagedList;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace MVC_Du_Lich.Controllers
+{
+    public class AdminController : Controller
+    {
+        QLDULICHEntities database = new QLDULICHEntities();
+
+        // GET: Admin
+        private List<TOUR> LayTourMoi(int soluong)
+        {
+            // Sắp xếp sách theo ngày cập nhật giảm dần, lấy đúng số lượng sách cần
+            // Chuyển qua dạng danh sách kết quả đạt được
+            return database.TOURs.OrderByDescending(tour => tour.NgayDiTour).Take(soluong).ToList();
+        }
+
+        public ActionResult Index()
+        {
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var dsSachMoi = LayTourMoi(4);
+            return View(dsSachMoi);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(ADMIN admin)
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(admin.UserAdmin))
+                    ModelState.AddModelError(string.Empty, "User name không được để trống");
+                if (string.IsNullOrEmpty(admin.PassAdmin))
+                    ModelState.AddModelError(string.Empty, "Password không được để trống");
+                //Kiểm tra có admin này hay chưa
+                var adminDB = database.ADMINs.FirstOrDefault(ad => ad.UserAdmin == admin.UserAdmin && ad.PassAdmin == admin.PassAdmin);
+                if (adminDB == null)
+                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không đúng");
+                else
+                {
+                    Session["Admin"] = adminDB;
+                    ViewBag.ThongBao = "Đăng nhập admin thành công";
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["Admin"] = null;
+            return RedirectToAction("Login", "Admin");
+        }
+
+
+        //TOUR
+
+        public ActionResult Tour(int? page)
+        {
+            var dsTour = database.TOURs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsTour.OrderBy(tour => tour.MaTour).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemTour()
+        {
+            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
+            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemTour(TOUR tour, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
+        {
+            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
+            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+
+            if (Hinh1 == null || Hinh2 == null || Hinh3 == null || Hinh4 == null)
+            {
+                ViewBag.ThongBao = "Vui lòng chọn đầy đủ ảnh";
+                return View();
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    //lấy tên file của hình được up lên
+                    var fileName1 = Path.GetFileName(Hinh1.FileName);
+                    var fileName2 = Path.GetFileName(Hinh2.FileName);
+                    var fileName3 = Path.GetFileName(Hinh3.FileName);
+                    var fileName4 = Path.GetFileName(Hinh4.FileName);
+
+                    if (!fileName1.Contains(".png") && !fileName1.Contains(".jpg") && !fileName1.Contains(".jpeg"))
+                        ModelState.AddModelError(string.Empty, "Hình 1 không đúng định dạng (phải là png/jpg/jpeg)");
+
+                    if (!fileName2.Contains(".png") && !fileName2.Contains(".jpg") && !fileName2.Contains(".jpeg"))
+                        ModelState.AddModelError(string.Empty, "Hình 2 không đúng định dạng (phải là png/jpg/jpeg)");
+
+                    if (!fileName3.Contains(".png") && !fileName3.Contains(".jpg") && !fileName3.Contains(".jpeg"))
+                        ModelState.AddModelError(string.Empty, "Hình 3 không đúng định dạng (phải là png/jpg/jpeg)");
+
+                    if (!fileName4.Contains(".png") && !fileName4.Contains(".jpg") && !fileName4.Contains(".jpeg"))
+                        ModelState.AddModelError(string.Empty, "Hình 4 không đúng định dạng (phải là png/jpg/jpeg)");
+
+                    else
+                    {
+                        //Tạo đường dẫn tới file
+                        var path1 = Path.Combine(Server.MapPath("~/Images"), fileName1);
+                        var path2 = Path.Combine(Server.MapPath("~/Images"), fileName2);
+                        var path3 = Path.Combine(Server.MapPath("~/Images"), fileName3);
+                        var path4 = Path.Combine(Server.MapPath("~/Images"), fileName4);
+
+                        Hinh1.SaveAs(path1);
+                        Hinh2.SaveAs(path2);
+                        Hinh3.SaveAs(path3);
+                        Hinh4.SaveAs(path4);
+
+                        //lưu tên tour
+                        tour.Hinh1 = fileName1;
+                        tour.Hinh2 = fileName2;
+                        tour.Hinh3 = fileName3;
+                        tour.Hinh4 = fileName4;
+
+
+                        tour.MaTour = "T" + (database.TOURs.Count() + 1).ToString();
+                        if (database.TOURs.Count() < 10)
+                        {
+                            tour.MaTour = "T0" + (database.TOURs.Count() + 1).ToString();
+                        }
+
+                        //lưu vào csdl
+                        database.TOURs.Add(tour);
+                        database.SaveChanges();
+                        return RedirectToAction("Tour");
+                    }
+
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult ChiTietTour(string loai)
+        {
+            var tour = database.TOURs.FirstOrDefault(s => s.MaTour == loai);
+            if (tour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tour);
+        }
+
+        [HttpGet]
+        public ActionResult SuaTour(string loai)
+        {
+            var tour = database.TOURs.FirstOrDefault(s => s.MaTour == loai);
+            if (tour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
+            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            return View(tour);
+        }
+
+        [HttpPost]
+        public ActionResult SuaTour(TOUR tour, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
+        {
+            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
+            ViewBag.MaDDen = new SelectList(database.DIEMDIs, "MaDDen", "TenDDen");
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaPT = new SelectList(database.LOAITOURs, "MaPT", "TenPT");
+            ViewBag.MaLKS = new SelectList(database.LOAITOURs, "MaLKS", "TenLKS");
+
+            if (ModelState.IsValid)
+            {
+                var productDB = database.TOURs.FirstOrDefault(p => p.MaTour == tour.MaTour);
+                if (productDB != null)
+                {
+                    productDB.TenTour = tour.TenTour;
+                    productDB.Gia = tour.Gia;
+                    productDB.SoLuong = tour.SoLuong;
+
+                    if (Hinh1 != null)
+                    {
+                        //Lấy tên file của hình được up lên
+                        var fileName = Path.GetFileName(Hinh1.FileName);
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        //Lưu tên
+                        productDB.Hinh1 = fileName;
+                        //Save vào Images Folder
+                        Hinh1.SaveAs(path);
+                    }
+
+                    if (Hinh2 != null)
+                    {
+                        //Lấy tên file của hình được up lên
+                        var fileName = Path.GetFileName(Hinh2.FileName);
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        //Lưu tên
+                        productDB.Hinh2 = fileName;
+                        //Save vào Images Folder
+                        Hinh2.SaveAs(path);
+                    }
+
+                    if (Hinh3 != null)
+                    {
+                        //Lấy tên file của hình được up lên
+                        var fileName = Path.GetFileName(Hinh3.FileName);
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        //Lưu tên
+                        productDB.Hinh3 = fileName;
+                        //Save vào Images Folder
+                        Hinh3.SaveAs(path);
+                    }
+
+                    if (Hinh4 != null)
+                    {
+                        //Lấy tên file của hình được up lên
+                        var fileName = Path.GetFileName(Hinh4.FileName);
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        //Lưu tên
+                        productDB.Hinh4 = fileName;
+                        //Save vào Images Folder
+                        Hinh4.SaveAs(path);
+                    }
+                    productDB.SoLuongConLai = tour.SoLuongConLai;
+                    productDB.NgayDiTour = tour.NgayDiTour;
+                    productDB.NgayKetThuc = tour.NgayKetThuc;
+                    productDB.MaDDi = tour.MaDDi;
+                    productDB.MaDDen = tour.MaDDen;
+                    productDB.MaLoaiTour = tour.MaLoaiTour;
+                    productDB.MaPT = tour.MaPT;
+                    productDB.MaLKS = tour.MaLKS;
+                }
+                database.SaveChanges();
+                return RedirectToAction("Tour");
+            }
+            return View(tour);
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaTour(string loai)
+        {
+            var tour = database.TOURs.FirstOrDefault(s => s.MaTour == loai);
+            if (tour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tour);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaTour")]
+        public ActionResult DeleteConfirmedTour(string loai)
+        {
+            var tour = database.TOURs.Find(loai);
+            database.TOURs.Remove(tour);
+            database.SaveChanges();
+            return RedirectToAction("Tour");
+        }
+
+
+        //DiemDi
+
+        public ActionResult DiemDi(int? page)
+        {
+            var dsDiemDi = database.DIEMDIs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsDiemDi.OrderBy(diemdi => diemdi.MaDDi).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemDiemDi()
+        {           
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemDiemDi(DIEMDI diemdi)
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            try
+            {
+                database.DIEMDIs.Add(diemdi);
+                database.SaveChanges();
+                return RedirectToAction("DiemDi");
+            }
+            catch
+            {
+                return Content("LỖI TẠO MỚI ĐIỂM ĐI");
+            }
+        }
+
+        public ActionResult ChiTietDiemDi(int id)
+        {
+            var diemdi = database.DIEMDIs.FirstOrDefault(s => s.MaDDi == id);
+            if (diemdi == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(diemdi);
+        }
+
+        [HttpGet]
+        public ActionResult SuaDiemDi(int id)
+        {
+            var diemdi = database.DIEMDIs.FirstOrDefault(s => s.MaDDi == id);
+            if (diemdi == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            return View(diemdi);
+        }
+
+        [HttpPost]
+        public ActionResult SuaDiemDi(DIEMDI diemdi, int id)
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+
+            database.Entry(diemdi).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("DiemDi");
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaDiemDi(int id)
+        {
+            var diemdi = database.DIEMDIs.FirstOrDefault(s => s.MaDDi == id);
+            if (diemdi == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(diemdi);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaDiemDi")]
+        public ActionResult DeleteConfirmedDiemDi(int id)
+        {
+            var diemdi = database.DIEMDIs.Find(id);
+            database.DIEMDIs.Remove(diemdi);
+            database.SaveChanges();
+            return RedirectToAction("DiemDi");
+        }
+
+
+        //DiemDen
+
+        public ActionResult DiemDen(int? page)
+        {
+            var dsDiemDen = database.DIEMDENs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsDiemDen.OrderBy(diemden => diemden.MaDDen).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemDiemDen()
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaCL = new SelectList(database.CHAULUCs, "MaChauLuc", "TenChauLuc");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemDiemDen(DIEMDEN diemden)
+        {
+
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaCL = new SelectList(database.CHAULUCs, "MaChauLuc", "TenChauLuc");
+            return View("DiemDen");
+        }
+
+        public ActionResult ChiTietDiemDen(int id)
+        {
+            var diemden = database.DIEMDENs.FirstOrDefault(s => s.MaDDen == id);
+            if (diemden == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(diemden);
+        }
+
+        [HttpGet]
+        public ActionResult SuaDiemDen(int id)
+        {
+            var diemden = database.DIEMDENs.FirstOrDefault(s => s.MaDDen == id);
+            if (diemden == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaCL = new SelectList(database.CHAULUCs, "MaChauLuc", "TenChauLuc");
+            return View(diemden);
+        }
+
+        [HttpPost]
+        public ActionResult SuaDiemDen(DIEMDEN diemden, int id)
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaCL = new SelectList(database.CHAULUCs, "MaChauLuc", "TenChauLuc");
+
+            database.Entry(diemden).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("DiemDen");
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaDiemDen(int id)
+        {
+            var diemden = database.DIEMDENs.FirstOrDefault(s => s.MaDDen == id);
+            if (diemden == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(diemden);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaDiemDen")]
+        public ActionResult DeleteConfirmedDiemDen(int id)
+        {
+            var diemden = database.DIEMDENs.Find(id);
+            database.DIEMDENs.Remove(diemden);
+            database.SaveChanges();
+            return RedirectToAction("DiemDen");
+        }
+
+
+        //ChauLuc
+
+        public ActionResult ChauLuc(int? page)
+        {
+            var dsChauLuc = database.CHAULUCs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsChauLuc.OrderBy(chauluc => chauluc.MaChauLuc).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemChauLuc()
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");          
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemChauLuc(DIEMDEN chauluc)
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");           
+            return View("ChauLuc");
+        }
+
+        public ActionResult ChiTietChauLuc(int id)
+        {
+            var chauluc = database.CHAULUCs.FirstOrDefault(s => s.MaChauLuc == id);
+            if (chauluc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(chauluc);
+        }
+
+        [HttpGet]
+        public ActionResult SuaChauLuc(int id)
+        {
+            var chauluc = database.CHAULUCs.FirstOrDefault(s => s.MaChauLuc == id);
+            if (chauluc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            return View(chauluc);
+        }
+
+        [HttpPost]
+        public ActionResult SuaChauLuc(CHAULUC chauluc, int id)
+        {
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+
+            database.Entry(chauluc).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("ChauLuc");
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaChauLuc(int id)
+        {
+            var chauluc = database.CHAULUCs.FirstOrDefault(s => s.MaChauLuc == id);
+            if (chauluc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(chauluc);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaChauLuc")]
+        public ActionResult DeleteConfirmedChauLuc(int id)
+        {
+            var chauluc = database.CHAULUCs.Find(id);
+            database.CHAULUCs.Remove(chauluc);
+            database.SaveChanges();
+            return RedirectToAction("ChauLuc");
+        }
+
+        //KHÁCH SẠN
+
+        public ActionResult KhachSan(int? page)
+        {
+            var dsKhachSan = database.KHACHSANs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsKhachSan.OrderBy(khachsan => khachsan.MaKS).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemKhachSan()
+        {
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemKhachSan(KHACHSAN khachsan)
+        {
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            return View("KhachSan");
+        }
+
+        public ActionResult ChiTietKhachSan(string loai)
+        {
+            var khachsan = database.KHACHSANs.FirstOrDefault(s => s.MaKS == loai);
+            if (khachsan == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(khachsan);
+        }
+
+        [HttpGet]
+        public ActionResult SuaKhachSan(string loai)
+        {
+            var khachsan = database.KHACHSANs.FirstOrDefault(s => s.MaKS == loai);
+            if (khachsan == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            return View(khachsan);
+        }
+
+        [HttpPost]
+        public ActionResult SuaKhachSan(KHACHSAN khachsan, string loai)
+        {
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+
+            database.Entry(khachsan).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("KhachSan");
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaKhachSan(string id)
+        {
+            var khachsan = database.KHACHSANs.FirstOrDefault(s => s.MaKS == id);
+            if (khachsan == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(khachsan);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaKhachSan")]
+        public ActionResult DeleteConfirmedKhachSan(string id)
+        {
+            var khachsan = database.KHACHSANs.Find(id);
+            database.KHACHSANs.Remove(khachsan);
+            database.SaveChanges();
+            return RedirectToAction("KhachSan");
+        }
+
+        //Loại Khách Sạn
+
+        public ActionResult LoaiKS(int? page)
+        {
+            var dsLoaiKs = database.LOAIKS.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsLoaiKs.OrderBy(loaiks => loaiks.MaLKS).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemLoaiKS()
+        {           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemLoaiKS(LOAIK loaiks)
+        {
+            try
+            {
+                database.LOAIKS.Add(loaiks);
+                database.SaveChanges();
+                return RedirectToAction("LoaiKS");
+            }
+            catch
+            {
+                return Content("LỖI TẠO MỚI Nhà xuất bản");
+            }
+        }
+
+        public ActionResult ChiTietLoaiKS(int id)
+        {
+            var loaiks = database.LOAIKS.FirstOrDefault(s => s.MaLKS == id);
+            if (loaiks == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(loaiks);
+        }
+
+        [HttpGet]
+        public ActionResult SuaLoaiKS(int id)
+        {
+            var loaiks = database.LOAIKS.FirstOrDefault(s => s.MaLKS == id);
+            if (loaiks == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(loaiks);
+        }
+
+        [HttpPost]
+        public ActionResult SuaLoaiKS(LOAIK loaiks, int id)
+        {
+
+            database.Entry(loaiks).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("LoaiKS");
+        }
+
+        // GET: Products/Delete/5
+        public ActionResult XoaLoaiKS(int id)
+        {
+            var loaiks = database.LOAIKS.FirstOrDefault(s => s.MaLKS == id);
+            if (loaiks == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(loaiks);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaLoaiKS")]
+        public ActionResult DeleteConfirmedLoaiKS(int id)
+        {
+            var loaiks = database.LOAIKS.Find(id);
+            database.LOAIKS.Remove(loaiks);
+            database.SaveChanges();
+            return RedirectToAction("LoaiKS");
+        }
+
+        //Đơn Đặt Tour
+
+        public ActionResult DonDatTour(int? page)
+        {
+            var dsDonDatTour = database.DONDATTOURs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsDonDatTour.OrderBy(dondattour => dondattour.SoHD).ToPagedList(pageNum,
+            pageSize));
+        }
+
+        public ActionResult ChiTietDonDatTour(int id)
+        {
+            var dondattour = database.DONDATTOURs.FirstOrDefault(s => s.SoHD == id);
+            if (dondattour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(dondattour);
+        }
+
+
+        [HttpGet]
+        public ActionResult SuaDonDatTour(int id)
+        {
+            var dondattour = database.DONDATTOURs.FirstOrDefault(s => s.SoHD == id);
+            if (dondattour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaKH = new SelectList(database.KHACHHANGs, "MaKH", "HoTenKH");
+            ViewBag.MaTour = new SelectList(database.TOURs, "MaTour", "TenTour");
+
+            return View(dondattour);
+        }
+
+        [HttpPost]
+        public ActionResult SuaDonDatTour(DONDATTOUR dondattour)
+        {
+            ViewBag.MaKH = new SelectList(database.KHACHHANGs, "MaKH", "HoTenKH");
+            ViewBag.MaTour = new SelectList(database.TOURs, "MaTour", "TenTour");
+
+            database.Entry(dondattour).State = System.Data.Entity.EntityState.Modified;
+
+            database.SaveChanges();
+            return RedirectToAction("DonDatTour");
+        }
+
+        [HttpGet]
+        public ActionResult SuaCTDatTour(int hd)
+        {
+            var ctdattour = database.CTDATTOURs.Where(s => s.SoHD == hd).ToList();
+            if (ctdattour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaTour = new SelectList(database.TOURs, "MaTour", "TenTour");
+            ViewBag.MaHK = new SelectList(database.HANHKHACHes, "MaHK", "TenHK");
+            return View(ctdattour);
+        }
+
+        [HttpPost]
+        public ActionResult SuaCTDatTour(CTDATTOUR ctdattour)
+        {
+            ViewBag.MaTour = new SelectList(database.TOURs, "MaTour", "TenTour");
+            ViewBag.MaHK = new SelectList(database.HANHKHACHes, "MaHK", "TenHK");
+
+            database.Entry(ctdattour).State = System.Data.Entity.EntityState.Modified;
+
+            database.SaveChanges();
+            return RedirectToAction("ChiTietDonDatTour");
+        }
+
+        public ActionResult XoaDonDatTour(int id)
+        {
+            var dondattour = database.DONDATTOURs.FirstOrDefault(s => s.SoHD == id);
+
+            if (dondattour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(dondattour);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaDonDatTour")]
+        public ActionResult DeleteConfirmedDonDatTour(int id)
+        {
+            // Tìm đơn đặt tour theo id
+            var dondattour = database.DONDATTOURs.Find(id);
+
+            if (dondattour != null)
+            {
+                // Lấy danh sách chi tiết đặt tour liên quan đến đơn đặt tour
+                var ctdattours = database.CTDATTOURs.Where(ct => ct.SoHD == id).ToList();
+
+                // Xóa tất cả các chi tiết đặt tour
+                database.CTDATTOURs.RemoveRange(ctdattours);
+
+                // Xóa đơn đặt tour
+                database.DONDATTOURs.Remove(dondattour);
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                database.SaveChanges();
+            }
+
+            return RedirectToAction("DonDatTour");
+        }
+
+
+        public ActionResult XoaCTDatTour(string TenTV)
+        {
+            var dondattour = database.CTDATTOURs.FirstOrDefault(s => s.TenTV == TenTV);
+
+            if (dondattour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(dondattour);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("XoaCTDatTour")]
+        public ActionResult DeleteConfirmedDatTour(string TenTV)
+        {
+            var dondattour = database.CTDATTOURs.Find(TenTV);
+            database.CTDATTOURs.Remove(dondattour);
+            database.SaveChanges();
+            return RedirectToAction("SuaCTDatTour");
+        }
+    }
+}

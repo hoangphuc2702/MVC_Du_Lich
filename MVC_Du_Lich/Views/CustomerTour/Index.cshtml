@@ -1,0 +1,69 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<TOUR>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/NavigationLocTour.cshtml";
+}
+
+@if (ViewBag.LoaiTour != null)
+{
+    var dbContext = new QLDULICHEntities();
+    int loaiTourId = ViewBag.LoaiTour; // Truy cập giá trị từ ViewBag.LoaiTour
+    var loaiTour = dbContext.LOAITOURs.FirstOrDefault(loai => loai.MaLoaiTour == loaiTourId);
+
+    <h2>Du lịch @(loaiTour.TenLoaiTour)</h2>
+}
+else if (ViewBag.DiemDen != null)
+{
+    var dbContext = new QLDULICHEntities();
+    int loaiTourId = ViewBag.DiemDen; // Truy cập giá trị từ ViewBag.LoaiTour
+    var loaiTour = dbContext.DIEMDENs.FirstOrDefault(diemden => diemden.MaDDen == loaiTourId);
+
+    <h2>Du lịch @(loaiTour.TenDDen)</h2>
+}
+else
+{
+    var dbContext = new QLDULICHEntities();
+    int loaiTourId = ViewBag.DiemDi; // Truy cập giá trị từ ViewBag.LoaiTour
+    var loaiTour = dbContext.DIEMDIs.FirstOrDefault(diemdi => diemdi.MaDDi == loaiTourId);
+
+    <h2>Du lịch @(loaiTour.TenDDi)</h2>
+}
+
+
+<div class="row">
+    @foreach (var tour in Model)
+    {
+
+        
+
+        <div class="card col-sm-4 col-md-4 col-lg-4 d-flex align-items-stretch book-section">
+
+            <a href="@Url.Action("Details", "CustomerTour", new { loai = tour.MaTour })">
+                <img class="card-img-top book-picture"
+                     src="~/Images/@tour.Hinh1" alt="Card image">
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">@tour.TenTour</h4>
+                <p class="card-text">@tour.Gia</p>
+            </div>
+        </div>
+    }
+</div>
+
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<!-- Kết thúc -->

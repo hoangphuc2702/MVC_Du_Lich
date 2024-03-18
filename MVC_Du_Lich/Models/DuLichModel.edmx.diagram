@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="521113f33f9a4ecaac9686d34ae4841e" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="QLDULICHModel.ADMIN" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLDULICHModel.CHAULUC" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="QLDULICHModel.CTDATTOUR" Width="1.5" PointX="9.75" PointY="5.5" />
+        <EntityTypeShape EntityType="QLDULICHModel.DIADIEM" Width="1.5" PointX="7.5" PointY="14.625" />
+        <EntityTypeShape EntityType="QLDULICHModel.DIEMDEN" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="QLDULICHModel.DIEMDI" Width="1.5" PointX="3" PointY="6.125" />
+        <EntityTypeShape EntityType="QLDULICHModel.DONDATTOUR" Width="1.5" PointX="12.75" PointY="6.375" />
+        <EntityTypeShape EntityType="QLDULICHModel.HANHKHACH" Width="1.5" PointX="7.5" PointY="2.5" />
+        <EntityTypeShape EntityType="QLDULICHModel.KHACHHANG" Width="1.5" PointX="10.5" PointY="1.75" />
+        <EntityTypeShape EntityType="QLDULICHModel.LICHTRINH" Width="1.5" PointX="9.75" PointY="9.625" />
+        <EntityTypeShape EntityType="QLDULICHModel.LOAIK" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="QLDULICHModel.LOAITOUR" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="QLDULICHModel.PHUONGTIEN" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="QLDULICHModel.TOUR" Width="1.5" PointX="7.5" PointY="5.25" />
+        <EntityTypeShape EntityType="QLDULICHModel.KHACHSAN" Width="1.5" PointX="7.5" PointY="18.25" />
+        <AssociationConnector Association="QLDULICHModel.FK__CHAULUC__MaLoaiT__7C4F7684" />
+        <AssociationConnector Association="QLDULICHModel.FK__DIEMDEN__MaChauL__02084FDA" />
+        <AssociationConnector Association="QLDULICHModel.FK__CTDATTOUR__MaHK__373B3228" />
+        <AssociationConnector Association="QLDULICHModel.FK__CTDATTOUR__MaTou__382F5661" />
+        <AssociationConnector Association="QLDULICHModel.FK__CTDATTOUR__SoHD__36470DEF" />
+        <AssociationConnector Association="QLDULICHModel.FK__DIADIEM__MaDDen__37703C52" />
+        <AssociationConnector Association="QLDULICHModel.FK__LICHTRINH__MaDD__7849DB76" />
+        <AssociationConnector Association="QLDULICHModel.FK__DIEMDEN__MaLoaiT__02FC7413" />
+        <AssociationConnector Association="QLDULICHModel.FK__TOUR__MaDDen__719CDDE7" />
+        <AssociationConnector Association="QLDULICHModel.FK__DIEMDI__MaLoaiTo__7F2BE32F" />
+        <AssociationConnector Association="QLDULICHModel.FK__TOUR__MaDDi__70A8B9AE" />
+        <AssociationConnector Association="QLDULICHModel.FK__DONDATTOU__MaTou__336AA144" />
+        <AssociationConnector Association="QLDULICHModel.FK__DONDATTOUR__MaKH__2EA5EC27" />
+        <AssociationConnector Association="QLDULICHModel.FK__LICHTRINH__MaTou__7755B73D" />
+        <AssociationConnector Association="QLDULICHModel.FK__KHACHSAN__MaLKS__6BE40491" />
+        <AssociationConnector Association="QLDULICHModel.FK__TOUR__MaLKS__74794A92" />
+        <AssociationConnector Association="QLDULICHModel.FK__TOUR__MaLoaiTour__72910220" />
+        <AssociationConnector Association="QLDULICHModel.FK__TOUR__MaPT__73852659" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

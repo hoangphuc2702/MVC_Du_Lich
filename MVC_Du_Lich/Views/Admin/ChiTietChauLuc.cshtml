@@ -1,0 +1,44 @@
+﻿@model MVC_Du_Lich.Models.CHAULUC
+@{
+    ViewBag.Title = "ChiTietChauLuc";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiet Châu Lục</h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ CHÂU LỤC:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.MaChauLuc)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 row-title">
+            TÊN CHÂU LỤC:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.TenChauLuc)
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-3 row-title">
+            MÃ LOẠI TOUR:
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.LOAITOUR.TenLoaiTour)
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("ĐIỀU CHỈNH", "SuaChauLuc", new { id = Model.MaChauLuc }) |
+    @Html.ActionLink("TRỞ VỀ", "ChauLuc")
+</p>
+<style>
+    .row-title {
+        font-weight: bold;
+        text-align: right;
+    }
+</style>

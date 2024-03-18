@@ -1,0 +1,79 @@
+﻿@model MVC_Du_Lich.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/User.cshtml";
+}
+
+
+<form class="form" method="post" action="">
+    <h2 style="color: red;">@ViewBag.ThongBao</h2>
+    @using (Html.BeginForm("DangKy", "User"))
+    {
+        @Html.ValidationSummary(true)
+        <div class="input-box">
+            <label class="form-label" for="hoten">Họ tên <span style="color:red">*</span></label>
+            @Html.TextBoxFor(model => model.HoTenKH, new { @class = "form-control", @id = "hoten", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.HoTenKH)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="phone">Điện thoại <span style="color:red">*</span></label>
+            @Html.TextBoxFor(model => model.DienThoaiKH, new { @class = "form-control", @id = "phone", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.DienThoaiKH)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="email">Email <span style="color:red">*</span></label>
+            @Html.TextBoxFor(model => model.EmailKH, new { @class = "form-control", @id = "email", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.EmailKH)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="dob">Ngày sinh <span style="color:red">*</span></label>
+            @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "dob", type = "date", placeholder = "mm/dd/yyyy"})
+            @Html.ValidationMessageFor(model => model.EmailKH)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label">Giới tính <span style="color:red">*</span></label>
+            @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Nam", Value = "true" },
+                new SelectListItem { Text = "Nữ", Value = "false" }
+            }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="address">Địa chỉ <span style="color:red">*</span></label>
+            @Html.TextBoxFor(model => model.DiaChiKH, new { @class = "form-control", @id = "address", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.DiaChiKH)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="matkhau">Mật khẩu <span style="color:red">*</span></label>
+            @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @id = "matkhau", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.MatKhau)
+        </div>
+
+        <div class="input-box">
+            <label class="form-label" for="ReMatKhau">Nhập lại mật khẩu <span style="color:red">*</span></label>
+            @Html.PasswordFor(model => model.XacNhanMatKhau, new { @class = "form-control", @id = "matkhau", style = "filed-validation-error" })
+            @Html.ValidationMessageFor(model => model.XacNhanMatKhau)
+        </div>
+        <button class="btn btn-primary" type="submit">Đăng ký <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></button>
+     }
+    <div class="text-center" style="margin-top:15px">hoặc</div>
+
+    <div class="col">
+        <button class="btn btn-icon-fb btn-primary" type="submit"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i> Tiếp tục với Facebook</i></button>
+        <button class="btn btn-icon-gg btn-primary" type="submit"><i class="fa-brands fa-google-plus-g" style="color: #ffffff;"></i> Tiếp tục với Google</i></button>
+    </div>
+
+    <hr style="margin-top: 35px;margin-bottom: 25px;" />
+
+    <p class="btn-register">
+        Đã có tài khoản?<a href="@Url.Action("DangNhap","User")">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+    </p>
+
+</form>

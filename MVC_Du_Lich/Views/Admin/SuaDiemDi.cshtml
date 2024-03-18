@@ -1,0 +1,47 @@
+﻿@model MVC_Du_Lich.Models.DIEMDI
+@{
+    ViewBag.Title = "SuaDiemDi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h2 style="text-align: center">CHỈNH SỬA ĐIỂM ĐI</h2>
+
+    @using (Html.BeginForm("SuaDiemDi", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>ĐIỂM ĐI</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaDDi)
+
+            <div class="form-group">
+                TÊN ĐIỂM ĐI
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenDDi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenDDi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                Mã Loại Tour
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MaLoaiTour, (SelectList)ViewBag.MaLoaiTour, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaLoaiTour, "", new { @class = "text-danger" })
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 mb-3 mt-3">
+                    <input type="submit" value="LƯU" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("TRỞ LẠI", "DiemDi")
+    </div>
+</div>
+

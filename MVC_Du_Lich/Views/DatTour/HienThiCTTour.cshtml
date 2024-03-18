@@ -1,0 +1,833 @@
+﻿@using MVC_Du_Lich.Models
+@model List<ThanhVien>
+
+@{
+    ViewBag.Title = "HienThiCTTour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TOUR tour = Session["MaTour"] as TOUR;
+    KHACHHANG khachhang = Session["KhachHang"] as KHACHHANG;
+
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    .customer-contact .customer-contact-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 25px;
+    }
+
+        .customer-contact .customer-contact-inner > * {
+            width: 48%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .customer-contact .customer-contact-inner > * label {
+                line-height: 16px;
+                display: flex;
+                align-items: center;
+                color: #2d4271;
+                margin-bottom: 5px;
+            }
+
+    .customer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+
+        .customer .change {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 48%;
+            border: 1px solid #e7e7e7;
+            border-radius: 10px;
+            margin-bottom: 13px;
+            padding: 10px 15px;
+        }
+
+            .customer .change .change-number {
+                display: flex;
+                align-items: center;
+            }
+
+                .customer .change .change-number .number {
+                    border: none;
+                    background: 0 0;
+                    width: 30px;
+                    text-align: center;
+                    font-size: 27px;
+                    line-height: 32px;
+                    color: #2d4271;
+                }
+
+                .customer .change .change-number .btn-click {
+                    font-size: 25px;
+                }
+
+    .customer-notice {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 25px 35px;
+        margin-bottom: 40px;
+    }
+
+        .customer-notice > * {
+            width: 50%;
+        }
+
+    .s-rate {
+        display: flex;
+        align-items: center;
+        margin-right: 22px;
+    }
+
+        .s-rate span {
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 20px;
+            color: #fff;
+            background: #fdc432;
+            width: 65px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-right: 11px;
+        }
+
+            .s-rate span:before {
+                content: "";
+                display: block;
+                width: 0;
+                height: 0;
+                border-right: 10px solid transparent;
+                border-top: 10px solid #fdc432;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1;
+            }
+
+    .checkout-main.order-tour .top .product .product-content .title {
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 28px;
+        color: #2d4271;
+    }
+
+    .checkout-main.order-tour .top .product .product-content .entry {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .checkout-main .group-checkout {
+        background: #fff;
+        border: 1px solid #d5d5d5;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    .group-checkout .detail table {
+        width: 100%;
+    }
+
+    .checkout-main .detail table td {
+        padding: 10px 0;
+    }
+
+    .checkout-main .detail table .text-right {
+        text-align: right;
+        font-weight: 700;
+        line-height: 19px;
+        text-align: right;
+        color: #2d4271;
+    }
+
+    .checkout-main .detail table .total td {
+        font-weight: 700;
+        line-height: 19px;
+        text-transform: uppercase;
+        color: #2d4271;
+        border-top: 1px solid #e7e7e7;
+        padding: 20px 0;
+    }
+
+        .checkout-main .detail table .total td.t-price {
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 28px;
+            text-align: right;
+            color: #fd5056;
+            text-transform: lowercase;
+        }
+
+    .checkout-main .detail .btn-order {
+        background: linear-gradient(64.4deg,#fd5056 21.33%,#fe2214 67.61%);
+        border-radius: 10px;
+        height: 50px;
+        width: 100%;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: right;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    tr.spaceUnder > td {
+        padding-bottom: 1.5em;
+    }
+
+    tr.total > th {
+        padding-bottom: 1.5em;
+    }
+</style>
+
+
+
+<div class="col-12 top" style="width: 100%">
+    <div class="product" style="display: flex; margin-top: 20px; margin-bottom: 20px">
+        <div class="product-image" style="width: 30%;">
+            <div class="image">
+                <img src="https://media.travel.com.vn/tour/tfd_230322093243_935409.jpg" class="img-fluid" alt="image">
+            </div>
+        </div>
+        <div class="product-content" style="width: 70%; padding: 15px 30px; background: #f9f9f9;">
+            <div class="short-rating">
+                <div class="s-rate">
+                    <span>
+                        9.98
+                    </span>
+                    <div class="s-comment">
+                        Tuyệt vời
+                        <p style="display: block;margin:0">504 quan tâm</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-no-wrap d-lg-none">
+                <div class="ticket-no">
+                    <i class="icon icon--ticket"></i> @tour.MaTour
+                </div>
+            </div>
+            <p class="title" id="title">@tour.TenTour</p>
+            <div class="entry">
+                <div class="entry-inner">
+                    <span>Mã Tour <b>@tour.MaTour</b></span>
+                    <span>Khởi hành <b>@tour.NgayDiTour</b></span>
+                    <span>Thời gian <b>@tour.NgayKetThuc - @tour.NgayDiTour</b></span>
+                    <span>Nơi khởi hành <b>@tour.MaDDi</b></span>
+                    <span>Số chỗ còn nhận <b>@tour.SoLuongConLai</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="width: 100%; display: flex;">
+    <div class="col-md-8 col-12 left" style="flex: 0 0 auto; width: 66.66667%; margin-top: 50px;">
+        <h2 class="d-none d-lg-block" style="margin-bottom: 30px;">Tổng quan về chuyến đi</h2>
+        <h3>Thông tin liên lạc</h3>
+        <div class="customer-contact mb-3">
+            <form class="customer-contact-inner">
+                <div class="name">
+                    <label for="name">Họ và Tên <b>*</b></label><br />
+                    @khachhang.HoTenKH
+                    @*@Html.TextBox("HoTenKH", null, new { @class = "form-control", @id = "name", required = "required" })*@
+                </div>
+
+                <div class="mail">
+                    <label for="mail">Email <b>*</b></label><br />
+                    @khachhang.EmailKH
+                    @*@Html.TextBox("EmailKH", null, new { @class = "form-control", @id = "mail", required = "required" })*@
+                </div>
+
+                <div class="phone">
+                    <label for="phone">Số điện thoại <b>*</b></label><br />
+                    @khachhang.DienThoaiKH
+                    @*@Html.TextBox("DienThoaiKH", null, new { @class = "form-control", @id = "phone", required = "required" })*@
+                </div>
+
+                <div class="addess">
+                    <label for="addess">Địa chỉ</label><br />
+                    @khachhang.DiaChiKH
+                    @*@Html.TextBox("DiaChiKH", null, new { @class = "form-control", @id = "addess", required = "required" })*@
+                </div>
+            </form>
+        </div>
+
+        <div class="customer-notice">
+            <div class="customer-notice-left">
+                . Người lớn sinh trước ngày <b>24/11/2011</b><br>
+                . Trẻ nhỏ sinh từ <b>25/11/2018</b> đến <b>24/11/2021</b>
+            </div>
+            <div class="customer-notice-right">
+                . Trẻ em sinh từ <b>25/11/2011</b> đến <b>24/11/2018</b><br>
+                . Em bé sinh từ <b>25/11/2021</b> đến <b>26/11/2023</b>
+            </div>
+        </div>
+
+
+        @using (Html.BeginForm("ThemHanhKhachVaoDon", "DatTour", new { MaTour = @tour.MaTour }))
+        {
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <div class="form-group">
+                        <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label>
+                        @Html.TextBox("TenTV", null, new { @class = "form-control", @id = "nameTv", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-group select-custom-icon">
+                        <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                        @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Nam", Value = "true" },
+                            new SelectListItem { Text = "Nữ", Value = "false" }
+                        }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+                    </div>
+                </div>
+
+
+                <div class="col-lg-2 col-12">
+                    <div class="form-group select-custom-icon">
+                        <label class="pb-1 white-space-nowrap" for="dobTv">Ngày sinh <span class="text-danger">*</span></label>
+                        @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "dobTv", type = "date", placeholder = "mm/dd/yyyy", required = "required" })
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-12">
+                    <div class="form-group select-custom-icon">
+                        <label class="pb-1 white-space-nowrap"></label>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+        <div id="lstcustomerfullname">
+            <section class="wrap-info-customer-number-person-details mt-4 wrapper-new-input" id="listmembercustomer">
+                <div class="title-section mb-3 title-hotel-flight-infor">Thông tin hành khách</div>
+                @foreach (var hk in Model)
+                {
+                    <div class="group-fields-input-contact-@hk.MaHK group-fields-input-contact-wrapper mb-3">
+                        <div class="title-persona mt-2">
+                            @switch (hk.MaHK)
+                            {
+                                case 1:
+                                    <div><i class="fa-solid fa-user"></i> Người lớn</div>
+                                    break;
+                                case 2:
+                                    <div><i class="fa-solid fa-child"></i> Trẻ em</div>
+                                    break;
+                                case 3:
+                                    <div><i class="fa-solid fa-children"></i> Trẻ nhỏ</div>
+                                    break;
+                                case 4:
+                                    <div><i class="fa-solid fa-baby"></i> Em bé</div>
+                                    break;
+                            }
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-12">
+                                <div class="form-group">
+                                    <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label><br />
+                                    @hk.TenTV
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <div class="form-group select-custom-icon">
+                                    <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label><br />
+                                    @(hk.GioiTinh ? "Nam" : "Nữ")
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-12">
+                                <div class="form-group select-custom-icon">
+                                    <label class="pb-1 white-space-nowrap" for="dobTv">Ngày sinh <span class="text-danger">*</span></label><br />
+                                    @hk.NgaySinh
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <div class="form-group select-custom-icon">
+                                    @Html.ActionLink("Cập nhật", "CapNhatThanhVien", new { TenTV = hk.TenTV })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12">
+                                <div class="form-group select-custom-icon">
+                                    @Html.ActionLink("Xoá", "XoaMatHang", new { TenTV = @hk.TenTV })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+
+
+
+        @*<div class="customer">
+            <h3 style="width: 100%">Hành khách</h3>
+            <div class="change">
+                <div class="change-title">
+                    <h4>Người lớn</h4>
+                    <p>&gt; 12 tuổi</p>
+                </div>
+                <div class="change-number">
+                    @if (ViewBag.TongSLNL == 1)
+                    {
+                        <span class="minus btn-click"><a href="">-</a></span>
+                        <span class="number" id="adult">@ViewBag.TongSLNL</span>
+                        <span class="plus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 1, MaTour = tour.MaTour, choice = 1})" style="text-decoration: none">+</a></span>
+                    }
+                    else
+                    {
+                        <span class="minus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 1, MaTour = tour.MaTour, choice = 2})" style="text-decoration: none">-</a></span>
+                        <span class="number" id="adult">@ViewBag.TongSLNL</span>
+                        <span class="plus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 1, MaTour = tour.MaTour, choice = 1})" style="text-decoration: none">+</a></span>
+                    }
+                </div>
+            </div>
+            <div class="change">
+                <div class="change-title">
+                    <h4>Trẻ em</h4>
+                    <p>Từ 5 - 11 tuổi</p>
+                </div>
+                <div class="change-number">
+                    <span class="minus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 2, MaTour = tour.MaTour, choice = 2})" style="text-decoration: none">-</a></span>
+                    <span class="number" id="adult">@ViewBag.TongSLTE</span>
+                    <span class="plus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 2, MaTour = tour.MaTour, choice = 1})" style="text-decoration: none">+</a></span>
+                </div>
+            </div>
+            <div class="change">
+                <div class="change-title">
+                    <h4>Trẻ nhỏ</h4>
+                    <p>Từ 2 - 4 tuổi</p>
+                </div>
+                <div class="change-number">
+                    <span class="minus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 3, MaTour = tour.MaTour, choice = 2})" style="text-decoration: none">-</a></span>
+                    <span class="number" id="adult">@ViewBag.TongSLTN</span>
+                    <span class="plus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 3, MaTour = tour.MaTour, choice = 1})" style="text-decoration: none">+</a></span>
+                </div>
+            </div>
+            <div class="change">
+                <div class="change-title">
+                    <h4>Em bé</h4>
+                    <p>Từ 0 - 2 tuổi</p>
+                </div>
+                <div class="change-number">
+                    <span class="minus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 4, MaTour = tour.Gia, choice = 2})" style="text-decoration: none">-</a></span>
+                    <span class="number" id="adult">@ViewBag.TongSLEB</span>
+                    <span class="plus btn-click"><a href="@Url.Action("ThemHanhKhachVaoDon", "DatTour", new {MaHK = 4, MaTour = tour.Gia, choice = 1})" style="text-decoration: none">+</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-notice">
+            <div class="customer-notice-left">
+                . Người lớn sinh trước ngày <b>24/11/2011</b><br>
+                . Trẻ nhỏ sinh từ <b>25/11/2018</b> đến <b>24/11/2021</b>
+            </div>
+            <div class="customer-notice-right">
+                . Trẻ em sinh từ <b>25/11/2011</b> đến <b>24/11/2018</b><br>
+                . Em bé sinh từ <b>25/11/2021</b> đến <b>26/11/2023</b>
+            </div>
+        </div>
+        <div id="lstcustomerfullname">
+            <section class="wrap-info-customer-number-person-details mt-4 wrapper-new-input" id="listmembercustomer">
+                <div class="title-section mb-3 title-hotel-flight-infor">Thông tin hành khách</div>
+
+                @Html.AntiForgeryToken()
+
+                @foreach (var hk in Model)
+                {
+                    if (hk.MaHK == 1)
+                    {
+                        <div class="group-fields-input-contact-adult group-fields-input-contact-wrapper mb-3">
+                            <div class="title-persona">
+                                <i class="fa-solid fa-user"></i>
+                                Người lớn
+                            </div>
+                            @for (int i = 0; i < ViewBag.TongSLNL; i++)
+                            {
+                                using (Html.BeginForm("CapNhatMatHang", "DatTour", new { MaHK = hk.MaHK }))
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label>
+                                                @Html.TextBox("TenTV", null, new { @class = "form-control", @id = "nameTv", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+                                                {
+                                                    new SelectListItem { Text = "Nam", Value = "true" },
+                                                    new SelectListItem { Text = "Nữ", Value = "false" }
+                                                }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+                                            </div>
+                                        </div>
+
+                            -----------------------------------phần này bỏ-----------------------------------------
+                                        <div class="form-group">
+                                            <label for="ngaysinh">Ngày sinh:</label>
+                                            <div class="row">
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        @Html.DropDownList("Ngay", Enumerable.Range(1, 31).Select(i => new SelectListItem
+                                                        {
+                                                            Value = i.ToString(),
+                                                            Text = i.ToString()
+                                                        }), "- Chọn ngày -", new { @class = "form-control birth-date hotel-flight-input" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        @Html.DropDownList("Thang", Enumerable.Range(1, 12).Select(i => new SelectListItem
+                                                        {
+                                                            Value = i.ToString(),
+                                                            Text = i.ToString()
+                                                        }), "- Chọn tháng -", new { @class = "form-control birth-month hotel-flight-input" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        @Html.DropDownList("Nam", Enumerable.Range(DateTime.Now.Year - 12, 12).Select(i => new SelectListItem
+                                                        {
+                                                            Value = i.ToString(),
+                                                            Text = i.ToString()
+                                                        }), "- Chọn năm -", new { @class = "form-control birth-year birth-year-adult hotel-flight-input" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            ------------------------------------------------------------------------------
+
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "genderTv", type = "date", placeholder = "mm/dd/yyyy", required = "required" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap"></label>
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    }
+
+                    else if (hk.MaHK == 2)
+                    {
+                        <div class="group-fields-input-contact-childrend group-fields-input-contact-wrapper mb-3">
+                            <div class="title-persona mt-2">
+                                <i class="fa-solid fa-child"></i>
+                                Trẻ em
+                            </div>
+                            @for (int i = 0; i < ViewBag.TongSLTE; i++)
+                            {
+                                using (Html.BeginForm("CapNhatMatHang", "DatTour", new { MaHK = hk.MaHK }))
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label>
+                                                @Html.TextBox("TenTV", null, new { @class = "form-control", @id = "nameTv", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+                                                {
+                                                    new SelectListItem { Text = "Nam", Value = "true" },
+                                                    new SelectListItem { Text = "Nữ", Value = "false" }
+                                                }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+                                            </div>
+                                        </div>
+
+                        -----------------------------------phần này bỏ-----------------------------------------
+
+                                        <div class="col-lg-5 col-12">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1 white-space-nowrap font-700">Ngày sinh <span class="text-danger">*</span></label>
+                                                        <select class="form-control birth-date hotel-flight-input" onchange="onchangebirthdate(this)" id="date-children-0"><option value="-1" hidden="" selected="">Ngày</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-month hotel-flight-input" onchange="onchangebirthmonth(this)" id="month-children-0"><option value="-1" hidden="" selected="">Tháng</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-year birth-year-children hotel-flight-input" onchange="onchangebirthyear(this)" id="year-children-0"><option value="-1" hidden="" selected="">Năm</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ------------------------------------------------------------------------------
+
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "genderTv", type = "date", placeholder = "mm/dd/yyyy", required = "required" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap"></label>
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                    }
+
+                    else if (hk.MaHK == 3)
+                    {
+                        <div class="group-fields-input-contact-smallchildren group-fields-input-contact-wrapper mb-3">
+                            <div class="title-persona mt-2">
+                                <i class="fa-solid fa-children"></i>
+                                Trẻ nhỏ
+                            </div>
+                            @for (int i = 0; i < ViewBag.TongSLTN; i++)
+                            {
+                                using (Html.BeginForm("CapNhatMatHang", "DatTour", new { MaHK = hk.MaHK }))
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label>
+                                                @Html.TextBox("TenTV", null, new { @class = "form-control", @id = "nameTv", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+                                                {
+                                                    new SelectListItem { Text = "Nam", Value = "true" },
+                                                    new SelectListItem { Text = "Nữ", Value = "false" }
+                                                }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+                                            </div>
+                                        </div>
+
+                                        -----------------------------------phần này bỏ-----------------------------------------
+
+                                        <div class="col-lg-5 col-12">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1 white-space-nowrap font-700">Ngày sinh <span class="text-danger">*</span></label>
+                                                        <select class="form-control birth-date hotel-flight-input" onchange="onchangebirthdate(this)" id="date-smallchildren-0"><option value="-1" hidden="" selected="">Ngày</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-month hotel-flight-input" onchange="onchangebirthmonth(this)" id="month-smallchildren-0"><option value="-1" hidden="" selected="">Tháng</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-year birth-year-smallchildren hotel-flight-input" onchange="onchangebirthyear(this)" id="year-smallchildren-0"><option value="-1" hidden="" selected="">Năm</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        ------------------------------------------------------------------------------
+
+
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "genderTv", type = "date", placeholder = "mm/dd/yyyy", required = "required" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap"></label>
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
+                    else if (hk.MaHK == 4)
+                    {
+                        using (Html.BeginForm("CapNhatMatHang", "DatTour", new { MaHK = hk.MaHK }))
+                        {
+                            <div class="group-fields-input-contact-baby group-fields-input-contact-wrapper mb-3">
+                                <div class="title-persona mt-2">
+                                    <i class="fa-solid fa-baby"></i>
+                                    Em bé
+                                </div>
+                                @for (int i = 0; i < ViewBag.TongSLEB; i++)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <label class="pb-1 font-700" for="nameTv">Họ và tên <span class="text-danger">*</span></label>
+                                                @Html.TextBox("TenTV", null, new { @class = "form-control", @id = "nameTv", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.DropDownList("GioiTinh", new SelectList(new List<SelectListItem>
+                                                {
+                                                    new SelectListItem { Text = "Nam", Value = "true" },
+                                                    new SelectListItem { Text = "Nữ", Value = "false" }
+                                                }, "Value", "Text"), new { @class = "form-control", @id = "genderTv", required = "required" })
+                                            </div>
+                                        </div>
+
+                            -----------------------------------phần này bỏ-----------------------------------------
+
+                                        <div class="col-lg-5 col-12">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1 white-space-nowrap font-700">Ngày sinh <span class="text-danger">*</span></label>
+                                                        <select class="form-control birth-date hotel-flight-input" onchange="onchangebirthdate(this)" id="date-baby-0"><option value="-1" hidden="" selected="">Ngày</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-month hotel-flight-input" onchange="onchangebirthmonth(this)" id="month-baby-0"><option value="-1" hidden="" selected="">Tháng</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-4 mt-sm-0 mt-4">
+                                                    <div class="form-group select-custom-icon">
+                                                        <label class="pb-1">&nbsp;</label>
+                                                        <select class="form-control birth-year birth-year-baby hotel-flight-input" onchange="onchangebirthyear(this)" id="year-baby-0"><option value="-1" hidden="" selected="">Năm</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        ------------------------------------------------------------------------------
+
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <label class="pb-1 white-space-nowrap" for="genderTv">Giới tính <span class="text-danger">*</span></label>
+                                                @Html.TextBox("NgaySinh", null, new { @class = "form-control", @id = "genderTv", type = "date", placeholder = "mm/dd/yyyy", required = "required" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 col-12">
+                                            <div class="form-group select-custom-icon">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        }
+
+
+                    }
+                }
+            </section>
+        </div>*@
+    </div>
+
+    <div class="col-md-4 col-12 right" style="flex: 0 0 auto; width: 33.33333%; margin-bottom: 10px;margin-top: 50px;">
+        <div class="group-checkout">
+            <h3>Tóm tắt chuyến đi</h3>
+            <br>
+            <br>
+            <div class="detail">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="l1" style="padding-bottom: 2em;">Hành khách</th>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>Người lớn</td>
+                            <td class="t-price text-right" id="AdultPrice">@ViewBag.TongSL1 x @ViewBag.DonGiaNL₫</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>Trẻ em</td>
+                            <td class="t-price text-right" id="ChildrenPrice">@ViewBag.TongSL2 x @ViewBag.DonGiaTE₫</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>Trẻ nhỏ</td>
+                            <td class="t-price text-right" id="SmallChildrenPrice">@ViewBag.TongSL3 x @ViewBag.DonGiaTN₫</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>Em bé</td>
+                            <td class="t-price text-right" id="BabyPrice">@ViewBag.TongSL4 x @ViewBag.DonGiaEB₫</td>
+                        </tr>
+                        <tr class="total">
+                            <th>Tổng cộng</th>
+                            <td class="t-price text-right" id="TotalPrice">@ViewBag.TongTien</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button class="btn btn-primary btn-order" id="btnConfirm" style="width:100%; background-color: #ff1200;color: #fff;">
+                        @Html.ActionLink("Đặt ngay", "DatHang", null, new { @class = "btn btn - primary" })
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

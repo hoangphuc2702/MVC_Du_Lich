@@ -1,0 +1,33 @@
+﻿@model MVC_Du_Lich.Models.LOAIK
+@{
+    ViewBag.Title = "XoaLoaiKS";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA LOẠI KHÁCH SẠN NÀY KHÔNG?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN LOẠI KHÁCH SẠN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenLKS)
+            </dd>           
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("TRỞ LẠI", "LoaiKS")
+            </div>
+        }
+    </div>
+</div>
+

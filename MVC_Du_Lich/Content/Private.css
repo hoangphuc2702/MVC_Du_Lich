@@ -1,0 +1,98 @@
+﻿.home-page__destination{
+    margin-left: 10%;
+    margin-right:10%
+}
+
+.home-page__destination card-body {
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.destination-item__image__overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: rgba(0,0,0,.25);
+    border-radius: 10px;
+}
+.home-page__title {
+    /* text-align: start;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;*/
+    font-weight: 700;
+    font-size: 30px;
+    color: #2d4271;
+}
+
+.destination-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.destination-item {
+    width: 100%;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.destination-item:hover {
+    transform: scale(1.05);
+}
+
+.destination-item img {
+    width: 100%;
+    /*height: 250px;*/
+    object-fit: cover;
+}
+
+.destination-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.destination-description {
+    font-size: 16px;
+    color: #2d4271;
+    margin-bottom: 10px;
+}
+a:hover {
+    text-decoration: none; /* Ở trạng thái hover */
+}
+.card-title a {
+    color: #2d4271; /* Màu mặc định */
+    transition: color 0.3s; /* Tạo hiệu ứng chuyển đổi */
+}
+
+.card-title a:hover {
+    color: blue;  
+}
+
+
+/* vì sao chọn travel*/
+.home-page__why-vietravel {
+    margin-left: 10%;
+    color: #2d4271;
+}
+
+.home-page__why-vietravel img{
+    width: 15%;
+    height: 15%;
+    /*align-items:center;*/
+}
+
+#test {
+    text-align: center;
+}
+

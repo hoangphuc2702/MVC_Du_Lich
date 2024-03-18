@@ -1,0 +1,772 @@
+﻿@using MVC_Du_Lich.Models
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Detail.css" />
+
+<style>
+    main {
+        display: block;
+    }
+
+    .s-rate {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-right: 22px;
+    }
+
+    .s-rate span {
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 20px;
+        color: #fff;
+        background: #fdc432;
+        width: 65px;
+        height: 50px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        position: relative;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin-right: 11px;
+    }
+
+    .s-rate span:before {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #fdc432;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+    }
+
+    .s-wishlist {
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        width: 112px;
+        height: 50px;
+        background: #fff;
+        border: 0.5px solid #d5d5d5;
+        border-radius: 5px;
+    }
+
+    .sale-price {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+    }
+
+    .price {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #fd5056;
+        line-height: 28px;
+    }
+
+    .group-add-cart {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 16px;
+    }
+
+    .add-to-cart {
+        background: linear-gradient(64.4deg,#fd5056 21.33%,#fe2214 67.61%);
+        border-radius: 5px;
+        height: 50px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        width: 192px;
+        color: #fff;
+        font-weight: 500;
+        margin-bottom: 10px;
+        text-decoration: none
+    }
+
+    .add-to-group {
+        border: 1px solid #2d4271;
+        border-radius: 5px;
+        height: 50px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        width: 192px;
+        color: #2d4271;
+        text-decoration: none;
+    }
+
+    .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(var(--bs-gutter-y) * -1);
+        margin-right: calc(var(--bs-gutter-x)/-2);
+        margin-left: calc(var(--bs-gutter-x)/-2);
+    }
+
+    .box-order {
+        padding: 15px 30px 15px 30px;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .calendar-box {
+        border: 1px solid #4d4aef;
+        border-radius: 5px;
+        width: 110px;
+        height: 30px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        color: #4d4aef;
+    }
+
+    .group-contract {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #4d4aef;
+        border-radius: 14px;
+        max-width: 350px;
+    }
+
+    .phone {
+        background-color: #4d4aef;
+        border-radius: 10px;
+        height: 50px;
+        width: 183px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .mail {
+        border-radius: 10px;
+        height: 50px;
+        width: 183px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        color: #4d4aef;
+    }
+
+    .group-services {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+        border-bottom: 1px solid #7d8fab;
+        padding-bottom: 20px;
+        margin-bottom: 35px;
+    }
+
+    .item {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+    }
+
+    .item img {
+        max-height: 25px;
+        max-width: 25px;
+    }
+
+    .item label {
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .item p {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .section-7 .left {
+        display: flex;
+        background-color: #f9f9f9;
+        border-radius: 10px 0 0 10px;
+        padding: 38px 16px 38px 16px;
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .go-tour .day {
+        position: relative;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        padding-bottom: 34px;
+    }
+
+    .go-tour .day:before {
+        content: "";
+        height: 100%;
+        border-left: 0.5px dashed #2d4271;
+        position: absolute;
+        top: 0;
+        left: 52px;
+        z-index: 0;
+    }
+
+    .tour {
+        padding: 35px 15px 35px 15px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
+
+    .detail-tour {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ffffff;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    h3 {
+        line-height: 40px;
+    }
+
+    .tt {
+        width: 100%;
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #2d4271;
+    }
+
+    .goto {
+        border-right: 1px solid #d5d5d5;
+    }
+
+    .detail-tour-inner {
+        padding: 0 10px 0 10px;
+    }
+</style>
+
+<main class="main">
+    <div class="tour-details">
+
+        <div class="entry-head" style="background-color:#f9f9f9">
+            <section class="section-1" style="margin: 32px 0 28px 0">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-md-6 col-12 left">
+                            <div class="wrap-mark" style="color: #4d4aef; font-size: 13px; margin-bottom: 5px;">
+                                <i class="fa-light fa-ticket-simple" style="color: #4d4aef;"></i>
+                                <label style="display:inline-block">@Model.MaTour</label>
+                            </div>
+                            <h1 class="title" style="font-size: 26px; font-weight: 700; color: #2d4271; line-height: 30px; margin-bottom: 12px; max-width: 100%;">
+                                @Model.TenTour
+                            </h1>
+                            <div class="short-rating" style="display:flex">
+                                <div class="s-rate">
+                                    <span>
+                                        9.98
+                                    </span>
+                                    <div class="s-comment">
+                                        Tuyệt vời
+                                        <p style="display: block;margin:0">504 quan tâm</p>
+                                    </div>
+                                </div>
+
+                                <div class="s-wishlist">
+                                    <i class="fa-solid fa-heart fa-xl" style="color: #ff0000; padding-right: 5px"></i>
+                                    <label>126</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12 right " style="display: flex; -webkit-box-pack: end; justify-content: flex-end; padding-top: 25px; ">
+                            <div class="group-price" style="text-align:right">
+                                <div class="sale-price">
+                                    <p style="margin:0">
+                                        <span class="price">@Model.Gia đ</span>
+                                        / Khách
+                                    </p>
+                                </div>
+                                <div class="saving" style="font-size: 13px; color: #2d4271; margin-bottom: 8px;"></div>
+                            </div>
+                            <div class="group-add-cart row">
+                                <a href="@Url.Action("DatTour", "DatTour", new { MaTour = Model.MaTour })" style="text-decoration: none" class="add-to-cart">
+                                    <i class="fa-solid fa-cart-shopping" style="color: #ffffff; margin-right: 7px"></i>
+                                    <label style="display:inline-block; color: white">Đặt ngay</label>
+                                </a>
+                                <a href="#" class="add-to-group">
+                                    <label style="display:inline-block;">Liên hệ tư vấn</label>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-2" style="padding-bottom: 30px; background-color: #f9f9f9">
+                <div class="container" style="width: 100%; padding-right: var(--bs-gutter-x,.75rem); padding-left: var(--bs-gutter-x,.75rem); margin-right: auto; margin-left: auto;">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12 left">
+                            <div class="img" style="height:535px">
+                                <img src="~/Images/@Model.Hinh1" class="img-fluid" alt="image" style="width:100%; height:100%;border-radius:10px; object-fit:fill" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 right">
+                            <div class="row gy-4">
+                                <div class="col-md-12 col-sm-12 small">
+                                    <div class="row" style="flex-wrap:wrap">
+                                        <div class="col-6" style="padding-right: 0">
+                                            <div class="image" style="height: 200px;">
+                                                <img src="~/Images/@Model.Hinh2" class="img-fluid" alt="image" style="width:100%; height:100%;border-radius:10px; object-fit:fill" />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="image" style="height: 200px">
+                                                <img src="~/Images/@Model.Hinh3" class="img-fluid" alt="image" style="width:100%; height:100%;border-radius:10px; object-fit:fill" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 big">
+                                    <div class="image" style="padding-top:10px;height:335px">
+                                        <img src="~/Images/@Model.Hinh4" class="img-fluid" alt="image" style="width:100%; height:100%;border-radius:10px; object-fit:fill" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="tab-panels">
+            <div class="overview active">
+                <section class="section-3 mb-5" style="background-color:#f9f9f9;padding-bottom:30px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 col-12 left">
+                                <p class="s-title-03 tour-des" style="text-align:justify;line-height:24px;margin-bottom:30px; max-height:100px;overflow:auto;padding-right:15px"></p>
+                                <div class="box-order">
+                                    <div class="time">
+                                        <p style="margin-bottom: 10px; margin-top:0">Khởi hành <b>@Model.NgayDiTour - Giờ đi: 17:05</b></p>
+                                        <p style="margin-bottom: 10px; margin-top:0">Tập trung <b>15:00 ngày @Model.NgayDiTour</b></p>
+                                        <p style="margin-bottom: 10px; margin-top:0">Thời gian <b>3 ngày</b></p>
+                                        <p style="margin-bottom: 10px; margin-top:0">Nơi khởi hành <b>TP.Hồ Chí Mình</b></p>
+                                        <p style="margin-bottom: 10px; margin-top:0">Số chỗ còn nhận <b>@Model.SoLuongConLai</b></p>
+                                    </div>
+                                    <div class="calendar">
+                                        <div class="calendar-box">
+                                            <i class="fa-regular fa-calendar" style="color: #4d4aef;"></i>
+                                            <label style="display: inline-block"><a href="#" style="text-decoration: none; color: #4d4aef; margin-left: 5px"> Ngày khác</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-support">
+                                    <label>Quý khách cần hỗ trợ?</label>
+                                    <div class="group-contract">
+                                        <a href="#" target="_blank" class="phone" style="text-decoration: none;">
+                                            <i class="fa-solid fa-phone fa-2xl" style="color: #ffffff;"></i>
+                                            <p style="margin:0; line-height:16px; margin-left:5px">
+                                                Gọi miễn phí
+                                                <br />
+                                                qua Internet
+                                            </p>
+                                        </a>
+                                        <a href="#" class="mail" style="text-decoration:none">
+                                            <i class="fa-regular fa-envelope fa-2xl" style="color: #4d4aef;"></i>
+                                            <p style="margin:0; line-height:16px; margin-left: 5px">
+                                                Gửi yêu cầu
+                                                <br />
+                                                hỗ trợ ngay
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 col-12 right" style="padding-left:50px">
+                                <div class="group-services">
+                                    <div class="item">
+                                        <img src="~/Images/thoi gian.png" alt="icon-img" />
+                                        <label>Thời gian</label>
+                                        <p>3 ngày 2 đêm</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/phuong tien di chuyen.png" alt="icon-img" />
+                                        <label>Phương tiện di chuyển</label>
+                                        <p>Máy bay, Xe du lịch</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/diem tham quan.png" alt="icon-img" />
+                                        <label>Điểm tham quan</label>
+                                        <p>Phú Quốc, Bốn Đảo, Grand World, Bãi Sao, Thiền Viện Trúc Lâm</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/am thuc.png" alt="icon-img" />
+                                        <label>Ẩm thực</label>
+                                        <p>Đặc sản địa phương, Theo thực đơn</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/khach san.png" />
+                                        <label>Khách sạn</label>
+                                        <p>Khách sạn 4 sao</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/thoi gian ly tuong.png" alt="icon-img" />
+                                        <label>Thời gian lý tưởng</label>
+                                        <p>Quanh năm</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/doi tuong thich hop.png" alt="icon-img" />
+                                        <label>Đối tượng thích hợp</label>
+                                        <p>Gia đình nhiều thế hệ</p>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/Images/uu dai.png" alt="icon-img" />
+                                        <label>Ưu đãi</label>
+                                        <p>Đã ưu đãi trực tiếp vào giá tour</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section-4 mb-5">
+                </section>
+            </div>
+
+            <div class="map-route">
+                <section class="section-8 mb-5" style="margin-bottom: 48px">
+                    <div class="container-xl">
+                        <div class="row">
+                            <div class="col-md-6 col-12 right">
+                                <h2>Giá Tour & phụ thu phòng đơn</h2>
+                                <div class="table-price">
+                                    <table style="caption-side: bottom;border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th class="11" style="width:290px;padding:10px 0 10px 0;font-weight:700">
+                                                    Loại khách
+                                                </th>
+                                                <th class="12" style="width:130px;padding: 10px 0 10px 0; font-weight:700">
+                                                    Giá Tour
+                                                </th>
+                                                <th class="13 d-none" style="width:130px;padding:10px 0 10px 0;font-weight:700;display: none!important">
+                                                    Land Tour
+                                                </th>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding: 10px 0 10px 0">Người lớn (Từ 12 tuổi trở lên)</td>
+                                                <td class="t-price">2,590,000đ</td>
+                                                <td class="1-price" style="display: none!important">0đ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Trẻ em (Từ 5 - 11 tuổi)</td>
+                                                <td class="t-price">1,942,000đ</td>
+                                                <td class="1-price" style="display:none!important">0đ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Trẻ nhỏ (Từ 2 - 4 tuổi)</td>
+                                                <td class="t-price">1,500,000đ</td>
+                                                <td class="1-price" style="display: none!important">0đ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Em bé (Dưới 2 tuổi)</td>
+                                                <td class="t-price">200,000đ</td>
+                                                <td class="1-price" style="display: none!important">0đ</td>
+                                            </tr>
+
+                                            <tr class="total">
+                                                <td style="font-weight:700">Phụ thu phòng đơn</td>
+                                                <td class="t-price" style="font-weight:700;color:#fd5056">0đ</td>
+                                                <td class="1-price" style="display:none!important; font-weight:700">0đ</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h2 class="tt mt-3" style="margin-top: 16px!important">
+                                    Thông tin hướng dẫn viên
+                                </h2>
+                                <div class="table-price">
+                                    <div class="more-info more-info-2">
+                                        <div class="block">
+                                            <span>HDV dẫn đoàn</span>
+                                            <div id="divThongTinHDV">
+                                                <div class="info" style="width:100%">
+                                                    <h3>LỄ TĨNH BIÊN - CN PQ</h3>
+                                                    <p>190 Pasteur, Vo Thi Sau Ward, District 3, HCM City, Viet Nam</p>
+                                                    <p>0939.611.169</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="block">
+                                            <span>HDV tiễn</span>
+                                            <div id="divThongTinHDVTien">
+                                                <div class="info" style="width:100%">
+                                                    <h3>LƯU MINH NHÀN</h3>
+                                                    <p>190 Pasteur, Vo Thi Sau Ward, District 3, HCM City, Viet Nam</p>
+                                                    <p>038 476 1276</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="note-info">
+                <section class="section-9">
+                    <div class="container">
+                        <div class="row">
+                            <h2 style="font-weight:700; font-size:22px; line-height:28px; text-align:center; margin-bottom:30px">Những thông tin cần lưu ý</h2>
+                            <div class="col-md-6 col-12 left">
+                                <div class="faqs">
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Giá Tour bao gồm</h3>
+                                        <div class="pannel active">
+                                            - Xe tham quan (15, 25, 35, 45 chỗ tùy theo số lượng khách) theo chương trình
+                                            <br />
+                                            - Vé máy bay khứ hồi
+                                            <br />
+                                            - Khách sạn theo tiêu chuẩn 2 khách/phòng hoặc 3 khách/phòng
+                                            <br />
+                                            - Ăn theo chương trình.
+                                            <br />
+                                            - Vé tham quan theo chương trình
+                                            <br />
+                                            - Hướng dẫn viên tiếng Việt nối tuyến
+                                            <br />
+                                            - Bảo hiểm du lịch với mức bồi thường cao nhất 120.000.000đ/vụ
+                                            <br />
+                                            - Nón Vietravel + Nước suối + Khăn lạnh
+                                            <br />
+                                            - Thuế VAT
+                                            <br />
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Giá tour không bao gồm</h3>
+                                        <div class="pannel active">
+                                            - Chi phí cá nhân: ăn uống ngoài chương trình, giặt ủi, chi phí hủy đổi hành trình và nâng hạng chuyến bay, hành lý quá cước, phụ thu phòng đơn,…
+                                            <br />
+                                            - Chi phí tham quan ngoài chương trình
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Gía vé trẻ em</h3>
+                                        <div class="pannel active">
+                                            - Trẻ em dưới 5 tuổi: không thu phí dịch vụ, bố mẹ tự lo cho bé và thanh toán các chi phí phát sinh (đối với các dịch vụ tính phí theo chiều cao…). Hai người lớn chỉ được kèm 1 trẻ em dưới 5 tuổi, trẻ em thứ 2 sẽ đóng phí theo qui định dành cho độ tuổi từ 5 đến dưới 12 tuổi và phụ thu phòng đơn. Vé máy bay, tàu hỏa, phương tiện vận chuyển công cộng mua vé theo qui định của các đơn vị vận chuyển.
+                                            <br />
+                                            - Trẻ em từ 5 - dưới 12 tuổi: phải mua 75% vé tour trọn gói bao gồm phương tiện vận chuyển, ăn uống theo chương trình, vé tham quan đối với các điểm tính phí theo độ tuổi/chiều cao (lưu ý bé ngủ chung với cha mẹ). Hai người lớn chỉ được kèm 1 trẻ em từ 5 - dưới 12 tuổi, em thứ hai trở lên phải mua 1 suất giường đơn.
+                                            <br />
+                                            - Trẻ em 12 tuổi trở lên: phải mua vé tour trọn gói như người lớn bao gồm phương tiện vận chuyển, khách sạn, ăn uống theo chương trình, vé tham quan theo qui định các điểm tham quan.
+                                            <br />
+                                            <br />
+                                            Lưu ý: trong trường hợp Quý khách có nhu cầu tự mua vé tham quan, chúng tôi sẵn sàng tư vấn để Quý khách chọn mua tour F&E hoặc tour theo nhóm riêng, theo dạng tour này Quý khách có thể tự chọn các dịch vụ theo nhu cầu.
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Điều kiện thanh toán</h3>
+                                        <div class="pannel active">
+
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Các điều kiện khi đăng ký Tour</h3>
+                                        <div class="pannel active">
+                                            - Khi đăng ký vui lòng cung cấp giấy tờ tùy thân tất cả người đi: Chứng minh nhân dân/Hộ chiếu (Passport)/Giấy khai sinh (trẻ em dưới 14 tuổi). Trong trường hợp đăng ký trực tuyến qua www.travel.com.vn vui lòng nhập tên chính xác theo thứ tự: Họ/tên lót/tên xuất vé máy bay. Quý khách khi đăng ký cung cấp tên theo giấy tờ tùy thân nào, khi đi tour mang theo giấy tờ tùy thân đó.
+                                            <br />
+                                            - Quy định giấy tờ tùy thân khi đi tour :
+                                            <br />
+                                            - Khách quốc tịch Việt Nam: Trẻ em dưới 14 tuổi Giấy khai sinh bản chính/Hộ chiếu bản chính còn giá trị sử dụng. Trẻ em từ 14 tuổi trở lên và Người lớn CMND/ Hộ chiếu bản chính còn giá trị sử dụng. Lưu ý trẻ em trên 14 tuổi bắt buộc phải có CMND/Hộ chiếu làm thủ tục lên máy bay hoặc Giấy xác nhận nhân thân theo mẫu quy định và chỉ có giá trị trong vòng 30 ngày kể từ ngày xác nhận.
+                                            <br />
+                                            - Khách quốc tịch nước ngoài hoặc là Việt kiều: Khi đi tour vui lòng mang theo hộ chiếu bản chính (Passport) hoặc thẻ xanh kèm thị thực nhập cảnh (visa dán vào hộ chiếu hoặc tờ rời hoặc cuốn miễn thị thực, các loại giấy tờ này phải có dấu nhập cảnh Việt Nam và còn giá trị sử dụng theo quy định khi đi tour).
+                                            <br />
+                                            - Thông tin tập trung: Tại sân bay Tân Sơn Nhất, Ga đi trong nước, trước giờ bay 2 tiếng (áp dụng ngày thường), trước 2 tiếng 30 phút (áp dụng lễ tết). Trong trường hợp bay hãng hàng không Vietjet cột 5, trong trường hợp bay hãng hàng không Vietnam, Jetstar cột 12 Quầy Vietravel
+                                            <br />
+                                            - Thông tin hành lý khi đi tour, xách tay dưới 7kg/1khách - kích thước không quá: 56cm x 36cm x 23 cm, chất lỏng với thể tích không quá 100ml. Ký gửi 20kg/1khách - kích thước không quá: 119cm x 119cm x 81cm. Các vật phẩm không được chấp nhận dưới dạng hành lý ký gởi hoặc vận chuyển trong hành lý theo quy định hàng không
+                                            <br />
+                                            - Trong trường hợp Quý khách cung cấp tên sai, đến trễ giờ bay, vui lòng thanh toán phí đổi vé hoặc mua lại vé mới theo quy định của Hãng Hàng Không (nếu chuyến bay còn chỗ).
+                                            <br />
+                                            - Trong trường hợp Quý khách bay hãng hàng không Vietnam, Jetstar, Vietjet. Vé máy bay khuyến mãi không hoàn, không đổi, hủy, sai tên mất 100%. Vé Vietnam, Jetstar không bay chặng đi, tự động hủy chặng về.
+                                            <br />
+                                            - Do các chuyến bay phụ thuộc vào các hãng Hàng Không (Vietnam, Vietjet, Jetstar,..) nên trong một số trường hợp giá vé, chuyến bay, giờ bay có thể thay đổi mà không được báo trước. Tùy vào tình hình thực tế, chương trình và điểm tham quan có thể linh động thay đổi thứ tự các điểm phù hợp điều kiện giờ bay và thời tiết thực tế.
+                                            <br />
+                                            - Vietravel sẽ không chịu trách nhiệm bảo đảm các điểm tham quan trong trường hợp:
+                                            <br />
+                                            + Xảy ra thiên tai: bão lụt, hạn hán, động đất…
+                                            <br />
+                                            + Sự cố về an ninh: khủng bố, biểu tình
+                                            <br />
+                                            + Sự cố về hàng không: trục trặc kỹ thuật, an ninh, dời, hủy, hoãn chuyến bay.
+                                            <br />
+                                            Nếu những trường hợp trên xảy ra, Vietravel sẽ xem xét để hoàn trả chi phí không tham quan cho khách trong điều kiện có thể (sau khi đã trừ lại các dịch vụ đã thực hiện….và không chịu trách nhiệm bồi thường thêm bất kỳ chi phí nào khác).
+                                            <br />
+                                            - Sau khi Quý khách đã làm thủ tục Hàng Không và nhận thẻ lên máy bay, đề nghị Quý khách giữ cẩn thận và lưu ý lên máy bay đúng giờ. Vietravel không chịu trách nhiệm trong trường hợp khách làm mất thẻ lên máy bay và không lên máy bay đúng theo giờ quy định của Hàng Không.
+                                            <br />
+                                            - Giờ nhận phòng & trả phòng theo quy định khách sạn, nhận sau 14:00 giờ và trả trước 12:00 giờ.
+                                            <br />
+                                            - Phòng khách sạn/resort có thể xảy ra trường hợp phòng không gần nhau, không cùng tầng, loại phòng một giường đôi hoặc hai giường đơn không theo yêu cầu, tùy tình hình thực tế từng khách sạn/Resort.
+                                            <br />
+                                            - Trường hợp quý khách tham gia tour 01 khách, bắt buộc đóng thêm tiền phụ thu phòng đơn để ở riêng 01 phòng. Trường hợp trong đoàn cũng có khách đi 01 mình, cùng giới tính và có nhu cầu muốn ghép cùng phòng với quý khách thì Vietravel sẽ hoàn lại tiền phụ thu phòng đơn cho quý khách.
+                                            <br />
+                                            - Trường hợp quý khách đi nhóm 03 khách, Vietravel sẽ cung cấp 01 phòng dành cho 03 khách là 01 giường lớn 1m6 và 01 giường phụ di động từ 0.8 - 1,2m (extrabed). Trong trường hợp quý khách có nhu cầu ở riêng, vui lòng đóng thêm tiền phụ thu phòng đơn theo quy định.
+                                            <br />
+                                            - Trong trường hợp Quý khách có yêu cầu nâng chuẩn loại phòng cao cấp hơn vui lòng liên hệ phụ trách tuyến & thanh toán chí phát sinh tùy hạng phòng yêu cầu (nếu có).
+                                            <br />
+                                            - Đối với các chương trình tham quan biển đảo, trong trường hợp Quý khách không khỏe, có tiền sử bệnh hoặc có chất kích thích trong người (rượu, bia…) thì không nên tắm & lặn biển để đảm bảo sự an toàn.
+                                            <br />
+                                            - Cam kết đã được tư vấn hiểu rõ và đồng ý các quy định liên quan về điều kiện sức khỏe khi tham gia chương trình du lịch. Khách nữ từ 55 tuổi trở lên và khách nam từ 60 trở lên: nên có người thân dưới 55 tuổi (đầy đủ sức khỏe) đi cùng. Riêng khách từ 70 tuổi trở lên: Bắt buộc phải có người thân dưới 55 tuổi (đầy đủ sức khỏe) đi cùng. Hạn chế nhận khách từ 80 tuổi trở lên. Khách từ 80 tuổi không có chế độ bảo hiểm. Quý khách mang thai vui lòng báo cho nhân viên bán tour ngay tại thời điểm đăng ký. Phải có ý kiến của bác sĩ trước khi đi tour, tự chịu trách nhiệm về sức khỏe của mình và thai nhi trong suốt thời gian tham gia chương trình du lịch. Khi đi tour phải mang theo sổ khám thai và giấy tờ tùy thân theo quy định hãng hàng không. Tuần thai từ 28 tuần trở đi phải mang theo giấy khám thai trong vòng 7 ngày trở lại. Cam kết bản thân và người thân hoàn toàn có đủ sức khỏe để đi du lịch theo chương trình. Đồng ý miễn trừ toàn bộ trách nhiệm pháp lý, không khiếu nại, không yêu cầu bồi thường đối với Vietravel nói chung và nhân viên Vietravel nói riêng về tất cả các vấn đề xảy ra liên quan đến tình trạng sức khỏe của khách hàng khi tham gia tour hoặc sử dụng các dịch vụ do Vietravel cung cấp. Quý khách cam kết tự chịu mọi chi phí phát sinh ngoài chương trình tour liên quan đến việc giải quyết các rủi ro về sức khỏe (lưu trú, vận chuyển, chi phí khám chữa bệnh...) – ngoại trừ các chi phí thuộc hạng mục bảo hiểm sẽ do Công ty Bảo hiểm hoàn trả theo quy định.
+                                            <br />
+                                            - Quý khách có nhu cầu cần xuất hóa đơn vui lòng cung cấp thông tin xuất hóa đơn cho nhân viên bán tour khi ngay khi đăng ký hoặc trước khi thanh toán hết, không nhận xuất hóa đơn sau khi tour đã kết thúc.
+                                            <br />
+                                            - Quý khách vui lòng đọc kỹ chương trình, giá tour, các khoản bao gồm cũng như không bao gồm trong chương trình, các điều kiện hủy tour trên biên nhận đóng tiền. Tùy thời điểm đăng ký, kênh bán, giá tour có thể thay đổi. Trong trường hợp Quý khách không trực tiếp đến đăng ký tour mà do người khác đến đăng ký thì Quý khách vui lòng tìm hiểu kỹ chương trình từ người đăng ký cho mình.
+                                            <br />
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12 right">
+                                <div class="faqs">
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Lưu ý khi chuyển/hủy Tour</h3>
+                                        <div class="pannel active">
+                                            Tour không hoàn, không đổi, hủy mất 100% chi phí
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Các điều kiện hủy Tour đối với ngày thường</h3>
+                                        <div class="pannel active">
+                                            Tour không hoàn, không đổi, hủy mất 100% chi phí
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Các điều kiện hủy Tour đối với ngày lễ, Tết</h3>
+                                        <div class="pannel active">
+                                            <p style="margin-top:0; margin-bottom:16px">
+                                                Áp dụng cho các Tour có thời gian diễn ra rơi vào một trong các ngày Lễ, Tết theo qui định.
+                                            </p>
+                                            Tour không hoàn, không đổi, hủy mất 100% chi phí
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Trường hợp bất khả kháng</h3>
+                                        <div class="pannel active">
+                                            Nếu chương trình du lịch bị hủy bỏ hoặc thay đổi bởi một trong hai bên vì lý do bất khả kháng (hỏa hoạn, thời tiết, tai nạn, thiên tai, chiến tranh, dịch bệnh, hoãn, dời, và hủy chuyến hoặc thay đổi khác của các phương tiện vận chuyển công cộng hoặc các sự việc bất khả kháng khác theo quy định pháp luật…), thì hai bên sẽ không chịu bất kỳ nghĩa vụ bồi hoàn các tổn thất đã xảy ra và không chịu bất kỳ trách nhiệm pháp lý nào. Tuy nhiên mỗi bên có trách nhiệm cố gắng tối đa để giúp đỡ bên bị thiệt hại nhằm giảm thiểu các tổn thất gây ra vì lý do bất khả kháng.
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <i class='open bx bx-chevron-down'></i>
+                                        <h3>Liên hệ</h3>
+                                        <div class="pannel active">
+                                            <p style="text-align:center; margin-top: 0;margin-bottom:16px">
+                                                <br />
+                                                <strong>
+                                                    Môi chi tiết vui lòng liên hệ:
+                                                    <br />
+                                                    KHỐI KHÁCH LẺ - DU LỊCH TRONG NƯỚC
+                                                    <br />
+                                                    190 PASTURE, PHƯỜNG VÕ THỊ SÁU, QUẬN 3, TP.HCM
+                                                    <br />
+                                                    Điện thoại: (84-28) 3822 8898
+                                                    <br />
+                                                    <br />
+                                                    TRAVELIKE KÍNH CHÚC QUÝ KHÁCH MỘT CHUYẾN DU LỊCH VUI VẺ!
+                                                </strong>
+                                            </p>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="customer-comments">
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "NavigationDichVu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3 col-12 sidebar sidebar-filter">
+        <div class="sidebar-inner">
+            <h3 style="text-align:center;">Danh mục tour</h3>
+            <div class="px-3 py-4">
+
+
+                <a href="@Url.Action("KhachSan", "Admin")" class="list-group-item" style="list-style: none; text-decoration: none">Quản lý khách sạn</a>
+                <a href="@Url.Action("LoaiKS", "Admin")" class="list-group-item" style="list-style: none; text-decoration: none">Quản lý loại khách sạn</a>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-md-9 col-12 main-content">
+        @RenderBody()
+    </div>
+</div>

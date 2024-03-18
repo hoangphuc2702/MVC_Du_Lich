@@ -1,0 +1,49 @@
+﻿@model MVC_Du_Lich.Models.ThanhVien
+
+@{
+    ViewBag.Title = "XoaMatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA NHÀ XUẤT BẢN NÀY?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN THÀNH VIÊN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenTV)
+            </dd>
+
+            <dt>
+                GIỚI TÍNH
+            </dt>
+
+            <dd>
+                @(Model.GioiTinh ? "Nam" : "Nữ")
+            </dd>
+
+            <dt>
+                NGÀY SINH
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("TRỞ LẠI", "HienThiCTTour")
+            </div>
+        }
+    </div>
+

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Admin.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+        #wrapper {
+            width: 15%;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #343a40;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .brand-logo {
+            padding: 1rem;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #495057;
+        }
+
+            .nav-item a {
+                color: #fff;
+                transition: color 0.3s;
+            }
+
+                .nav-item a:hover {
+                    color: #ccc;
+                    text-decoration: none;
+                }
+
+                .nav-item a.active {
+                    color: #fff;
+                }
+
+        .main-content {
+            margin-left: 15%; /* Adjust margin to match sidebar width */
+            padding: 20px;
+            width: 85%;
+        }
+
+        .logout {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 15%; /* Match sidebar width */
+            background-color: #343a40;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex;">
+        <!-- Sidebar -->
+        <div id="wrapper">
+            <div class="brand-logo">
+                <a href="./index.html" class="text-nowrap logo-img">
+                    <img src="../Images/logo.jpg" width="180" alt="">
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <div class="sidebar-nav">
+                <!-- Dashboard -->
+                <div class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("Index", "Admin")">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </div>
+                <!-- Chức năng -->
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Tour", "Admin")">
+                        <i class="fas fa-hiking"></i> Quản lý tour
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("DiemDi", "Admin")">
+                        <i class="fas fa-map-marker-alt"></i> Quản lý điểm đi
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("DiemDen", "Admin")">
+                        <i class="fas fa-map-marker-alt"></i> Quản lý điểm đến
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("KhachSan", "Admin")">
+                        <i class="fas fa-hotel"></i> Quản lý khách sạn
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("DonDatTour", "Admin")">
+                        <i class="fas fa-file-signature"></i> Quản lý đơn đặt tour
+                    </a>
+                </div>
+                <!-- User -->
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("LogOut", "Admin")">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

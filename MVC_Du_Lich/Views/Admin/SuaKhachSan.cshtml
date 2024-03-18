@@ -1,0 +1,61 @@
+﻿@model MVC_Du_Lich.Models.KHACHSAN
+@{
+    ViewBag.Title = "SuaKhachSan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h2 style="text-align: center">CHỈNH SỬA KHÁCH SẠN</h2>
+
+    @using (Html.BeginForm("SuaKhachSan", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>KHÁCH SẠN</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaKS)
+
+            <div class="form-group">
+                TÊN KHÁCH SẠN
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenKS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenKS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                GIÁ KHÁCH SẠN
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GiaKS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GiaKS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                ĐỊA CHỈ
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                MÃ LOẠI KHÁC SẠN
+                <div class="col-md-10">
+                    @Html.DropDownList("MaLKS", null, htmlAttributes: new { @class = "form - control" })
+                    @Html.ValidationMessageFor(model => model.MaLKS, "", new { @class = "text - danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 mb-3 mt-3">
+                    <input type="submit" value="LƯU" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("TRỞ LẠI", "Index")
+    </div>
+</div>
+

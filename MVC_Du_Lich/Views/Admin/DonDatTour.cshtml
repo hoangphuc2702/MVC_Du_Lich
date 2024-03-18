@@ -1,0 +1,122 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<DONDATTOUR>
+@{
+    ViewBag.Title = "DonDatTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QUẢN LÝ THÔNG TIN ĐƠN ĐẶT TOUR</h2>
+
+<p>
+    @Html.ActionLink("THÊM MỚI", "ThemDonDatTour")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SoHD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().HoTenKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SDT_KH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().EmailKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DiaChiKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().HTThanhToan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaTour)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoHD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG.MaKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT_KH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChiKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongTien)
+            </td>
+            <td>
+                @if ((bool)item.HTThanhToan)
+                {
+                    <span>Đã thanh toán</span>
+                }
+                else
+                {
+                    <span>Chưa thanh toán</span>
+                }
+            </td>
+            <td>
+                @if ((bool)item.HTThanhToan)
+                {
+                    <span>Hoàn thành</span>
+                }
+                else
+                {
+                    <span>Chưa hoàn thành</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TOUR.MaTour)
+            </td>
+
+            <td style="width: 150px;">
+                @Html.ActionLink("SỬA", "SuaDonDatTour", new { id = item.SoHD }) |
+                @Html.ActionLink("CHI TIẾT", "ChiTietDonDatTour", new { id = item.SoHD })|
+                @Html.ActionLink("XÓA", "XoaDonDatTour", new { id = item.SoHD })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- Thêm mã phân trang -->
+<br />
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("DonDatTour", new { page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+
+    td, th {
+        text-align: center;
+    }
+</style>
+<!-- Kết thúc -->
