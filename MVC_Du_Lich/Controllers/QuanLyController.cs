@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC_Du_Lich.Design_Pattern.Creational_Pattern.Builder;
 using MVC_Du_Lich.Models;
 using MVC_Du_Lich.Pattern.Singleton;
 using PagedList;
@@ -77,6 +78,15 @@ namespace MVC_Du_Lich.Controllers
             return RedirectToAction("Login", "QuanLy");
         }
 
+        public void ViewBags()
+        {
+            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
+            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
+            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
+            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
+            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+        }
+
 
         //TOUR
 
@@ -94,22 +104,14 @@ namespace MVC_Du_Lich.Controllers
         [HttpGet]
         public ActionResult ThemTour()
         {
-            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
-            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
-            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
-            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
-            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            ViewBags();
             return View();
         }
 
         [HttpPost]
-        public ActionResult ThemTour(TOUR tour, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
+        public ActionResult ThemTour(FormCollection formCollection, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
         {
-            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
-            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
-            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
-            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
-            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            ViewBags();
 
             if (Hinh1 == null || Hinh2 == null || Hinh3 == null || Hinh4 == null)
             {
@@ -140,6 +142,8 @@ namespace MVC_Du_Lich.Controllers
 
                     else
                     {
+                        var builder = new TourBuilder();
+
                         //Tạo đường dẫn tới file
                         var path1 = Path.Combine(Server.MapPath("~/Images"), fileName1);
                         var path2 = Path.Combine(Server.MapPath("~/Images"), fileName2);
@@ -152,17 +156,32 @@ namespace MVC_Du_Lich.Controllers
                         Hinh4.SaveAs(path4);
 
                         //lưu tên tour
-                        tour.Hinh1 = fileName1;
-                        tour.Hinh2 = fileName2;
-                        tour.Hinh3 = fileName3;
-                        tour.Hinh4 = fileName4;
+                        builder.ThemHinh1(fileName1);
+                        builder.ThemHinh2(fileName2);
+                        builder.ThemHinh3(fileName3);
+                        builder.ThemHinh4(fileName4);
 
 
-                        tour.MaTour = "T" + (database.TOURs.Count() + 1).ToString();
+                        builder.ThemMaTour("T" + (database.TOURs.Count() + 1).ToString());
                         if (database.TOURs.Count() < 10)
                         {
-                            tour.MaTour = "T0" + (database.TOURs.Count() + 1).ToString();
+                            builder.ThemMaTour("T0" + (database.TOURs.Count() + 1).ToString());
                         }
+
+                        builder.ThemTenTour(formCollection["TenTour"]);
+                        builder.ThemGia(Convert.ToDecimal(formCollection["Gia"]));
+                        builder.ThemSoLuong(Convert.ToInt32(formCollection["SoLuong"]));
+                        builder.ThemMoTa(formCollection["MoTa"]);
+                        builder.ThemSLConLai(Convert.ToInt32(formCollection["SoLuong"]));
+                        builder.ThemNgayDiTour(Convert.ToDateTime(formCollection["NgayDiTour"]));
+                        builder.ThemNgayKetThuc(Convert.ToDateTime(formCollection["NgayKetThuc"]));
+                        builder.ThemMaDDi(Convert.ToInt32(formCollection["MaDDi"]));
+                        builder.ThemMaDDen(Convert.ToInt32(formCollection["MaDDen"]));
+                        builder.ThemMaLoaiTour(Convert.ToInt32(formCollection["MaLoaiTour"]));
+                        builder.ThemMaPT(Convert.ToInt32(formCollection["MaPT"]));
+                        builder.ThemMaLKS(Convert.ToInt32(formCollection["MaLKS"]));
+
+                        TOUR tour = builder.build();
 
                         //lưu vào csdl
                         database.TOURs.Add(tour);
@@ -170,7 +189,6 @@ namespace MVC_Du_Lich.Controllers
                         tourSingleton.UpdateTour(database);
                         return RedirectToAction("Tour");
                     }
-
                 }
             }
 
@@ -197,79 +215,100 @@ namespace MVC_Du_Lich.Controllers
                 Response.StatusCode = 404;
                 return null;
             }
-            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
-            ViewBag.MaDDen = new SelectList(database.DIEMDENs, "MaDDen", "TenDDen");
-            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
-            ViewBag.MaPT = new SelectList(database.PHUONGTIENs, "MaPT", "TenPT");
-            ViewBag.MaLKS = new SelectList(database.LOAIKS, "MaLKS", "TenLKS");
+            ViewBags();
             return View(tour);
         }
 
         [HttpPost]
-        public ActionResult SuaTour(TOUR tour, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
+        public ActionResult SuaTour(FormCollection formCollection, HttpPostedFileBase Hinh1, HttpPostedFileBase Hinh2, HttpPostedFileBase Hinh3, HttpPostedFileBase Hinh4)
         {
-            ViewBag.MaDDi = new SelectList(database.DIEMDIs, "MaDDi", "TenDDi");
-            ViewBag.MaDDen = new SelectList(database.DIEMDIs, "MaDDen", "TenDDen");
-            ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
-            ViewBag.MaPT = new SelectList(database.LOAITOURs, "MaPT", "TenPT");
-            ViewBag.MaLKS = new SelectList(database.LOAITOURs, "MaLKS", "TenLKS");
+            ViewBags();
 
             if (ModelState.IsValid)
             {
+                var builder = new TourBuilder();
+
+                builder.ThemMaTour(formCollection["MaTour"]);
+                builder.ThemTenTour(formCollection["TenTour"]);
+                builder.ThemGia(Convert.ToDecimal(formCollection["Gia"]));
+                builder.ThemSoLuong(Convert.ToInt32(formCollection["SoLuong"]));
+
+                if (Hinh1 != null)
+                {
+                    //Lấy tên file của hình được up lên
+                    var fileName = Path.GetFileName(Hinh1.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Lưu tên
+                    builder.ThemHinh1(fileName);
+                    //Save vào Images Folder
+                    Hinh1.SaveAs(path);
+                }
+
+                if (Hinh2 != null)
+                {
+                    //Lấy tên file của hình được up lên
+                    var fileName = Path.GetFileName(Hinh2.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Lưu tên
+                    builder.ThemHinh2(fileName);
+                    //Save vào Images Folder
+                    Hinh2.SaveAs(path);
+                }
+
+                if (Hinh3 != null)
+                {
+                    //Lấy tên file của hình được up lên
+                    var fileName = Path.GetFileName(Hinh3.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Lưu tên
+                    builder.ThemHinh3(fileName);
+                    //Save vào Images Folder
+                    Hinh3.SaveAs(path);
+                }
+
+                if (Hinh4 != null)
+                {
+                    //Lấy tên file của hình được up lên
+                    var fileName = Path.GetFileName(Hinh4.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Lưu tên
+                    builder.ThemHinh4(fileName);
+                    //Save vào Images Folder
+                    Hinh4.SaveAs(path);
+                }
+
+                builder.ThemMoTa(formCollection["MoTa"]);
+                builder.ThemSLConLai(Convert.ToInt32(formCollection["SoLuong"]));
+                builder.ThemNgayDiTour(Convert.ToDateTime(formCollection["NgayDiTour"]));
+                builder.ThemNgayKetThuc(Convert.ToDateTime(formCollection["NgayKetThuc"]));
+                builder.ThemMaDDi(Convert.ToInt32(formCollection["MaDDi"]));
+                builder.ThemMaDDen(Convert.ToInt32(formCollection["MaDDen"]));
+                builder.ThemMaLoaiTour(Convert.ToInt32(formCollection["MaLoaiTour"]));
+                builder.ThemMaPT(Convert.ToInt32(formCollection["MaPT"]));
+                builder.ThemMaLKS(Convert.ToInt32(formCollection["MaLKS"]));
+
+                TOUR tour = builder.build();
+
                 var productDB = database.TOURs.FirstOrDefault(p => p.MaTour == tour.MaTour);
                 if (productDB != null)
                 {
+                    // Update các thuộc tính của tour từ builder
                     productDB.TenTour = tour.TenTour;
                     productDB.Gia = tour.Gia;
                     productDB.SoLuong = tour.SoLuong;
-
-                    if (Hinh1 != null)
-                    {
-                        //Lấy tên file của hình được up lên
-                        var fileName = Path.GetFileName(Hinh1.FileName);
-                        //Tạo đường dẫn tới file
-                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                        //Lưu tên
-                        productDB.Hinh1 = fileName;
-                        //Save vào Images Folder
-                        Hinh1.SaveAs(path);
-                    }
-
-                    if (Hinh2 != null)
-                    {
-                        //Lấy tên file của hình được up lên
-                        var fileName = Path.GetFileName(Hinh2.FileName);
-                        //Tạo đường dẫn tới file
-                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                        //Lưu tên
-                        productDB.Hinh2 = fileName;
-                        //Save vào Images Folder
-                        Hinh2.SaveAs(path);
-                    }
-
-                    if (Hinh3 != null)
-                    {
-                        //Lấy tên file của hình được up lên
-                        var fileName = Path.GetFileName(Hinh3.FileName);
-                        //Tạo đường dẫn tới file
-                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                        //Lưu tên
-                        productDB.Hinh3 = fileName;
-                        //Save vào Images Folder
-                        Hinh3.SaveAs(path);
-                    }
-
-                    if (Hinh4 != null)
-                    {
-                        //Lấy tên file của hình được up lên
-                        var fileName = Path.GetFileName(Hinh4.FileName);
-                        //Tạo đường dẫn tới file
-                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                        //Lưu tên
-                        productDB.Hinh4 = fileName;
-                        //Save vào Images Folder
-                        Hinh4.SaveAs(path);
-                    }
+                    productDB.Hinh1 = tour.Hinh1;
+                    productDB.Hinh2 = tour.Hinh2;
+                    productDB.Hinh3 = tour.Hinh3;
+                    productDB.Hinh4 = tour.Hinh4;
+                    productDB.MoTa = tour.MoTa;
                     productDB.SoLuongConLai = tour.SoLuongConLai;
                     productDB.NgayDiTour = tour.NgayDiTour;
                     productDB.NgayKetThuc = tour.NgayKetThuc;
@@ -283,7 +322,7 @@ namespace MVC_Du_Lich.Controllers
                 tourSingleton.UpdateTour(database);
                 return RedirectToAction("Tour");
             }
-            return View(tour);
+            return View();
         }
 
         // GET: Products/Delete/5
