@@ -9,10 +9,12 @@
 
 namespace MVC_Du_Lich.Models
 {
+    using MVC_Du_Lich.Design_Pattern.Creational_Pattern.Builder;
+    using MVC_Du_Lich.Design_Pattern.Creational_Pattern.Prototype;
     using System;
     using System.Collections.Generic;
-    
-    public partial class TOUR
+
+    public partial class TOUR : Prototype
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TOUR()
@@ -21,25 +23,48 @@ namespace MVC_Du_Lich.Models
             this.DONDATTOURs = new HashSet<DONDATTOUR>();
             this.LICHTRINHs = new HashSet<LICHTRINH>();
         }
-    
+
+        public TOUR(string maTour, string tenTour, decimal gia, int soLuong, string hinh1, string hinh2, string hinh3,
+            string hinh4, string moTa, int slconlai, DateTime ngayDiTour, DateTime ngayKetThuc, int maDDi, int maDDen,
+            int maLoaiTour, int maPT, int maLKS)
+        {
+            this.MaTour = maTour;
+            this.TenTour = tenTour;
+            this.Gia = gia;
+            this.SoLuong = soLuong;
+            this.Hinh1 = hinh1;
+            this.Hinh2 = hinh2;
+            this.Hinh3 = hinh3;
+            this.Hinh4 = hinh4;
+            this.MoTa = moTa;
+            this.SoLuongConLai = slconlai;
+            this.NgayDiTour = ngayDiTour;
+            this.NgayKetThuc = ngayKetThuc;
+            this.MaDDi = maDDi;
+            this.MaDDen = maDDen;
+            this.MaLoaiTour = maLoaiTour;
+            this.MaPT = maPT;
+            this.MaLKS = maLKS;
+        }
+
         public string MaTour { get; set; }
         public string TenTour { get; set; }
-        public Nullable<decimal> Gia { get; set; }
-        public Nullable<int> SoLuong { get; set; }
+        public decimal Gia { get; set; }
+        public int SoLuong { get; set; }
         public string Hinh1 { get; set; }
         public string Hinh2 { get; set; }
         public string Hinh3 { get; set; }
         public string Hinh4 { get; set; }
         public string MoTa { get; set; }
         public int SoLuongConLai { get; set; }
-        public Nullable<System.DateTime> NgayDiTour { get; set; }
-        public Nullable<System.DateTime> NgayKetThuc { get; set; }
-        public Nullable<int> MaDDi { get; set; }
-        public Nullable<int> MaDDen { get; set; }
-        public Nullable<int> MaLoaiTour { get; set; }
-        public Nullable<int> MaPT { get; set; }
-        public Nullable<int> MaLKS { get; set; }
-    
+        public System.DateTime NgayDiTour { get; set; }
+        public System.DateTime NgayKetThuc { get; set; }
+        public int MaDDi { get; set; }
+        public int MaDDen { get; set; }
+        public int MaLoaiTour { get; set; }
+        public int MaPT { get; set; }
+        public int MaLKS { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDATTOUR> CTDATTOURs { get; set; }
         public virtual DIEMDEN DIEMDEN { get; set; }
@@ -51,5 +76,30 @@ namespace MVC_Du_Lich.Models
         public virtual LOAIK LOAIK { get; set; }
         public virtual LOAITOUR LOAITOUR { get; set; }
         public virtual PHUONGTIEN PHUONGTIEN { get; set; }
+
+        public override Prototype Clone(TOUR origintour, string maTour)
+        {
+            var tour = new TOUR
+            {
+                MaTour = maTour,
+                TenTour = origintour.TenTour,
+                Gia = origintour.Gia,
+                SoLuong = origintour.SoLuong,
+                Hinh1 = origintour.Hinh1,
+                Hinh2 = origintour.Hinh2,
+                Hinh3 = origintour.Hinh3,
+                Hinh4 = origintour.Hinh4,
+                MoTa = origintour.MoTa,
+                SoLuongConLai = origintour.SoLuongConLai,
+                NgayDiTour = origintour.NgayDiTour,
+                NgayKetThuc = origintour.NgayKetThuc,
+                MaDDi = origintour.MaDDi,
+                MaDDen = origintour.MaDDen,
+                MaLoaiTour = origintour.MaLoaiTour,
+                MaPT = origintour.MaPT,
+                MaLKS = origintour.MaLKS,
+            };
+            return (TOUR)tour;
+        }
     }
 }

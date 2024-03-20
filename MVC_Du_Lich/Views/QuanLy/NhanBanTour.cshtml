@@ -1,0 +1,147 @@
+﻿@model MVC_Du_Lich.Models.TOUR
+@{
+    ViewBag.Title = "NhanBanTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN NHÂN BẢN TOUR NÀY KHÔNG?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN TOUR
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenTour)
+            </dd>
+
+            <dt>
+                Giá
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Gia)
+            </dd>
+
+            <dt>
+                SỐ LƯỢNG
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoLuong)
+            </dd>
+
+            <dt>
+                HÌNH ẢNH
+            </dt>
+
+            <dd>
+                <img src="~/Images/@Model.Hinh1" />
+            </dd>
+
+            <dt>
+                HÌNH ẢNH
+            </dt>
+
+            <dd>
+                <img src="~/Images/@Model.Hinh2" />
+            </dd>
+
+            <dt>
+                HÌNH ẢNH
+            </dt>
+
+            <dd>
+                <img src="~/Images/@Model.Hinh3" />
+            </dd>
+
+            <dt>
+                HÌNH ẢNH
+            </dt>
+
+            <dd>
+                <img src="~/Images/@Model.Hinh4" />
+            </dd>
+
+            <dt>
+                MÔ TẢ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+                SỐ LƯỢNG CÒN LẠI
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoLuongConLai)
+            </dd>
+
+            <dt>
+                NGÀY ĐI TOUR
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayDiTour)
+            </dd>
+
+            <dt>
+                NGÀY KẾT THÚC
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayKetThuc)
+            </dd>
+            <dt>
+                MÃ ĐIỂM ĐI
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DIEMDI.TenDDi)
+            </dd>
+            <dt>
+                MÃ ĐIỂM ĐẾN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DIEMDEN.TenDDen)
+            </dd>
+            <dt>
+                MÃ LOẠI TOUR
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LOAITOUR.TenLoaiTour)
+            </dd>
+            <dt>
+                MÃ PHƯƠNG TIỆN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PHUONGTIEN.TenPT)
+            </dd>
+            <dt>
+                MÃ LOẠI KHÁCH SẠN
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LOAIK.TenLKS)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Nhân bản" class="btn btn-primary" /> |
+                @Html.ActionLink("TRỞ LẠI", "Tour")
+            </div>
+        }
+    </div>
+</div>
