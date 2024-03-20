@@ -8,9 +8,14 @@
 
 <h2>QUẢN LÝ THÔNG TIN ĐƠN ĐẶT TOUR</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("THÊM MỚI", "ThemDonDatTour")
-</p>
+</p>*@
+<div>
+    <a href="@Url.Action("ThemDiemDi")" class="btn btn-primary" style="background-color: #ff1200;">
+        <label style="color: white;">THÊM MỚI</label>
+    </a>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -94,10 +99,10 @@
                 @Html.DisplayFor(modelItem => item.TOUR.MaTour)
             </td>
 
-            <td style="width: 150px;">
-                @Html.ActionLink("SỬA", "SuaDonDatTour", new { id = item.SoHD }) |
-                @Html.ActionLink("CHI TIẾT", "ChiTietDonDatTour", new { id = item.SoHD })|
-                @Html.ActionLink("XÓA", "XoaDonDatTour", new { id = item.SoHD })
+            <td style="width: 200px; text-align: center;">
+                @Html.ActionLink("SỬA", "SuaDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-warning", style = "margin-right: 5px;" }) |
+                @Html.ActionLink("CHI TIẾT", "ChiTietDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-info", style = "margin-right: 5px;" }) |
+                @Html.ActionLink("XÓA", "XoaDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-danger", style = "margin-right: 5px;" })
             </td>
         </tr>
     }
@@ -113,10 +118,6 @@ Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.Page
 <style>
     .MenuTrang li {
         display: inline;
-    }
-
-    td, th {
-        text-align: center;
     }
 </style>
 <!-- Kết thúc -->

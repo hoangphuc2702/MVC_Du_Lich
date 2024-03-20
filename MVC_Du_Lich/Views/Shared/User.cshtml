@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "User";
+    ViewBag.Title = "Nguoi Dung";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -161,13 +161,13 @@
                 <div class="d-flex tab">
                     @if (ViewBag.loai == 1)
                     {
-                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white" href="@Url.Action("DangNhap", "User", new {loai = 2})">Đăng nhập</a>
-                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271" href="@Url.Action("DangKy", "User", new {loai = 1})">Đăng ký</a>
+                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white; text-decoration: none" href="@Url.Action("DangNhap", "NguoiDung", new {loai = 2})">Đăng nhập</a>
+                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271; text-decoration: none" href="@Url.Action("DangKy", "NguoiDung", new {loai = 1})">Đăng ký</a>
                     }
                     else
                     {
-                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271" href="@Url.Action("DangNhap", "User", new {loai = 2})">Đăng nhập</a>
-                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white" href="@Url.Action("DangKy", "User", new {loai = 1})">Đăng ký</a>
+                        <a class="w-50 p-3 signin-btn h5 mb-0 text-center fw-bold" style="background-color: white; color: #2d4271; text-decoration: none" href="@Url.Action("DangNhap", "NguoiDung", new {loai = 2})">Đăng nhập</a>
+                        <a class="w-50 p-3 signup-btn h5 mb-0 text-center fw-bold" style="background-color: #0d6efd; color: white; text-decoration: none" href="@Url.Action("DangKy", "NguoiDung", new {loai = 1})">Đăng ký</a>
                     }
                 </div>
 

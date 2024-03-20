@@ -9,7 +9,7 @@ using PagedList;
 
 namespace MVC_Du_Lich.Controllers
 {
-    public class UserController : Controller
+    public class NguoiDungController : Controller
     {
         QLDULICHEntities database = new QLDULICHEntities();
 
@@ -137,7 +137,7 @@ namespace MVC_Du_Lich.Controllers
             Session["NameUser"] = null;
             Session["KhachHang"] = null;
             Session["MaKH"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("trangChu", "TrangChu");
         }
 
         public ActionResult ThongTinCaNhan()
@@ -157,7 +157,7 @@ namespace MVC_Du_Lich.Controllers
             var dsHd1 = database.DONDATTOURs.Where(s => s.MaKH == makh).Select(s => s.SoHD).ToList();
             if (dsHd1.Count == 0)
             {
-                return RedirectToAction("ThongBaoDH", "User");
+                return RedirectToAction("ThongBaoDH", "NguoiDung");
             }
             else
             {

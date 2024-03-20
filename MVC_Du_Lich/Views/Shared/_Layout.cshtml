@@ -384,13 +384,13 @@
     <header class="header">
         <nav class="navbar navbar-expand-xl">
             <div class="container-fluid">
-                <a class="navbar-brand logo" href="@Url.Action("Index", "Home")">
+                <a class="navbar-brand logo" href="@Url.Action("trangChu", "TrangChu")">
                     <img src="~/Images/logo (1).png" alt="Travelike logo" width="150" height="50" loading="lazy" />
                 </a>
                 <div class="navbar-collapse offcanvas-collapse left" id="main_nav">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown me-4">
-                            <a class="nav-link" href="@Url.Action("Index", "Home")" rel="nofollow" role="button" aria-expanded="true">Trang chủ</a>
+                            <a class="nav-link" href="@Url.Action("trangChu", "TrangChu")" rel="nofollow" role="button" aria-expanded="true">Trang chủ</a>
                         </li>
                         <li class="nav-item dropdown me-4">
                             <a class="nav-link" href="#" rel="nofollow" role="button" aria-expanded="true">Giới thiệu</a>
@@ -399,8 +399,8 @@
                             <a class="nav-link dropdown-toggle show" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Du lịch</a>
                             <div class="col-2">
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="@Url.Action("Index", "CustomerTour", new {loaiTour = 1})">Tour trong nước</a>
-                                    <a class="dropdown-item" href="@Url.Action("Index", "CustomerTour", new {loaiTour = 2})">Tour ngoài nước</a>
+                                    <a class="dropdown-item" href="@Url.Action("TrangChu", "DSTour", new {loaiTour = 1})">Tour trong nước</a>
+                                    <a class="dropdown-item" href="@Url.Action("TrangChu", "DSTour", new {loaiTour = 2})">Tour ngoài nước</a>
                                 </div>
                             </div>
                         </li>
@@ -439,9 +439,9 @@
                                         </a>
                                         <div class="col-2">
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan", "User")">Thông tin cá nhân</a>
-                                                <a class="dropdown-item" href="@Url.Action("LSHoaDon", "User")">Lịch sử đặt tour</a>
-                                                <a class="dropdown-item" href="@Url.Action("Logout", "User")">Đăng xuất</a>
+                                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan", "NguoiDung")">Thông tin cá nhân</a>
+                                                <a class="dropdown-item" href="@Url.Action("LSHoaDon", "NguoiDung")">Lịch sử đặt tour</a>
+                                                <a class="dropdown-item" href="@Url.Action("Logout", "NguoiDung")">Đăng xuất</a>
                                             </div>
                                         </div>
                                     </li>
@@ -461,8 +461,8 @@
                                         </a>
                                         <div class="col-2">
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="@Url.Action("DangNhap", "User")">Đăng nhập</a>
-                                                <a class="dropdown-item" href="@Url.Action("DangKy", "User")">Đăng ký</a>
+                                                <a class="dropdown-item" href="@Url.Action("DangNhap", "NguoiDung", new {loai = 2})">Đăng nhập</a>
+                                                <a class="dropdown-item" href="@Url.Action("DangKy", "NguoiDung", new {loai = 1})">Đăng ký</a>
                                             </div>
                                         </div>
                                     </li>

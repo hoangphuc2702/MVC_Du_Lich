@@ -1,0 +1,167 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<TOUR>
+
+@{
+    ViewBag.Title = "Tour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+.table-container {
+margin-top: 20px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: #f2f2f2;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-container tr:hover {
+    background-color: #ddd;
+}
+
+/*.table-container td {
+    max-width: 100px;*/ /* Điều chỉnh chiều rộng tối đa của ô */
+    /*overflow: hidden;
+    white-space: nowrap;*/ /* Ngăn chặn văn bản bị tràn ra nếu ảnh quá lớn */
+/*}*/
+
+.table-container td img {
+    max-width: 100px; /* Điều chỉnh kích thước tối đa của ảnh */
+    height: auto; /* Đảm bảo tỉ lệ chiều cao/chiều rộng tự động */
+}
+.table-container td.description {
+    max-width: 100px; /* Điều chỉnh chiều cao tối đa của ô mô tả */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.page-navigation {
+margin-top: 20px;
+}
+
+.page-navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.page-navigation li {
+    float: left;
+    margin-right: 10px;
+}
+
+.page-navigation li a {
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+}
+
+.page-navigation li a:hover {
+    background-color: #45a049;
+}
+
+.separator {
+    margin: 0 5px;
+}
+
+/* Hover effect */
+a:hover {
+    opacity: 0.7;
+}
+</style>
+
+<div class="row bg-primary">
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div class="mb-2 mb-lg-0">
+                <h3 text-white"><strong>@Html.ActionLink("QUẢN LÝ THÔNG TIN TOUR", "Tour", "QuanLy", null, new { @class = "nav-link" })</strong></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<p>
+    @Html.ActionLink("THÊM MỚI", "ThemTour")
+</p>*@
+<a href="@Url.Action("ThemTour")" style="width: 10%; background-color: #ff1200; color: #fff; text-decoration: none" class="btn btn-primary btn-order">
+    <label style="display:inline-block; color: white">THÊM MỚI</label>
+</a>
+
+<div class="table-container">
+    <table>
+        <tr>
+            <th>MaTour</th>
+            <th>TenTour</th>
+            <th>Gia</th>
+            <th>SoLuong</th>
+            <th>Hinh1</th>
+            <th>Hinh2</th>
+            <th>Hinh3</th>
+            <th>Hinh4</th>
+            <th>MoTa</th>
+            <th>SoLuongConLai</th>
+            <th>NgayDiTour</th>
+            <th>NgayKetThuc</th>
+            <th>MaDDi</th>
+            <th>MaDDen</th>
+            <th>MaLoaiTour</th>
+            <th>MaPT</th>
+            <th>MaLKS</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaTour)</td>
+                <td class="description">@Html.DisplayFor(modelItem => item.TenTour)</td>
+                <td>@Html.DisplayFor(modelItem => item.Gia)</td>
+                <td class="description">@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                <td><img src="~/Images/@item.Hinh1" /></td>
+                <td><img src="~/Images/@item.Hinh2" /></td>
+                <td><img src="~/Images/@item.Hinh3" /></td>
+                <td><img src="~/Images/@item.Hinh4" /></td>
+                <td class="description">@Html.DisplayFor(modelItem => item.MoTa)</td>
+                <td>@Html.DisplayFor(modelItem => item.SoLuongConLai)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayDiTour)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayKetThuc)</td>
+                <td>@Html.DisplayFor(modelItem => item.DIEMDI.TenDDi)</td>
+                <td>@Html.DisplayFor(modelItem => item.DIEMDEN.TenDDen)</td>
+                <td>@Html.DisplayFor(modelItem => item.LOAITOUR.TenLoaiTour)</td>
+                <td>@Html.DisplayFor(modelItem => item.PHUONGTIEN.TenPT)</td>
+                <td>@Html.DisplayFor(modelItem => item.LOAIK.TenLKS)</td>
+                <td style="width: 150px;">
+                    @Html.ActionLink("SỬA", "SuaTour", new { loai = @item.MaTour }, new { style = "color: #ffc107; text-decoration: none;" }) |
+                    @Html.ActionLink("CHI TIẾT", "ChiTietTour", new { loai = @item.MaTour }, new { style = "color: #007bff; text-decoration: none;" })|
+                    @Html.ActionLink("XÓA", "XoaTour", new { loai = @item.MaTour }, new { style = "color: #dc3545; text-decoration: none;" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="page-navigation">
+    @Html.PagedListPager(Model, page => Url.Action("Tour", new { page }))
+</div>

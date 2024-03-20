@@ -10,7 +10,7 @@
 <form class="form" method="post" action="">
     <h2>@ViewBag.ThongBao</h2>
     <h2 style="color: red;">@ViewBag.Error</h2>
-    @using (Html.BeginForm("DangNhap", "User"))
+    @using (Html.BeginForm("DangNhap", "NguoiDung"))
     {
         <div class="input-box">
             <label for="dangnhap">Số điện thoại: <span style="color:red">*</span></label>
