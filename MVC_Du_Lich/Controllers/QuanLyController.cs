@@ -309,6 +309,39 @@ namespace MVC_Du_Lich.Controllers
             return RedirectToAction("Tour");
         }
 
+        public ActionResult NhanBanTour(string loai)
+        {
+            var tour = database.TOURs.FirstOrDefault(s => s.MaTour == loai);
+            if (tour == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tour);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("NhanBanTour")]
+        public ActionResult NhanBanConfirmedTour(string loai)
+        {
+            var tour = database.TOURs.Find(loai);
+
+
+            string maTour = "T" + (database.TOURs.Count() + 1).ToString();
+            if (database.TOURs.Count() < 10)
+            {
+                maTour = "T0" + (database.TOURs.Count() + 1).ToString();
+            }
+            TOUR cloneTour = (TOUR)tour.Clone(tour, maTour);
+
+
+            database.TOURs.Add(cloneTour);
+            database.SaveChanges();
+            tourSingleton.UpdateTour(database);
+            return RedirectToAction("Tour");
+        }
+
+
 
         //DiemDi
 
