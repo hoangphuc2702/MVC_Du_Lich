@@ -15,7 +15,7 @@
 </head>
 <body>
     <h2>@ViewBag.ThongBao</h2>
-    @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "box login" }))
+    @using (Html.BeginForm("Login", "QuanLy", FormMethod.Post, new { @class = "box login" }))
     {
         @Html.ValidationSummary(true)
         <fieldset class="boxBody">

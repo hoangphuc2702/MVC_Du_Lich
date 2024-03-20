@@ -9,7 +9,7 @@ using PagedList;
 
 namespace MVC_Du_Lich.Controllers
 {
-    public class HomeController : Controller
+    public class TrangChuController : Controller
     {
         QLDULICHEntities database = new QLDULICHEntities();
 
@@ -20,20 +20,20 @@ namespace MVC_Du_Lich.Controllers
             return database.TOURs.OrderByDescending(tour => tour.NgayDiTour).Take(soluong).ToList();
         }
 
-        public ActionResult Index()
+        public ActionResult trangChu()
         {
             var dsSachMoi = LayTourMoi(4);
             return View(dsSachMoi);
         }
 
-        public ActionResult About()
+        public ActionResult ThongBao()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult LienHe()
         {
             ViewBag.Message = "Your contact page.";
 

@@ -42,7 +42,7 @@ else
 
         <div class="card col-sm-4 col-md-4 col-lg-4 d-flex align-items-stretch book-section">
 
-            <a href="@Url.Action("Details", "CustomerTour", new { loai = tour.MaTour })">
+            <a href="@Url.Action("ChiTiet", "DSTour", new { loai = tour.MaTour })">
                 <img class="card-img-top book-picture"
                      src="~/Images/@tour.Hinh1" alt="Card image">
             </a>
@@ -59,7 +59,7 @@ else
 <br />
 Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 <div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    @Html.PagedListPager(Model, page => Url.Action("TrangChu", new { page = page }))
 </div>
 <style>
     .MenuTrang li {

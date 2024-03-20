@@ -11,7 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace MVC_Du_Lich.Controllers
 {
-    public class AdminController : Controller
+    public class QuanLyController : Controller
     {
         QLDULICHEntities database = new QLDULICHEntities();
 
@@ -56,7 +56,7 @@ namespace MVC_Du_Lich.Controllers
                 {
                     Session["Admin"] = adminDB;
                     ViewBag.ThongBao = "Đăng nhập admin thành công";
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "QuanLy");
                 }
             }
             return View();
@@ -65,7 +65,7 @@ namespace MVC_Du_Lich.Controllers
         public ActionResult LogOut()
         {
             Session["Admin"] = null;
-            return RedirectToAction("Login", "Admin");
+            return RedirectToAction("Login", "QuanLy");
         }
 
 

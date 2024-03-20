@@ -1,0 +1,105 @@
+﻿@using MVC_Du_Lich.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<KHACHSAN>
+
+@{
+    ViewBag.Title = "KhachSan";
+    Layout = "~/Views/Shared/NavigationDichVu.cshtml";
+}
+
+<h2 style="text-align: center;">QUẢN LÝ THÔNG TIN KHÁCH SẠN</h2>
+
+@*<div style="text-align: center; margin-bottom: 20px;">
+    @Html.ActionLink("THÊM MỚI", "ThemKhachSan", null, new { @class = "btn btn-primary" })
+</div>*@
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="@Url.Action("ThemKhacSan")" class="btn btn-primary" style="background-color: #ff1200;">
+        <label style="color: white;">THÊM MỚI</label>
+    </a>
+</div>
+
+<table class="table">
+    <tr>
+        <th style="text-align: center;">@Html.DisplayNameFor(model => model.First().MaKS)</th>
+        <th style="text-align: center;">@Html.DisplayNameFor(model => model.First().TenKS)</th>
+        <th style="text-align: center;">@Html.DisplayNameFor(model => model.First().GiaKS)</th>
+        <th style="text-align: center;">@Html.DisplayNameFor(model => model.First().DiaChi)</th>
+        <th style="text-align: center;">@Html.DisplayNameFor(model => model.First().MaLKS)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.MaKS)</td>
+            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.TenKS)</td>
+            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.GiaKS)</td>
+            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.DiaChi)</td>
+            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.LOAIK.TenLKS)</td>
+            <td style="width: 200px; text-align: center;">
+                @Html.ActionLink("SỬA", "SuaKhachSan", new { loai = item.MaKS }, new { @class = "btn btn-warning", style = "margin-right: 5px;" }) |
+                @Html.ActionLink("CHI TIẾT", "ChiTietKhachSan", new { loai = item.MaKS }, new { @class = "btn btn-info", style = "margin-right: 5px;" }) |
+                @Html.ActionLink("XÓA", "XoaKhachSan", new { loai = item.MaKS }, new { @class = "btn btn-danger", style = "margin-right: 5px;" })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("KhachSan", new { page }), new PagedListRenderOptions { DisplayLinkToFirstPage = PagedListDisplayMode.Never, DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always })
+</div>
+
+<style>
+.table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+.table th,
+.table td {
+padding: 8px;
+border: 1px solid #dddddd;
+text-align: center;
+}
+
+.table th {
+background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+.table tr:hover {
+background-color: #ddd;
+}
+
+.MenuTrang {
+margin-top: 20px;
+text-align: center;
+}
+
+.MenuTrang ul {
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+.MenuTrang li {
+display: inline;
+margin-right: 5px;
+}
+
+.MenuTrang a {
+text-decoration: none;
+padding: 5px 10px;
+border: 1px solid #ddd;
+border-radius: 3px;
+color: #333;
+}
+
+.MenuTrang a:hover {
+    background-color: #f2f2f2;
+}
+</style>

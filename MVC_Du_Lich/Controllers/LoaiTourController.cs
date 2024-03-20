@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MVC_Du_Lich.Controllers
 {
-    public class CategoryController : Controller
+    public class LoaiTourController : Controller
     {
         private QLDULICHEntities database = new QLDULICHEntities();
 

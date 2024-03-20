@@ -9,9 +9,9 @@
         <div class="sidebar-inner">
             <h3 style="text-align:center;">Danh mục loại SP</h3>
             <div class="px-3 py-4">
-                @Html.Action("DiemDi", "Category")
+                @Html.Action("DiemDi", "LoaiTour")
 
-                @Html.Action("DiemDen", "Category", new {id = ViewBag.LoaiTour})
+                @Html.Action("DiemDen", "LoaiTour", new {id = ViewBag.LoaiTour})
 
             </div>
 

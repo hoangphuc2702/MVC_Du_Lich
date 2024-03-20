@@ -8,7 +8,7 @@
 
 <form class="form" method="post" action="">
     <h2 style="color: red;">@ViewBag.ThongBao</h2>
-    @using (Html.BeginForm("DangKy", "User"))
+    @using (Html.BeginForm("DangKy", "NguoiDung"))
     {
         @Html.ValidationSummary(true)
         <div class="input-box">
@@ -73,7 +73,7 @@
     <hr style="margin-top: 35px;margin-bottom: 25px;" />
 
     <p class="btn-register">
-        Đã có tài khoản?<a href="@Url.Action("DangNhap","User")">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+        Đã có tài khoản?<a href="@Url.Action("DangNhap","NguoiDung")">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
     </p>
 
 </form>

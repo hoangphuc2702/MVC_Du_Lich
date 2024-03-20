@@ -17,7 +17,7 @@
 <ul class="list-group">
     @foreach (var diemdi in Model)
     {
-        <a href="@Url.Action("Index", "CustomerTour", new { diemdi=diemdi.MaDDi })"
+        <a href="@Url.Action("TrangChu", "DSTour", new { diemdi=diemdi.MaDDi })"
            class="list-group-item list-group-item-action">
             @diemdi.TenDDi
         </a>

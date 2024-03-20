@@ -11,7 +11,7 @@
         <!-- Page header -->
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div class="mb-2 mb-lg-0">
-                <h3 text-white"><strong>@Html.ActionLink("TRANG CHỦ ADMIN", "Index", "Admin", null, new { @class = "nav-link" })</strong></h3>
+                <h3 text-white"><strong>@Html.ActionLink("TRANG CHỦ ADMIN", "Index", "QuanLy", null, new { @class = "nav-link" })</strong></h3>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
 <div class="container-fluid row rounded bg-white">
     <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover ">
         <!-- card -->
-        <a href="@Url.Action("Tour", "Admin")" style="list-style: none; text-decoration: none">
+        <a href="@Url.Action("Tour", "QuanLy")" style="list-style: none; text-decoration: none">
             <div class="card h-100 card-lift">
                 <!-- card body -->
                 <div class="card-body">
@@ -43,7 +43,7 @@
 
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
-        <a href="@Url.Action("DiemDi", "Admin")" style="list-style: none; text-decoration: none">
+        <a href="@Url.Action("DiemDi", "QuanLy")" style="list-style: none; text-decoration: none">
 
             <!-- card -->
             <div class="card h-100 card-lift">
@@ -68,7 +68,7 @@
         </a>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
-        <a href="@Url.Action("KhachSan", "Admin")" style="list-style: none; text-decoration: none">
+        <a href="@Url.Action("KhachSan", "QuanLy")" style="list-style: none; text-decoration: none">
 
             <!-- card -->
             <div class="card h-100 card-lift">
@@ -93,7 +93,7 @@
         </a>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 mb-5 zoom-on-hover">
-        <a href="@Url.Action("DonDatTour", "Admin")" style="list-style: none; text-decoration: none">
+        <a href="@Url.Action("DonDatTour", "QuanLy")" style="list-style: none; text-decoration: none">
 
             <!-- card -->
             <div class="card h-100 card-lift">
@@ -128,7 +128,7 @@
                     <div class="col-3" style="min-height: 900px">
                         <div class="card destination-item">
                             <div class="position-relative destination-item__image">
-                                <a href="@Url.Action("ChiTietTour", "Admin", new { loai = tour.MaTour })">
+                                <a href="@Url.Action("ChiTietTour", "QuanLy", new { loai = tour.MaTour })">
                                     <img src="~/Images/@tour.Hinh1" class="card-img-top img-fluid" alt="@tour.TenTour" style="height: 100%" width="312" height="208" loading="lazy">
                                 </a>
                                 @*<a href="/du-lich-nuoc-ngoai/tour-chau-a.aspx">

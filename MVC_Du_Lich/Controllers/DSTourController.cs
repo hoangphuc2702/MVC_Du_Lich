@@ -9,12 +9,12 @@ using System.Net;
 
 namespace MVC_Du_Lich.Controllers
 {
-    public class CustomerTourController : Controller
+    public class DSTourController : Controller
     {
         private QLDULICHEntities database = new QLDULICHEntities();
 
         // GET: CustomerTour
-        public ActionResult Index(int? loaiTour, int? diemden, int? diemdi, int? page)
+        public ActionResult TrangChu(int? loaiTour, int? diemden, int? diemdi, int? page)
         {
             // Bắt đầu với toàn bộ danh sách tour
             var tours = database.TOURs.AsQueryable();
@@ -54,7 +54,7 @@ namespace MVC_Du_Lich.Controllers
             return View(tours.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Details(string loai)
+        public ActionResult ChiTiet(string loai)
         {
             //Lấy sách có mã tương ứng
             var sach = database.TOURs.FirstOrDefault(s => s.MaTour == loai);
