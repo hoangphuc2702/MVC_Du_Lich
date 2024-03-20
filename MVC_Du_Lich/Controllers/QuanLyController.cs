@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Du_Lich.Models;
+using MVC_Du_Lich.Pattern.Singleton;
 using PagedList;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -14,13 +15,21 @@ namespace MVC_Du_Lich.Controllers
     public class QuanLyController : Controller
     {
         QLDULICHEntities database = new QLDULICHEntities();
+        private Singleton tourSingleton;
+
+        public QuanLyController()
+        {
+            // Khởi tạo tourSingleton trong hàm khởi tạo của CustomerTourController
+            tourSingleton = Singleton.GetInstance();
+            tourSingleton.LazyInit(database);
+        }
 
         // GET: Admin
         private List<TOUR> LayTourMoi(int soluong)
         {
             // Sắp xếp sách theo ngày cập nhật giảm dần, lấy đúng số lượng sách cần
             // Chuyển qua dạng danh sách kết quả đạt được
-            return database.TOURs.OrderByDescending(tour => tour.NgayDiTour).Take(soluong).ToList();
+            return tourSingleton.getTours.OrderByDescending(tour => tour.NgayDiTour).Take(soluong).ToList();
         }
 
         public ActionResult Index()
@@ -73,7 +82,7 @@ namespace MVC_Du_Lich.Controllers
 
         public ActionResult Tour(int? page)
         {
-            var dsTour = database.TOURs.ToList();
+            var dsTour = tourSingleton.getTours;
             //Tạo biến cho biết số sách mỗi trang
             int pageSize = 7;
             //Tạo biến số trang
@@ -158,6 +167,7 @@ namespace MVC_Du_Lich.Controllers
                         //lưu vào csdl
                         database.TOURs.Add(tour);
                         database.SaveChanges();
+                        tourSingleton.UpdateTour(database);
                         return RedirectToAction("Tour");
                     }
 
@@ -270,6 +280,7 @@ namespace MVC_Du_Lich.Controllers
                     productDB.MaLKS = tour.MaLKS;
                 }
                 database.SaveChanges();
+                tourSingleton.UpdateTour(database);
                 return RedirectToAction("Tour");
             }
             return View(tour);
@@ -294,6 +305,7 @@ namespace MVC_Du_Lich.Controllers
             var tour = database.TOURs.Find(loai);
             database.TOURs.Remove(tour);
             database.SaveChanges();
+            tourSingleton.UpdateTour(database);
             return RedirectToAction("Tour");
         }
 
@@ -415,10 +427,18 @@ namespace MVC_Du_Lich.Controllers
         [HttpPost]
         public ActionResult ThemDiemDen(DIEMDEN diemden)
         {
-
             ViewBag.MaLoaiTour = new SelectList(database.LOAITOURs, "MaLoaiTour", "TenLoaiTour");
             ViewBag.MaCL = new SelectList(database.CHAULUCs, "MaChauLuc", "TenChauLuc");
-            return View("DiemDen");
+            try
+            {
+                database.DIEMDENs.Add(diemden);
+                database.SaveChanges();
+                return RedirectToAction("DiemDen");
+            }
+            catch
+            {
+                return Content("LỖI TẠO MỚI ĐIỂM ĐẾN");
+            }
         }
 
         public ActionResult ChiTietDiemDen(int id)

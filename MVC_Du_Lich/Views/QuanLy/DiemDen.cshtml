@@ -10,7 +10,7 @@
 <h2 style="text-align: center;">QUẢN LÝ THÔNG TIN ĐIỂM ĐẾN</h2>
 
 <div style="text-align: center; margin-bottom: 20px;">
-    <a href="@Url.Action("ThemDiemDen")" class="btn btn-primary" style="background-color: #ff1200;">
+    <a href="@Url.Action("ThemDiemDen", "QuanLy")" class="btn btn-primary" style="background-color: #ff1200;">
         <label style="color: white;">THÊM MỚI</label>
     </a>
 </div>
@@ -41,7 +41,7 @@
 </table>
 
 <div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("DiemDi", new { page }), new PagedListRenderOptions { DisplayLinkToFirstPage = PagedListDisplayMode.Never, DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always })
+    @Html.PagedListPager(Model, page => Url.Action("DiemDen", new { page }), new PagedListRenderOptions { DisplayLinkToFirstPage = PagedListDisplayMode.Never, DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always })
 </div>
 
 <style>
