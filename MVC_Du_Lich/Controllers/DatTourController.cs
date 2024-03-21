@@ -1,4 +1,5 @@
 ﻿using MVC_Du_Lich.Models;
+using MVC_Du_Lich.Pattern.Strategy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -446,15 +447,20 @@ namespace MVC_Du_Lich.Controllers
             return View(gioHang);
         }
 
+        IThanhToan choice = new ThanhToanOffline();
+        CText ct = new CText();
+
         //xác nhận đơn hàng
-        public ActionResult DongYDatHang(string PTThanhToan)
+        public ActionResult DongYDatHang(DONDATTOUR DonHang)
         {
             KHACHHANG khach = Session["KhachHang"] as KHACHHANG;
             TOUR tour = Session["MaTour"] as TOUR;
 
             List<ThanhVien> gioHang = LayGioHang();
 
-            DONDATTOUR DonHang = new DONDATTOUR();
+            bool PTThanhToan = Convert.ToBoolean(Request.Form["PTThanhToan"]);
+
+            //DONDATTOUR DonHang = new DONDATTOUR();
             DonHang.MaKH = khach.MaKH;
             DonHang.HoTenKH = khach.HoTenKH;
             DonHang.DiaChiKH = khach.DiaChiKH;
@@ -469,6 +475,9 @@ namespace MVC_Du_Lich.Controllers
 
             database.DONDATTOURs.Add(DonHang);
             database.SaveChanges();
+
+
+            Session["DonHang"] = DonHang;
 
             //thêm từng chi tiết cho đơn hàng
             foreach (var thanhVien in gioHang)
@@ -495,6 +504,18 @@ namespace MVC_Du_Lich.Controllers
 
         public ActionResult HoanThanhDonHang()
         {
+            DONDATTOUR DonHang = Session["DonHang"] as DONDATTOUR;
+
+            if (DonHang.PTThanhToan == true)
+            {
+                choice = new ThanhToanOnline();
+            }
+            else if (DonHang.PTThanhToan == false)
+            {
+                choice = new ThanhToanOffline();
+            }
+            ct.setChoice(choice);
+            ViewBag.Show = ct.showChoice();
             return View();
         }
     }
