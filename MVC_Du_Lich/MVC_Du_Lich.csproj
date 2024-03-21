@@ -418,7 +418,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Design Pattern\Behavioral Pattern\" />
     <Folder Include="Design Pattern\Creational Pattern\Factory\" />
-    <Folder Include="Design Pattern\Iterator\" />
     <Folder Include="Design Pattern\NewFolder1\" />
     <Folder Include="Design Pattern\Structural Pattern\" />
   </ItemGroup>
