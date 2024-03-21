@@ -13,223 +13,6 @@ namespace MVC_Du_Lich.Controllers
     {
         QLDULICHEntities database = new QLDULICHEntities();
 
-        //// GET: GioHang
-        //public List<ThanhVien> LayGioHang()
-        //{
-        //    List<ThanhVien> gioHang = Session["GioHang"] as List<ThanhVien>;
-
-        //    //nếu giỏ hàng chưa tồn tại thì tạo mới và đưa vào session
-        //    if (gioHang == null)
-        //    {
-        //        gioHang = new List<ThanhVien>();
-        //        Session["GioHang"] = gioHang;
-        //    }
-        //    return gioHang;
-        //}
-
-        //public ActionResult ThemHanhKhachVaoDon(int MaHK, string MaTour, int choice)
-        //{
-        //    //Lây giỏ hàng hiện tại
-        //    List<ThanhVien> gioHang = LayGioHang();
-        //    //Kiểm tra xem có tồn tại có mặt hàng trong giỏ hay chưa
-        //    //Nếu có tăng số lượng lên 1 và ngược lại thêm vào giỏ
-        //    ThanhVien sanPham = gioHang.FirstOrDefault(s => s.MaHK == MaHK);
-        //    var tour = database.TOURs.FirstOrDefault(k => k.MaTour == MaTour);
-        //    Session["MaTour"] = tour;
-
-        //    if (choice == 1) //1 là tăng, 2 là giảm
-        //    {
-        //        if (sanPham == null)//sản phẩm chưa có trong giỏ
-        //        {
-        //            sanPham = new ThanhVien(MaHK, MaTour);
-        //            gioHang.Add(sanPham);
-        //        }
-        //        else
-        //        {
-        //            sanPham.SoLuong++;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (sanPham.SoLuong == 0)//sản phẩm có trong giỏ
-        //        {
-        //            gioHang.RemoveAll(s => s.MaHK == MaHK);
-        //        }
-        //        else
-        //        {
-        //            sanPham.SoLuong--;
-        //        }
-        //    }
-        //    return RedirectToAction("HienThiCTTour");
-        //}
-
-        //private int TinhTongSL(int maHK)
-        //{
-        //    int tongSL = 0;
-        //    List<ThanhVien> gioHang = LayGioHang();
-
-        //    if (gioHang != null)
-        //    {
-        //        // Tính tổng số lượng của các thành viên có mã HK bằng mã HK được truyền vào
-        //        tongSL = gioHang.Where(tv => tv.MaHK == maHK).Sum(tv => tv.SoLuong);
-        //    }
-
-        //    return tongSL;
-        //}
-
-        //private double TinhTongTienHK(int maHK)
-        //{
-        //    double thanhTien = 0;
-        //    List<ThanhVien> gioHang = LayGioHang();
-
-        //    if (gioHang != null)
-        //    {
-        //        // Lấy đối tượng ThanhVien có mã HK tương ứng
-        //        ThanhVien thanhVien = gioHang.FirstOrDefault(tv => tv.MaHK == maHK);
-
-        //        if (thanhVien != null)
-        //        {
-        //            // Tính thành tiền dựa trên giá và số lượng
-        //            thanhTien = thanhVien.ThanhTien();
-        //        }
-        //    }
-
-        //    return thanhTien;
-        //}
-
-
-        //private double TinhTongTien()
-        //{
-        //    double TongTien = 0;
-        //    List<ThanhVien> gioHang = LayGioHang();
-        //    if (gioHang != null)
-        //    {
-        //        TongTien = gioHang.Sum(sp => sp.ThanhTien());
-        //    }
-        //    return TongTien;
-        //}
-
-        //public ActionResult HienThiCTTour()
-        //{
-        //    List<ThanhVien> gioHang = LayGioHang();
-        //    ViewBag.TongSLNL = TinhTongSL(1);
-        //    ViewBag.TongSLTE = TinhTongSL(2);
-        //    ViewBag.TongSLTN = TinhTongSL(3);
-        //    ViewBag.TongSLEB = TinhTongSL(4);
-
-        //    ViewBag.DonGiaNL = TinhTongTienHK(1);
-        //    ViewBag.DonGiaTE = TinhTongTienHK(2);
-        //    ViewBag.DonGiaTN = TinhTongTienHK(3);
-        //    ViewBag.DonGiaEB = TinhTongTienHK(4);
-
-        //    ViewBag.TongTien = TinhTongTien();
-        //    return View(gioHang);
-        //}
-
-        ////xác nhận đơn hàng
-        //public ActionResult DongYDatHang()
-        //{
-        //    KHACHHANG khach = Session["TaiKhoan"] as KHACHHANG;
-        //    List<ThanhVien> danhSachThanhVien = LayGioHang();
-
-        //    DONDATTOUR DonHang = new DONDATTOUR();
-        //    if (Session["TaiKhoan"] != null)
-        //    {
-        //        DonHang.MaKH = khach.MaKH;
-        //        DonHang.HoTenKH = khach.HoTenKH;
-        //        DonHang.DiaChiKH = khach.DiaChiKH;
-        //        DonHang.SDT_KH = khach.DienThoaiKH;
-        //        DonHang.EmailKH = khach.EmailKH;
-        //    }
-        //    else
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            if (string.IsNullOrEmpty(DonHang.HoTenKH))
-        //            {
-        //                ModelState.AddModelError(string.Empty, "Họ tên không được để trống");
-        //            }
-        //            if (string.IsNullOrEmpty(DonHang.EmailKH))
-        //            {
-        //                ModelState.AddModelError(string.Empty, "Email không được để trống");
-        //            }
-        //            if (string.IsNullOrEmpty(DonHang.DiaChiKH))
-        //            {
-        //                ModelState.AddModelError(string.Empty, "Địa chỉ không được để trống");
-        //            }
-        //            if (string.IsNullOrEmpty(DonHang.SDT_KH))
-        //            {
-        //                ModelState.AddModelError(string.Empty, "Số điện thoại không được để trống");
-        //            }
-        //            if (string.IsNullOrEmpty(DonHang.EmailKH))
-        //            {
-        //                ModelState.AddModelError(string.Empty, "Email không được để trống");
-        //            }
-        //        }
-        //    }
-
-        //    DonHang.TongTien = (decimal)TinhTongTien();
-        //    DonHang.HTThanhToan = false;
-        //    DonHang.TrangThai = false;
-
-        //    database.DONDATTOURs.Add(DonHang);
-        //    database.SaveChanges();
-
-        //    //thêm từng chi tiết cho đơn hàng
-        //    foreach (var thanhVien in danhSachThanhVien)
-        //    {
-        //        CTDATTOUR chiTietDonHang = new CTDATTOUR
-        //        {
-        //            SoHD = DonHang.SoHD,
-        //            MaHK = thanhVien.MaHK,
-        //            DonGia = (decimal)thanhVien.DonGia,
-        //            PTGiam = thanhVien.PTGiam,
-        //            TenTV = thanhVien.TenTV,
-        //            GioiTinh = thanhVien.GioiTinh,
-        //            NgaySinh = thanhVien.NgaySinh
-        //        };
-
-        //        database.CTDATTOURs.Add(chiTietDonHang);
-        //    }
-
-        //    //xoá sản phẩm trong giỏ hàng
-        //    Session["GioHang"] = null;
-        //    return RedirectToAction("HoanThanhDonHang");
-        //}
-
-        //public ActionResult HoanThanhDonHang()
-        //{
-        //    return View();
-        //}
-
-        public ActionResult NguoiLon(int loai)
-        {
-            var loai1 = database.HANHKHACHes.FirstOrDefault(s => s.MaHK == loai);
-            return PartialView(loai1);
-        }
-
-        public ActionResult TreEm(int loai)
-        {
-            var loai1 = database.HANHKHACHes.FirstOrDefault(s => s.MaHK == loai);
-            return PartialView(loai1);
-        }
-
-        public ActionResult TreNho(int loai)
-        {
-            var loai1 = database.HANHKHACHes.FirstOrDefault(s => s.MaHK == loai);
-            return PartialView(loai1);
-        }
-
-        public ActionResult EmBe(int loai)
-        {
-            var loai1 = database.HANHKHACHes.FirstOrDefault(s => s.MaHK == loai);
-            return PartialView(loai1);
-        }
-
-
-
-
-
         // GET: GioHang
 
         public List<ThanhVien> LayGioHang()
@@ -479,9 +262,12 @@ namespace MVC_Du_Lich.Controllers
 
             Session["DonHang"] = DonHang;
 
-            //thêm từng chi tiết cho đơn hàng
-            foreach (var thanhVien in gioHang)
+            IAbstractIterator iterator = new Iterator(gioHang);
+            var thanhVien = iterator.First();
+
+            while (!iterator.hasNext)
             {
+
                 CTDATTOUR chiTietDonHang = new CTDATTOUR
                 {
                     SoHD = DonHang.SoHD,
@@ -494,6 +280,7 @@ namespace MVC_Du_Lich.Controllers
                     NgaySinh = thanhVien.NgaySinh
                 };
                 database.CTDATTOURs.Add(chiTietDonHang);
+                thanhVien = iterator.Next();
             }
             database.SaveChanges();
 
