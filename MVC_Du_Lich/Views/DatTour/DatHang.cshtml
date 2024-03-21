@@ -8,214 +8,203 @@
     KHACHHANG khachhang = Session["KhachHang"] as KHACHHANG;
 }
 
-<script>
-    $(document).ready(function () {
-        $("#btnConfirm").click(function () {
-            var ptThanhToan = $("#PTThanhToanSelect").val();
-            // Thêm dòng log để kiểm tra giá trị đã chọn
-            console.log("PTThanhToan: " + ptThanhToan);
 
-            // Gọi hàm DongYDatHang với giá trị ptThanhToan
-            window.location.href = "/Dattour/DongYDatHang?PTThanhToan=" + ptThanhToan;
-        });
-    });
-</script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-    .customer-contact .customer-contact-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        background: #f9f9f9;
-        border-radius: 10px;
-        padding: 25px;
-    }
+.customer-contact .customer-contact-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px;
+}
 
-        .customer-contact .customer-contact-inner > * {
-            width: 48%;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-        }
+.customer-contact .customer-contact-inner > * {
+    width: 48%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
 
-            .customer-contact .customer-contact-inner > * label {
-                line-height: 16px;
-                display: flex;
-                align-items: center;
-                color: #2d4271;
-                margin-bottom: 5px;
-            }
+.customer-contact .customer-contact-inner > * label {
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #2d4271;
+    margin-bottom: 5px;
+}
 
-    .customer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-bottom: 25px;
-    }
+.customer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
 
-        .customer .change {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 48%;
-            border: 1px solid #e7e7e7;
-            border-radius: 10px;
-            margin-bottom: 13px;
-            padding: 10px 15px;
-        }
+.customer .change {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 48%;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    margin-bottom: 13px;
+    padding: 10px 15px;
+}
 
-            .customer .change .change-number {
-                display: flex;
-                align-items: center;
-            }
+.customer .change .change-number {
+    display: flex;
+    align-items: center;
+}
 
-                .customer .change .change-number .number {
-                    border: none;
-                    background: 0 0;
-                    width: 30px;
-                    text-align: center;
-                    font-size: 27px;
-                    line-height: 32px;
-                    color: #2d4271;
-                }
+.customer .change .change-number .number {
+    border: none;
+    background: 0 0;
+    width: 30px;
+    text-align: center;
+    font-size: 27px;
+    line-height: 32px;
+    color: #2d4271;
+}
 
-                .customer .change .change-number .btn-click {
-                    font-size: 25px;
-                }
+.customer .change .change-number .btn-click {
+    font-size: 25px;
+}
 
-    .customer-notice {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        background: #f9f9f9;
-        border-radius: 10px;
-        padding: 25px 35px;
-        margin-bottom: 40px;
-    }
+.customer-notice {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px 35px;
+    margin-bottom: 40px;
+}
 
-        .customer-notice > * {
-            width: 50%;
-        }
+.customer-notice > * {
+    width: 50%;
+}
 
-    .s-rate {
-        display: flex;
-        align-items: center;
-        margin-right: 22px;
-    }
+.s-rate {
+    display: flex;
+    align-items: center;
+    margin-right: 22px;
+}
 
-        .s-rate span {
-            font-weight: 700;
-            font-size: 25px;
-            line-height: 20px;
-            color: #fff;
-            background: #fdc432;
-            width: 65px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            margin-right: 11px;
-        }
+.s-rate span {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 20px;
+    color: #fff;
+    background: #fdc432;
+    width: 65px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 11px;
+}
 
-            .s-rate span:before {
-                content: "";
-                display: block;
-                width: 0;
-                height: 0;
-                border-right: 10px solid transparent;
-                border-top: 10px solid #fdc432;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                z-index: 1;
-            }
+.s-rate span:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fdc432;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
 
-    .checkout-main.order-tour .top .product .product-content .title {
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 28px;
-        color: #2d4271;
-    }
+.checkout-main.order-tour .top .product .product-content .title {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    color: #2d4271;
+}
 
-    .checkout-main.order-tour .top .product .product-content .entry {
-        display: flex;
-        align-items: flex-end;
-    }
+.checkout-main.order-tour .top .product .product-content .entry {
+    display: flex;
+    align-items: flex-end;
+}
 
-    .checkout-main .group-checkout {
-        background: #fff;
-        border: 1px solid #d5d5d5;
-        box-sizing: border-box;
-        padding: 20px;
-    }
+.checkout-main .group-checkout {
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    padding: 20px;
+}
 
-    .group-checkout .detail table {
-        width: 100%;
-    }
+.group-checkout .detail table {
+    width: 100%;
+}
 
-    .checkout-main .detail table td {
-        padding: 10px 0;
-    }
+.checkout-main .detail table td {
+    padding: 10px 0;
+}
 
-    .checkout-main .detail table .text-right {
-        text-align: right;
-        font-weight: 700;
-        line-height: 19px;
-        text-align: right;
-        color: #2d4271;
-    }
+.checkout-main .detail table .text-right {
+    text-align: right;
+    font-weight: 700;
+    line-height: 19px;
+    text-align: right;
+    color: #2d4271;
+}
 
-    .checkout-main .detail table .total td {
-        font-weight: 700;
-        line-height: 19px;
-        text-transform: uppercase;
-        color: #2d4271;
-        border-top: 1px solid #e7e7e7;
-        padding: 20px 0;
-    }
+.checkout-main .detail table .total td {
+    font-weight: 700;
+    line-height: 19px;
+    text-transform: uppercase;
+    color: #2d4271;
+    border-top: 1px solid #e7e7e7;
+    padding: 20px 0;
+}
 
-        .checkout-main .detail table .total td.t-price {
-            font-weight: 700;
-            font-size: 22px;
-            line-height: 28px;
-            text-align: right;
-            color: #fd5056;
-            text-transform: lowercase;
-        }
+.checkout-main .detail table .total td.t-price {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    text-align: right;
+    color: #fd5056;
+    text-transform: lowercase;
+}
 
-    .checkout-main .detail .btn-order {
-        background: linear-gradient(64.4deg,#fd5056 21.33%,#fe2214 67.61%);
-        border-radius: 10px;
-        height: 50px;
-        width: 100%;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: right;
-        text-transform: uppercase;
-        color: #fff;
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
+.checkout-main .detail .btn-order {
+    background: linear-gradient(64.4deg,#fd5056 21.33%,#fe2214 67.61%);
+    border-radius: 10px;
+    height: 50px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
 
-    tr.spaceUnder > td {
-        padding-bottom: 1.5em;
-    }
+tr.spaceUnder > td {
+    padding-bottom: 1.5em;
+}
 
-    tr.total > th {
-        padding-bottom: 1.5em;
-    }
+tr.total > th {
+    padding-bottom: 1.5em;
+}
 </style>
 
 
@@ -368,47 +357,47 @@
             <br>
             <br>
             <div class="detail">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th class="l1" style="padding-bottom: 2em;">Hành khách</th>
-                        </tr>
-                        <tr class="spaceUnder">
-                            <td>Người lớn</td>
-                            <td class="t-price text-right" id="AdultPrice">@ViewBag.TongSL1 x @ViewBag.DonGiaNL₫</td>
-                        </tr>
-                        <tr class="spaceUnder">
-                            <td>Trẻ em</td>
-                            <td class="t-price text-right" id="ChildrenPrice">@ViewBag.TongSL2 x @ViewBag.DonGiaTE₫</td>
-                        </tr>
-                        <tr class="spaceUnder">
-                            <td>Trẻ nhỏ</td>
-                            <td class="t-price text-right" id="SmallChildrenPrice">@ViewBag.TongSL3 x @ViewBag.DonGiaTN₫</td>
-                        </tr>
-                        <tr class="spaceUnder">
-                            <td>Em bé</td>
-                            <td class="t-price text-right" id="BabyPrice">@ViewBag.TongSL4 x @ViewBag.DonGiaEB₫</td>
-                        </tr>
-                        <tr class="spaceUnder">
-                            <th>Phương thức thanh toán</th>
-                            <td class="t-price text-right" id="PTThanhToan">
-                                <select id="PTThanhToanSelect" class="form-control">
-                                    <option value="true">Thanh toán online</option>
-                                    <option value="false">Thanh toán offline</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="total">
-                            <th>Tổng cộng</th>
-                            <td class="t-price text-right" id="TotalPrice">@ViewBag.TongTien</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    <button class="btn btn-primary btn-order" id="btnConfirm" style="width:100%; background-color: #ff1200;color: #fff;">
-                        @Html.ActionLink("Hoàn tất đặt hàng", "DongYDatHang", null, new { @class = "btn btn - primary" })
-                    </button>
-                </div>
+                <form id="paymentForm" action="@Url.Action("DongYDatHang", "DatTour")" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th class="l1" style="padding-bottom: 2em;">Hành khách</th>
+                            </tr>
+                            <tr class="spaceUnder">
+                                <td>Người lớn</td>
+                                <td class="t-price text-right" id="AdultPrice">@ViewBag.TongSL1 x @ViewBag.DonGiaNL₫</td>
+                            </tr>
+                            <tr class="spaceUnder">
+                                <td>Trẻ em</td>
+                                <td class="t-price text-right" id="ChildrenPrice">@ViewBag.TongSL2 x @ViewBag.DonGiaTE₫</td>
+                            </tr>
+                            <tr class="spaceUnder">
+                                <td>Trẻ nhỏ</td>
+                                <td class="t-price text-right" id="SmallChildrenPrice">@ViewBag.TongSL3 x @ViewBag.DonGiaTN₫</td>
+                            </tr>
+                            <tr class="spaceUnder">
+                                <td>Em bé</td>
+                                <td class="t-price text-right" id="BabyPrice">@ViewBag.TongSL4 x @ViewBag.DonGiaEB₫</td>
+                            </tr>
+                            <tr class="spaceUnder">
+                                <th>Phương thức thanh toán</th>
+                                <td class="t-price text-right" id="PTThanhToan">
+                                    <select name="PTThanhToan" id="PTThanhToanSelect" class="form-control">
+                                        <option value="true">Thanh toán online</option>
+                                        <option value="false">Thanh toán offline</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="total">
+                                <th>Tổng cộng</th>
+                                <td class="t-price text-right" id="TotalPrice">@ViewBag.TongTien</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary btn-order" type="submit" style="line-height: 2; width: 100%; background-color: #ff1200; color: #fff;">Hoàn tất đặt hàng</button>
+
+                </form>
+
             </div>
         </div>
     </div>

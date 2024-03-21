@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Net.Mail;
 
 namespace MVC_Du_Lich.Controllers
 {
@@ -15,6 +16,11 @@ namespace MVC_Du_Lich.Controllers
 
         // GET: User
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult OTP()
         {
             return View();
         }
@@ -139,6 +145,10 @@ namespace MVC_Du_Lich.Controllers
             Session["MaKH"] = null;
             return RedirectToAction("trangChu", "TrangChu");
         }
+
+       
+
+        
 
         public ActionResult ThongTinCaNhan()
         {
