@@ -1,5 +1,4 @@
-﻿@model MVC_Du_Lich.Models.KHACHHANG
-
+﻿
 @{
     ViewBag.Title = "DangNhap";
     Layout = "~/Views/Shared/User.cshtml";
@@ -13,14 +12,12 @@
     @using (Html.BeginForm("DangNhap", "NguoiDung"))
     {
         <div class="input-box">
-            <label for="dangnhap">Số điện thoại: <span style="color:red">*</span></label>
-            @Html.TextBoxFor(model => model.DienThoaiKH, new { @class = "form-control", @id = "dangnhap", style = "filed-validation-error" })
-            @Html.ValidationMessageFor(model => model.DienThoaiKH)
+            <label for="username">Số điện thoại: <span style="color:red">*</span></label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Nhập số điện thoại">
         </div>
         <div class="input-box">
-            <label for="matkhau">Mật khẩu: <span style="color:red">*</span></label>
-            @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @id = "matkhau", style = "filed-validation-error" })
-            @Html.ValidationMessageFor(model => model.MatKhau)
+            <label for="password">Mật khẩu: <span style="color:red">*</span></label>
+            <input type="text" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
         </div>
 
         <a href="#" class="forget-pass">Lấy lại mật khẩu</a>

@@ -151,6 +151,8 @@
     <Compile Include="Design Pattern\Creational Pattern\Builder\TourBuilder.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Prototype\Prototype.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Singleton\Singleton.cs" />
+    <Compile Include="Design Pattern\Structural Pattern\Proxy\IProxy.cs" />
+    <Compile Include="Design Pattern\Structural Pattern\Proxy\UserAuthenticationProxy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -399,7 +401,6 @@
     <Content Include="Views\QuanLy\XoaDonDatTour.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\QuanLy\Index.cshtml" />
-    <Content Include="Views\QuanLy\Login.cshtml" />
     <Content Include="Views\Shared\NavigationAdmin.cshtml" />
     <Content Include="Views\Shared\NavigationDichVu.cshtml" />
     <Content Include="Views\TinTuc\TinTuc1.cshtml" />
