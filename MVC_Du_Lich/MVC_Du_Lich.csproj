@@ -141,14 +141,16 @@
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\TinTucController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Iterator\IAbstractIterator.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Iterator\Iterator.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Strategy\CText.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Strategy\IThanhToan.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Strategy\ThanhToanOffline.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Strategy\ThanhToanOnline.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Builder\IBuilder.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Builder\TourBuilder.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Prototype\Prototype.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Singleton\Singleton.cs" />
-    <Compile Include="Design Pattern\Strategy\CText.cs" />
-    <Compile Include="Design Pattern\Strategy\IThanhToan.cs" />
-    <Compile Include="Design Pattern\Strategy\ThanhToanOffline.cs" />
-    <Compile Include="Design Pattern\Strategy\ThanhToanOnline.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -416,10 +418,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Design Pattern\Behavioral Pattern\" />
+    <Folder Include="Design Pattern\Behavioral Pattern\Command\" />
     <Folder Include="Design Pattern\Creational Pattern\Factory\" />
-    <Folder Include="Design Pattern\NewFolder1\" />
-    <Folder Include="Design Pattern\Structural Pattern\" />
+    <Folder Include="Design Pattern\Structural Pattern\Adapter\" />
+    <Folder Include="Design Pattern\Structural Pattern\Composite\" />
+    <Folder Include="Design Pattern\Structural Pattern\Decorator\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
