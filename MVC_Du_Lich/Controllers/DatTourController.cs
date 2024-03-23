@@ -1,4 +1,5 @@
-﻿using MVC_Du_Lich.Models;
+﻿using MVC_Du_Lich.Design_Pattern.Iterator;
+using MVC_Du_Lich.Models;
 using MVC_Du_Lich.Pattern.Strategy;
 using System;
 using System.Collections.Generic;

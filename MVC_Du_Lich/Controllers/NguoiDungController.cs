@@ -7,11 +7,19 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Net.Mail;
+using MVC_Du_Lich.Design_Pattern.Structural_Pattern.Proxy;
+using System.Security.Policy;
 
 namespace MVC_Du_Lich.Controllers
 {
     public class NguoiDungController : Controller
     {
+        IProxy userProxy;
+
+        public NguoiDungController()
+        {
+            userProxy = new UserAuthenticationProxy();
+        }
         QLDULICHEntities database = new QLDULICHEntities();
 
         // GET: User
@@ -95,15 +103,18 @@ namespace MVC_Du_Lich.Controllers
             return View();
         }
 
-        public ActionResult DangNhap(KHACHHANG kh)
+        public ActionResult DangNhap(FormCollection formCollection)
         {
+            string username = formCollection["username"];
+            string password = formCollection["password"];
+
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(kh.DienThoaiKH))
+                if (string.IsNullOrEmpty(username))
                 {
                     ViewBag.Error = "Điện thoại không được để trống";
                 }
-                if (string.IsNullOrEmpty(kh.MatKhau))
+                if (string.IsNullOrEmpty(password))
                 {
                     ViewBag.Error = "Mật khẩu không được để trống";
                 }
@@ -111,27 +122,30 @@ namespace MVC_Du_Lich.Controllers
                 if (ModelState.IsValid)
                 {
                     //kiểm tra xem người dùng đăng nhập đúng tên đăng nhập và mật khẩu hay không
-                    var khach = database.KHACHHANGs.FirstOrDefault(k => k.DienThoaiKH == kh.DienThoaiKH);
-                    if (khach != null)
+                    int chon = userProxy.AuthenticateUser(username, password);
+
+                    var khach = database.KHACHHANGs.FirstOrDefault(k => k.DienThoaiKH == username);
+                    var admin = database.ADMINs.FirstOrDefault(a => a.UserAdmin == username);
+
+                    switch (chon)
                     {
-                        if (khach.MatKhau == kh.MatKhau)
-                        {
+                        case 0:
+                            Session["Admin"] = admin;
+                            return RedirectToAction("Index", "QuanLy");
+                        case 1:
+                            ViewBag.Error = "Mật khẩu không đúng";
+                            break;
+                        case 2:
                             ViewBag.ThongBao = "Đăng nhập thành công";
                             //lưu vào session
                             Session["KhachHang"] = khach;
                             Session["NameUser"] = khach.HoTenKH;
                             Session["MaKH"] = khach.MaKH;
-                        }
-                        else
-                        {
-                            ViewBag.Error = "Mật khẩu không đúng";
-                        }
+                            return RedirectToAction("trangChu", "TrangChu");
+                        case 3:
+                            ViewBag.Error = "Số điện thoại này chưa đăng nhập";
+                            break;
                     }
-                    else
-                    {
-                        ViewBag.Error = "Số điện thoại này chưa đăng nhập";
-                    }
-
                 }
                 return View();
             }
