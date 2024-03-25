@@ -149,6 +149,9 @@
     <Compile Include="Design Pattern\Behavioral Pattern\Strategy\ThanhToanOnline.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Builder\IBuilder.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Builder\TourBuilder.cs" />
+    <Compile Include="Design Pattern\Creational Pattern\Factory\EmailOTPSender.cs" />
+    <Compile Include="Design Pattern\Creational Pattern\Factory\OTPSender.cs" />
+    <Compile Include="Design Pattern\Creational Pattern\Factory\OTPSenderFactory.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Prototype\Prototype.cs" />
     <Compile Include="Design Pattern\Creational Pattern\Singleton\Singleton.cs" />
     <Compile Include="Design Pattern\Structural Pattern\Proxy\IProxy.cs" />
@@ -420,7 +423,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Design Pattern\Behavioral Pattern\Command\" />
-    <Folder Include="Design Pattern\Creational Pattern\Factory\" />
     <Folder Include="Design Pattern\Structural Pattern\Adapter\" />
     <Folder Include="Design Pattern\Structural Pattern\Composite\" />
     <Folder Include="Design Pattern\Structural Pattern\Decorator\" />

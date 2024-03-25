@@ -1,67 +1,91 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
-
 <style>
-.container {
-    width: 300px;
-    margin: 0 auto;
-    text-align: center;
-}
+    .forgot-password-container {
+        width: 400px;
+        margin: 50px auto;
+    }
 
-.form-group {
-    margin-bottom: 15px;
-}
+    .forgot-password-form {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
 
-label {
-    display: block;
-}
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-}
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
+        .input-group input[type="email"],
+        .input-group input[type="text"],
+        .input-group input[type="password"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
-button:hover {
-    background-color: #0056b3;
-}
+        .input-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
 
-#message {
-    margin-top: 10px;
-    color: red;
-}
+    .send-otp-btn {
+        margin-left: 10px;
+    }
 
+    .btn-verify {
+        width: 100%;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
 </style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Enter OTP</h2>
-            <form id="otpForm">
-                <div class="form-group">
-                    <label for="otpInput">Nhập mã OTP</label>
-                    <input type="text" id="otpInput" name="otpInput">
+
+<div class="forgot-password-container">
+    <h2>Nhập email lấy otp</h2>
+    <h4 style="color: red;">@ViewBag.Error</h4>
+    <h4 style="font-weight: bold">@ViewBag.ThongBao</h4>
+    <form action="" method="POST" class="forgot-password-form">
+        @using (Html.BeginForm("OTP", "NguoiDung"))
+        {
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" required class="form-control" placeholder="Nhập Email">
+                    <button type="submit" class="btn btn-primary send-otp-btn">Gửi OTP</button>
                 </div>
-                <button type="submit">Gửi</button>
-            </form>
-            <p id="message"></p>
+            </div>
+        }
+    </form>
+
+    <div class="forgot-password-form">
+        @using (Html.BeginForm("Verify", "NguoiDung"))
+        {
+            <div class="form-group">
+                <label for="otp">Mã OTP:</label>
+                <input type="text" id="otp" name="otp" required class="form-control" placeholder="Nhập Mã OTP">
+                <button type="submit" class="btn btn-primary btn-verify">Kiểm Tra</button>
+            </div>
+        }
+
     </div>
-</body>
-
-
+</div>
