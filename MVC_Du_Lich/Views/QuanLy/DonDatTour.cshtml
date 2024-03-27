@@ -4,37 +4,51 @@
 @{
     ViewBag.Title = "DonDatTour";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    List<int> updatedIds = Session["UpdatedIds"] as List<int>;
+
+    List<int> deletedIds = Session["DeletedIds"] as List<int>;
+
 }
+
+
 
 <h2>QUẢN LÝ THÔNG TIN ĐƠN ĐẶT TOUR</h2>
 
+
 @*<p>
-    @Html.ActionLink("THÊM MỚI", "ThemDonDatTour")
-</p>*@
+        @Html.ActionLink("THÊM MỚI", "ThemDonDatTour")
+    </p>*@
 <div>
     <a href="@Url.Action("ThemDiemDi")" class="btn btn-primary" style="background-color: #ff1200;">
         <label style="color: white;">THÊM MỚI</label>
     </a>
 </div>
+
+<div>
+    @*@if (deletedIds != null)
+        {
+            foreach (int item in deletedIds)
+            {
+                <a href="@Url.Action("Undo", new { id = item })" class="btn btn-info" style="margin-right: 5px;">HOÀN TÁC</a><div> |</div>
+            }
+        }*@
+
+    @if (deletedIds != null)
+    {
+        <a href="@Url.Action("Undo", new { id = Session["SoHD"] })" class="btn btn-info" style="margin-right: 5px;">HOÀN TÁC</a><div> |</div>
+    }
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().SoHD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().MaKH)
+            Số hóa đơn
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().HoTenKH)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().SDT_KH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().EmailKH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().DiaChiKH)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().TongTien)
@@ -58,19 +72,10 @@
                 @Html.DisplayFor(modelItem => item.SoHD)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KHACHHANG.MaKH)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.HoTenKH)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SDT_KH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailKH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChiKH)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TongTien)
@@ -86,7 +91,7 @@
                 }
             </td>
             <td>
-                @if ((bool)item.HTThanhToan)
+                @if ((bool)item.TrangThai)
                 {
                     <span>Hoàn thành</span>
                 }
@@ -100,7 +105,20 @@
             </td>
 
             <td style="width: 200px; text-align: center;">
-                @Html.ActionLink("SỬA", "SuaDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-warning", style = "margin-right: 5px;" }) |
+
+                @if (!(bool)item.HTThanhToan)
+                {
+                    <a href="@Url.Action("SuaThanhToanTour", new { id = item.SoHD, htttoan = (bool)item.HTThanhToan })" class="btn btn-info" style="margin-right: 5px;">CẬP NHẬT THANH TOÁN</a><div> |</div>
+                }
+                else
+                {
+                    if (updatedIds != null && updatedIds.Contains(item.SoHD))
+                    {
+                        <a href="@Url.Action("Undo", new { id = item.SoHD })" class="btn btn-info" style="margin-right: 5px;">HOÀN TÁC</a><div> |</div>
+                    }
+                }
+
+                @Html.ActionLink("SỬA CHI TIẾT", "SuaDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-warning", style = "margin-right: 5px;" }) |
                 @Html.ActionLink("CHI TIẾT", "ChiTietDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-info", style = "margin-right: 5px;" }) |
                 @Html.ActionLink("XÓA", "XoaDonDatTour", new { id = item.SoHD }, new { @class = "btn btn-danger", style = "margin-right: 5px;" })
             </td>
@@ -108,6 +126,8 @@
     }
 
 </table>
+
+
 
 <!-- Thêm mã phân trang -->
 <br />

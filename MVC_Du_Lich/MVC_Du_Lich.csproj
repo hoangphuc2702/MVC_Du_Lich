@@ -141,6 +141,11 @@
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\TinTucController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Command\Admin.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Command\CommandStack.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Command\DeleteCommand.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Command\ICommand.cs" />
+    <Compile Include="Design Pattern\Behavioral Pattern\Command\UpdateCommand.cs" />
     <Compile Include="Design Pattern\Behavioral Pattern\Iterator\IAbstractIterator.cs" />
     <Compile Include="Design Pattern\Behavioral Pattern\Iterator\Iterator.cs" />
     <Compile Include="Design Pattern\Behavioral Pattern\Strategy\CText.cs" />
@@ -422,6 +427,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Design Pattern\Creational Pattern\Factory\" />
     <Folder Include="Design Pattern\Behavioral Pattern\Command\" />
     <Folder Include="Design Pattern\Structural Pattern\Adapter\" />
     <Folder Include="Design Pattern\Structural Pattern\Composite\" />
