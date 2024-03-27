@@ -20,7 +20,7 @@
             <input type="text" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
         </div>
 
-        <a href="#" class="forget-pass">Lấy lại mật khẩu</a>
+        <a href="@Url.Action("OTP","NguoiDung", new {chon = 1})" style="text-decoration: none" class="forget-pass">Lấy lại mật khẩu <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
 
         <button class="btn btn-primary" type="submit">Đăng nhập <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></button>
     }

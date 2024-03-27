@@ -28,9 +28,190 @@ namespace MVC_Du_Lich.Controllers
             return View();
         }
 
-        public ActionResult OTP()
+        [HttpGet]
+        public ActionResult OTP(int chon)
+        {
+            Session["chon"] = chon;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult OTP(FormCollection formCollection)
+        {
+            string email = formCollection["email"];
+
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(email))
+                {
+                    ViewBag.Error = "Email không được để trống";
+                }
+
+                //kiểm tra xem có người nào đã đăng ký với điện thoại này hay chưa
+                var khachhang = database.KHACHHANGs.FirstOrDefault(k => k.EmailKH == email);
+                if (khachhang == null)
+                {
+                    ViewBag.Error = "Email chưa được đăng ký";
+                }
+                else
+                {
+                    Session["KH"] = khachhang;
+                    OTPSender sender = OTPSenderFactory.GetSender("email");
+
+                    string otp = GenerateOTP();
+                    Session["otp"] = otp;
+
+                    sender.SendOTP(email, otp);
+                    ViewBag.ThongBao = "Đã gửi otp, hãy kiểm tra email";
+                }
+            }
+            return View();
+        }
+
+        static string GenerateOTP()
+        {
+            // Generate a random 4-digit OTP
+            Random random = new Random();
+            return random.Next(1000, 9999).ToString();
+        }
+
+        [HttpPost]
+        public ActionResult Verify(FormCollection formCollection)
+        {
+            string otp = formCollection["otp"];
+
+            if (string.IsNullOrEmpty(otp))
+            {
+                ViewBag.Error = "Email không được để trống";
+            }
+
+            //kiểm tra xem có người nào đã đăng ký với điện thoại này hay chưa
+            if (otp != Session["otp"].ToString())
+            {
+                ViewBag.Error = "Sai otp";
+            }
+            else
+            {
+                if (Convert.ToInt32(Session["chon"]) == 1)
+                {
+                    Session["chon"] = null;
+                    Session["otp"] = null;
+                    return RedirectToAction("QuenMatKhau");
+                }
+                else
+                {
+                    Session["chon"] = null;
+                    Session["otp"] = null;
+                    return RedirectToAction("DoiMatKhau");
+                }
+            }
+            return View("OTP");
+        }
+
+        [HttpGet]
+        public ActionResult QuenMatKhau()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult QuenMatKhau(FormCollection formCollection)
+        {
+            string pass = formCollection["pass"];
+            string passConfirm = formCollection["passConfirm"];
+
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(pass))
+                {
+                    ViewBag.Error = "Mật khẩu mới không được để trống";
+                }
+                if (string.IsNullOrEmpty(passConfirm))
+                {
+                    ViewBag.Error = "Mật khẩu nhập lại không được để trống";
+                }
+                if (pass != passConfirm)
+                {
+                    ViewBag.Error = "Mật khẩu không trùng khớp";
+                }
+
+                KHACHHANG khachhang = Session["KH"] as KHACHHANG;
+                if (khachhang.MatKhau == pass)
+                {
+                    ViewBag.Error = "Mật khẩu phải khác mật khẩu cũ";
+                }
+
+                if (ViewBag.Error == null)
+                {
+                    var kh1 = database.KHACHHANGs.FirstOrDefault(k => k.MaKH == khachhang.MaKH);
+
+                    kh1.MatKhau = pass;
+                    kh1.XacNhanMatKhau = passConfirm;
+                    database.Entry(kh1).State = System.Data.Entity.EntityState.Modified;
+                    database.SaveChanges();
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            Session["KH"] = null;
+            return RedirectToAction("DangNhap");
+        }
+
+        [HttpGet]
+        public ActionResult DoiMatKhau()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DoiMatKhau(FormCollection formCollection)
+        {
+            string oldPass = formCollection["oldPass"];
+            string newPass = formCollection["newPass"];
+            string passConfirm = formCollection["passConfirm"];
+
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(oldPass))
+                {
+                    ViewBag.Error = "Mật khẩu cũ không được để trống";
+                }
+                if (string.IsNullOrEmpty(newPass))
+                {
+                    ViewBag.Error = "Mật khẩu mới không được để trống";
+                }
+                if (string.IsNullOrEmpty(passConfirm))
+                {
+                    ViewBag.Error = "Mật khẩu nhập lại không được để trống";
+                }
+                if (oldPass != passConfirm)
+                {
+                    ViewBag.Error = "Mật khẩu không trùng khớp";
+                }
+
+                var khachhang = Session["KhachHang"] as KHACHHANG;
+                if (khachhang.MatKhau == newPass)
+                {
+                    ViewBag.Error = "Mật khẩu mới phải khác mật khẩu cũ";
+                }
+
+                if (ViewBag.Error == null)
+                {
+                    var kh1 = database.KHACHHANGs.FirstOrDefault(k => k.MaKH == khachhang.MaKH);
+
+                    kh1.MatKhau = newPass;
+                    kh1.XacNhanMatKhau = passConfirm;
+                    database.Entry(kh1).State = System.Data.Entity.EntityState.Modified;
+                    database.SaveChanges();
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            return RedirectToAction("DangNhap");
         }
 
         [HttpGet]
