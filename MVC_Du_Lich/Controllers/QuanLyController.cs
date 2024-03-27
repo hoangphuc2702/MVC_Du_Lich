@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC_Du_Lich.Design_Pattern.Behavioral_Pattern.Command;
 using MVC_Du_Lich.Design_Pattern.Creational_Pattern.Builder;
 using MVC_Du_Lich.Models;
 using MVC_Du_Lich.Pattern.Singleton;
@@ -17,12 +18,16 @@ namespace MVC_Du_Lich.Controllers
     {
         QLDULICHEntities database = new QLDULICHEntities();
         private Singleton tourSingleton;
+        private readonly CommandStack commandStack;
 
         public QuanLyController()
         {
             // Khởi tạo tourSingleton trong hàm khởi tạo của CustomerTourController
             tourSingleton = Singleton.GetInstance();
             tourSingleton.LazyInit(database);
+
+            commandStack = CommandStack.GetInstance();
+            commandStack.LazyInit();
         }
 
         // GET: Admin
@@ -844,10 +849,66 @@ namespace MVC_Du_Lich.Controllers
             ViewBag.MaTour = new SelectList(database.TOURs, "MaTour", "TenTour");
 
             database.Entry(dondattour).State = System.Data.Entity.EntityState.Modified;
-
             database.SaveChanges();
             return RedirectToAction("DonDatTour");
         }
+
+        public ActionResult SuaThanhToanTour(int id, bool htttoan)
+        {
+            ICommand command = new UpdateCommand(id, database, htttoan);
+
+            // Kiểm tra xem Session["UpdatedIds"] đã tồn tại chưa
+            if (Session["UpdatedIds"] == null)
+            {
+                // Nếu chưa tồn tại, tạo một danh sách mới để lưu trữ các ID đã được cập nhật
+                Session["UpdatedIds"] = new List<int>();
+            }
+
+            // Kiểm tra xem danh sách ID đã tồn tại trong Session chưa
+            List<int> updatedIds = Session["UpdatedIds"] as List<int>;
+
+            // Thêm ID mới vào danh sách
+            updatedIds.Add(id);
+
+            // Lưu danh sách đã cập nhật vào Session
+            Session["UpdatedIds"] = updatedIds;
+
+            commandStack.ExecuteCommand(command);
+            return RedirectToAction("DonDatTour");
+        }
+
+        public ActionResult XoaDonDatTour(int id)
+        {
+            var command = new DeleteCommand(id, database);
+
+            Session["SoHD"] = id;
+
+            // Kiểm tra xem Session["UpdatedIds"] đã tồn tại chưa
+            if (Session["DeletedIds"] == null)
+            {
+                // Nếu chưa tồn tại, tạo một danh sách mới để lưu trữ các ID đã được cập nhật
+                Session["DeletedIds"] = new List<int>();
+            }
+
+            // Kiểm tra xem danh sách ID đã tồn tại trong Session chưa
+            List<int> deletedIds = Session["DeletedIds"] as List<int>;
+
+            // Thêm ID mới vào danh sách
+            deletedIds.Add(id);
+
+            // Lưu danh sách đã cập nhật vào Session
+            Session["DeletedIds"] = deletedIds;
+
+            commandStack.ExecuteCommand(command);
+            return RedirectToAction("DonDatTour");
+        }
+
+        public ActionResult Undo(int id)
+        {
+            commandStack.Undo(id);
+            return RedirectToAction("DonDatTour");
+        }
+
 
         [HttpGet]
         public ActionResult SuaCTDatTour(int hd)
@@ -875,42 +936,42 @@ namespace MVC_Du_Lich.Controllers
             return RedirectToAction("ChiTietDonDatTour");
         }
 
-        public ActionResult XoaDonDatTour(int id)
-        {
-            var dondattour = database.DONDATTOURs.FirstOrDefault(s => s.SoHD == id);
+        //public ActionResult XoaDonDatTour(int id)
+        //{
+        //    var dondattour = database.DONDATTOURs.FirstOrDefault(s => s.SoHD == id);
 
-            if (dondattour == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            return View(dondattour);
-        }
+        //    if (dondattour == null)
+        //    {
+        //        Response.StatusCode = 404;
+        //        return null;
+        //    }
+        //    return View(dondattour);
+        //}
 
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("XoaDonDatTour")]
-        public ActionResult DeleteConfirmedDonDatTour(int id)
-        {
-            // Tìm đơn đặt tour theo id
-            var dondattour = database.DONDATTOURs.Find(id);
+        //// POST: Products/Delete/5
+        //[HttpPost, ActionName("XoaDonDatTour")]
+        //public ActionResult DeleteConfirmedDonDatTour(int id)
+        //{
+        //    // Tìm đơn đặt tour theo id
+        //    var dondattour = database.DONDATTOURs.Find(id);
 
-            if (dondattour != null)
-            {
-                // Lấy danh sách chi tiết đặt tour liên quan đến đơn đặt tour
-                var ctdattours = database.CTDATTOURs.Where(ct => ct.SoHD == id).ToList();
+        //    if (dondattour != null)
+        //    {
+        //        // Lấy danh sách chi tiết đặt tour liên quan đến đơn đặt tour
+        //        var ctdattours = database.CTDATTOURs.Where(ct => ct.SoHD == id).ToList();
 
-                // Xóa tất cả các chi tiết đặt tour
-                database.CTDATTOURs.RemoveRange(ctdattours);
+        //        // Xóa tất cả các chi tiết đặt tour
+        //        database.CTDATTOURs.RemoveRange(ctdattours);
 
-                // Xóa đơn đặt tour
-                database.DONDATTOURs.Remove(dondattour);
+        //        // Xóa đơn đặt tour
+        //        database.DONDATTOURs.Remove(dondattour);
 
-                // Lưu thay đổi vào cơ sở dữ liệu
-                database.SaveChanges();
-            }
+        //        // Lưu thay đổi vào cơ sở dữ liệu
+        //        database.SaveChanges();
+        //    }
 
-            return RedirectToAction("DonDatTour");
-        }
+        //    return RedirectToAction("DonDatTour");
+        //}
 
 
         public ActionResult XoaCTDatTour(string TenTV)

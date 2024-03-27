@@ -152,7 +152,7 @@ namespace MVC_Du_Lich.Controllers
         {
             if (Session["KhachHang"] == null)
             {
-                return RedirectToAction("DangNhap", "User");
+                return RedirectToAction("DangNhap", "NguoiDung");
             }
 
             List<ThanhVien> gioHang = LayGioHang();
