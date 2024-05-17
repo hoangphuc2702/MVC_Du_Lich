@@ -9,6 +9,7 @@ using PagedList;
 using System.Net.Mail;
 using MVC_Du_Lich.Design_Pattern.Structural_Pattern.Proxy;
 using System.Security.Policy;
+using MVC_Du_Lich.Design_Pattern.Creational_Pattern.Factory;
 
 namespace MVC_Du_Lich.Controllers
 {
