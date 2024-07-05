@@ -187,7 +187,7 @@ namespace MVC_Du_Lich.Controllers
                 {
                     ViewBag.Error = "Mật khẩu nhập lại không được để trống";
                 }
-                if (oldPass != passConfirm)
+                if (newPass != passConfirm)
                 {
                     ViewBag.Error = "Mật khẩu không trùng khớp";
                 }
@@ -294,7 +294,7 @@ namespace MVC_Du_Lich.Controllers
             {
                 if (string.IsNullOrEmpty(username))
                 {
-                    ViewBag.Error = "Điện thoại không được để trống";
+                    ViewBag.Error = "Điện thoại/Gmail không được để trống";
                 }
                 if (string.IsNullOrEmpty(password))
                 {

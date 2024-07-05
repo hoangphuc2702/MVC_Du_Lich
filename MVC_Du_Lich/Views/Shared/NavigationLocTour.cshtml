@@ -4,6 +4,91 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    /* Giao diện thanh điều hướng */
+    .sidebar {
+        background-color: #f8f9fa; /* Màu nền nhẹ cho thanh điều hướng */
+        border-right: 1px solid #dee2e6; /* Đường viền bên phải thanh điều hướng */
+        padding: 15px; /* Padding xung quanh nội dung */
+        min-height: 100vh; /* Đảm bảo thanh điều hướng chiếm toàn bộ chiều cao màn hình */
+    }
+
+    .sidebar-inner {
+        background-color: #ffffff; /* Nền trắng cho nội dung thanh điều hướng */
+        border-radius: 8px; /* Bo góc thanh điều hướng */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ để tạo hiệu ứng nổi */
+        padding: 15px; /* Padding bên trong thanh điều hướng */
+    }
+
+    .sidebar-title {
+        font-size: 18px; /* Kích thước font cho tiêu đề */
+        font-weight: 700; /* Đậm tiêu đề */
+        color: #333333; /* Màu chữ tiêu đề */
+        margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        text-align: center; /* Căn giữa tiêu đề */
+    }
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column; /* Căn chỉnh các phần tử theo chiều dọc */
+    }
+
+        .sidebar-content > *:not(:last-child) {
+            margin-bottom: 15px; /* Khoảng cách giữa các phần tử trong thanh điều hướng */
+        }
+
+        .sidebar-content a {
+            color: #007bff; /* Màu của liên kết */
+            text-decoration: none; /* Bỏ gạch chân */
+            transition: color 0.3s; /* Hiệu ứng chuyển đổi màu sắc */
+        }
+
+            .sidebar-content a:hover {
+                color: #0056b3; /* Màu của liên kết khi hover */
+                text-decoration: underline; /* Gạch chân liên kết khi hover */
+            }
+
+    .main-content {
+        padding: 15px; /* Padding bên trong phần nội dung chính */
+        background-color: #ffffff; /* Nền trắng cho nội dung chính */
+    }
+
+    /* Giao diện danh sách điểm đi và điểm đến */
+    .title {
+        font-size: 20px; /* Kích thước font cho tiêu đề danh sách */
+        font-weight: 700; /* Đậm tiêu đề */
+        color: #333333; /* Màu chữ tiêu đề */
+        margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+    }
+
+    .list-group {
+        padding: 0; /* Bỏ padding của danh sách */
+        margin: 0; /* Bỏ margin của danh sách */
+        list-style-type: none; /* Bỏ dấu chấm đầu mục */
+    }
+
+    .list-group-item {
+        background-color: #ffffff; /* Nền trắng cho mục danh sách */
+        border: 1px solid #dee2e6; /* Đường viền xung quanh mục danh sách */
+        border-radius: 8px; /* Bo góc cho mục danh sách */
+        margin-bottom: 10px; /* Khoảng cách dưới mỗi mục danh sách */
+        padding: 10px 15px; /* Padding cho mỗi mục danh sách */
+        color: #333333; /* Màu chữ cho mục danh sách */
+        transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và chữ */
+    }
+
+        .list-group-item:hover {
+            background-color: #f1f1f1; /* Màu nền khi hover qua mục danh sách */
+            color: #007bff; /* Màu chữ khi hover qua mục danh sách */
+        }
+
+    .list-group-item-action {
+        text-decoration: none; /* Bỏ gạch chân liên kết */
+    }
+</style>
+
+
+
 <div class="row">
     <div class="col-md-3 col-12 sidebar sidebar-filter">
         <div class="sidebar-inner">
@@ -11,7 +96,7 @@
             <div class="px-3 py-4">
                 @Html.Action("DiemDi", "LoaiTour")
 
-                @Html.Action("DiemDen", "LoaiTour", new {id = ViewBag.LoaiTour})
+                @Html.Action("DiemDen", "LoaiTour", new { id = ViewBag.LoaiTour })
 
             </div>
 
